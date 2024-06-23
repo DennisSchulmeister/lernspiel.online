@@ -14,7 +14,7 @@ import path         from "path";
 
 if (process.argv.length < 4) {
     console.error(`Arguments missing. Usage: ${process.argv[1]} source_file out_file`);
-    return;
+    process.exit(-1);
 }
 
 let infile  = process.argv[2].replaceAll("\\", path.sep).replaceAll("/", path.sep);

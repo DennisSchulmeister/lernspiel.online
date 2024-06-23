@@ -166,20 +166,36 @@ NPM and esbuild
 ---------------
 
 Lernspiel Online uses a mixture of traditional server-side rendering and more modern client-side rendering.
-Server-side rendering using Django views and templates is used for all static and non-game pages.
-Client-side rendering is used for the games, using a websocket connection to the server to allow
-real-time communication between players, teacher and server. All in all, we still try to keep the
-code as simple as possible, tending to avoid complex libraries.
+Server-side rendering using Django views and templates is used for all static and non-game pages. Client-side
+rendering is used for the games, using a websocket connection to the server to allow real-time communication
+between players, teacher and server. All in all, we still try to keep the code as simple as possible, tending
+to avoid complex libraries.
 
 On the other hand, the NPM package index has be come a very convenient de-facto standard not only
 for Node.js server-side libraries but also for client-side libraries. We therefor use a subset of
 Node.js and NPM to pull client-side libraries and bundle them into distribution files with
 [esbuild](https://esbuild.github.io/).
 
-TODO
+The root-level [package.json](package.json) defines a NPM workspace, so that all NPM projects share
+a global `node_modules` directory. It also defines most build-tools via its `devDependencies`, so
+that they need not be maintained in several locations. Besides that, each sub-project has its own
+`package.json` for runtime dependencies, additional deveopment dependencies and run scripts. Typical
+run scripts are:
 
-* `npm run build` - Build frontend JavaScript/CSS bundle
-* `npm run watch` - Start watch mode to automatically rebuild the frontend JavaScript/CSS bundle
+* `npm run build` - Build distribution files
+* `npm run clean` - Delete distribution files
+* `npm run watch` - Start watch mode for automatical rebuilds
+* `npm run check` - Run all checks and tests: eslint, TypeScript, unit tests
+* `npm run start` or `npm start` - Run from built distribution files
+
+Less-often used commands:
+
+* `npm run test` - Run unit tests only
+* `npm run tsc` - Check source code with TypeScript only
+* `npm run lint` - Check source code with eslint only
+* `npm run lintfix` - Auto-correct eslint findings (be careful!)
+* `npm run prettier` - Check source code formatting with prettier
+* `npm run format` - Auto-correct prettier findings (be careful!)
 
 Developing New Game Types
 -------------------------
