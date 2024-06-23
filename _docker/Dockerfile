@@ -39,7 +39,8 @@ COPY . .
 COPY _docker/lernspiel_server.start.sh lernspiel_server/start.sh
 RUN chmod +x lernspiel_server/start.sh
 
-# This copies to _static, according to settings.py
+# This copies to …/_static, according to settings.py
+# start.sh then copies the files onto the volume …/_static.volume
 RUN .env/bin/python lernspiel_server/manage.py collectstatic --noinput
 
 VOLUME /app/lernspiel_server/_media.volume
