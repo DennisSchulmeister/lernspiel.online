@@ -1,0 +1,22 @@
+localhost {
+        encode zstd gzip
+
+        path /static/* {
+            file_server {
+                root /lernspiel_server/_static
+            }
+        }
+
+        path /media/* {
+            file_server {
+                root /lernspiel_server/_media
+            }
+        }
+
+        reverse_proxy lernspiel_server
+}
+
+# # Remove www. prefix
+# www.example.com {
+#         redir https://example.com{uri}
+# }

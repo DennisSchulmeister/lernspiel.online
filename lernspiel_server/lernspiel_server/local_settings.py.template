@@ -1,0 +1,47 @@
+# Deployment-specific local settings
+# ----------------------------------
+#
+# The content of this file is imported at the very end of `settings.py`. Therefor you can.
+# use this file to override any setting that needs to be changed for your local setup.
+# Please note, that you are always overriding the whole top-level variable. There is currently
+# no easy way e.g. to add a single application to `INSTALLED_APPS` without copying the original
+# variable from `settings.py`. But usually this should not be needed anyway.
+#
+# Below are a few suggestions of which settings you should change.
+
+# Replace with your own secret key !!
+SECRET_KEY = "django-insecure-l2i@-07@^2yju3jy_j(o4*41l=yl^tf@k5hq9u$uz-#kw-88&j"
+DEBUG = False
+ALLOWED_HOSTS = []
+
+# Built-in database engines:
+#   * "django.db.backends.postgresql"
+#   * "django.db.backends.mysql"
+#   * "django.db.backends.sqlite3"
+#   * "django.db.backends.oracle"
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "mydatabase",
+        "USER": "mydatabaseuser",
+        "PASSWORD": "mypassword",
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
+    }
+}
+
+# Static files
+# Run `manage.py collectstatic` to copy the files first!
+STATIC_DIR = "/srv/www/mysite.de/static"
+STATIC_URL = "static/"
+
+# Uploaded media files
+MEDIA_DIR = "/srv/www/mysite.de/media"
+MEDIA_URL = "media/"
+
+# i18n, l10n settings
+USE_TZ = True
+TIME_ZONE = "Europe/Berlin"
+
+LANGUAGE_CODE = "de-de"
+USE_THOUSAND_SEPARATOR = True

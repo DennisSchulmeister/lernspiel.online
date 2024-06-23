@@ -1,0 +1,9 @@
+{
+  "name": "lernspiel_server",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node ../../_scripts/esbuild-bundle.js   src/index.ts   ../lernspiel_server/static/lernspiel_server/_bundle.js",
+    "watch": "NODE_ENV=development npm run build"
+  }
+}

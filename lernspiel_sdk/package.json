@@ -1,0 +1,36 @@
+{
+  "name": "@lernspiel/game_sdk",
+  "description": "Lernspiel Online: Game SDK",
+  "author": "Dennis Schulmeister-Zimolong",
+  "license": "AGPL-3.0",
+  "homepage": "https://lernspiel.online",
+  "bugs": {
+      "url": "https://github.com/DennisSchulmeister/lernspiel.online/issues"
+  },
+  "repository": {
+      "type": "git",
+      "url": "git+https://github.com/DennisSchulmeister/lernspiel.online.git"
+  },
+  "type": "module",
+  "devDependencies": {
+    "ava": "^6.1.2",
+    "nodemon": "^3.1.0"
+  },
+  "ava": {
+    "files": [
+      "cli/test/**/*.test.ts"
+    ],
+    "extensions": {
+      "ts": "module"
+    },
+    "workerThreads": false,
+    "failFast": false
+  },
+  "nodemonConfig": {
+    "ext": "js,ts,mjs,json",
+    "ignore": [
+      "**/*.spec.ts"
+    ],
+    "delay": 500
+  }
+}

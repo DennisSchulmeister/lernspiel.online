@@ -1,0 +1,45 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "display": "Typescript configuration",
+    "compilerOptions": {
+        // JavaScript version settings
+        "target": "esnext",
+        "lib": ["ESNext"],        // Frontend projects: ["ESNext", "DOM"]
+        "module": "nodenext",     // Frontend projects: "esnext"
+
+        // Output settings
+        "declaration": true,
+        "sourceMap": true,
+        "declarationMap": true,
+        "outDir": "./build",
+        "rootDir": ".",
+
+        // Compilation options
+        "allowJs": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "verbatimModuleSyntax": true,
+        "forceConsistentCasingInFileNames": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+
+        // Where to find external type declarations
+        "typeRoots": ["node_modules/@types"],
+    },
+
+    "include": [
+        // // Directories to build (to be defined for each project!)
+        // "./package.json",
+        // "./src/**/*.ts",
+        // "./src/**/*.json",
+        // "./test/**/*.ts",
+        // "./test/**/*.json",
+
+        // // TS-only packages:
+        // "./node_modules/OTHERLIB/**/package.json",
+        // "./node_modules/OTHERLIB/**/*.ts",
+        // "./node_modules/OTHERLIB/**/*.json",
+    ],
+}
