@@ -5,7 +5,7 @@
   "scripts": {
     "clean": "rimraf ../lernspiel_server/static/lernspiel_server/_bundle.*",
     "build": "node ../../_scripts/esbuild-bundle.js   src/index.ts   ../lernspiel_server/static/lernspiel_server/_bundle.js",
-    "watch": "NODE_ENV=development npm run build && npm run tsc",
+    "watch": "conc -c auto -n esbuild,tsc \"NODE_ENV=development npm run build\" \"npm run tsc -- -w --preserveWatchOutput\"",
     "lint": "eslint --ext .ts,.tsx ./",
     "lintfix": "eslint --fix --ext .ts,.tsx ./",
     "prettier": "prettier --ignore-path ../../.gitignore \"**/*.+(ts|tsx)\"",

@@ -10,6 +10,7 @@
     "devDependencies": {
         "@types/node": "^20.14.8",
         "@typescript-eslint/eslint-plugin": "^7.13.1",
+        "conc": "^0.0.3",
         "concurrently": "^8.2.2",
         "esbuild": "^0.21.5",
         "esbuild-plugin-less": "^1.3.5",
