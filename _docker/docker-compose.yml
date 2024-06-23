@@ -17,7 +17,7 @@ services:
         restart: unless-stopped
         shm_size: 256mb
         environment:
-            # NOTE: Delete volumes/postgres, when you are changing the superuser
+            # NOTE: Delete the postgres volume, when you are changing the superuser
             # credentials here. Otherwise the change has no effect, if the service
             # has been started before.
             POSTGRES_USER: postgres
@@ -65,8 +65,8 @@ services:
     # In that case create a volume that maps the following directories to the
     # host filesystem and serve them with your web server.
     #
-    #   - /lernspiel_server/_static
-    #   - /lernspiel_server/_media
+    #   - /lernspiel_server/_static.volume
+    #   - /lernspiel_server/_media.volume
     #
     # Make sure to forward all other HTTP requests to the Lernspiel Online server.
     #---------------------------------------------------------------------------
