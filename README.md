@@ -50,8 +50,11 @@ Further Documentation
 At the time being there is no full documentation, yet. But README files are available to summarize the
 most important points for different target groups:
 
+* [CHANGELOG.md](CHANGELOG.md): Release change log
 * [HACKING.md](HACKING.md): Information for developers
 * [DEPLOYMENT.md](DEPLOYMENT.md): Installation notes for administrators
+* [CONTRIBUTORS.md](CONTRIBUTORS.md): List of contributors (patches welcome)
+* [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md): Our community code of conduct
 
 Copyright
 ---------
