@@ -17,7 +17,9 @@
     "lernspiel_game_sdk": "cli/dist/main.js"
   },
   "scripts": {
-    "clean": "rimraf cli/dist/* && rimraf web/dist/*",
+    "clean:cli": "rimraf cli/dist/*",
+    "clean:web": "rimraf web/dist/*",
+    "clean": "npm run clean:cli && npm run clean:web",
     "build:cli": "tsc -b cli/",
     "build:web": "node ../_scripts/esbuild-bundle.js   web/src/index.ts   web/dist/lernspiel_game_sdk_web.js",
     "build": "npm run clean && npm run build:cli && npm run build:web && npm run tsc:web",
