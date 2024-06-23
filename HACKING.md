@@ -53,7 +53,7 @@ Here are a few important directories and files that you might want to know about
 │   │   └── ...
 │   └── manage.py                       Django CLI for the server
 │
-└── lernspiel_game_sdk                  Lernspiel Game SDK
+└── game_sdk                            Lernspiel Game SDK
 │   ├── cli                             Game SDK CLI
 │   └── web                             Game SDK Client Library
 ```
