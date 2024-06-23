@@ -3,6 +3,7 @@ Installation Notes for Administrators
 
 1. [Local Settings](#local-settings)
 1. [Web Server](#web-server)
+1. [Docker Compose](#docker-compose)
 
 Local Settings
 --------------
@@ -53,3 +54,31 @@ command:
 ```sh
 python ./manage.py collectstatic
 ```
+
+Docker Compose
+--------------
+
+The [_docker](_docker) directory contains a working example configuration for Docker Compose.
+You can use it to test a full deployment build on your local machine and as a template for your
+own deployment. The following commands will be helpful:
+
+* `docker compose build` - Build docker images
+* `docker compose up` - Start all services in foreground (end with CTRL+C)
+* `docker compose up -d` - Start all services in background
+* `docker compose down` - Stop all services, either in foreground or background
+* `docker exec -it docker-lernspiel-server-1 sh` - Open a shell on the lernspiel server
+
+The following services are defined:
+
+* `postgres` (container `docker-postgres-1`): Persistent database
+* `redis` (container `docker-redis-1`): Key/value store for asynchronous processes
+* `lernspiel-server` (container `docker-lernspiel-server-1`): The main server
+* `webserver` (container `docker-webserver-1`): Frontend webserver
+
+As of today there is no official docker image on Docker Hub. Therefor the directory contains a
+Dockerfile that will be built on demand. For the time being the recommendation is to pull the
+source code from GitHub, copy the `_docker` directory to a new location outside the git tree
+and adapt it to your needs.
+
+Get in touch with us, if you like to work on an official Docker image, once the platform is
+sufficiently mature enough.
