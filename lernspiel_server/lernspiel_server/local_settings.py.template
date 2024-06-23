@@ -12,7 +12,7 @@
 # Replace with your own secret key !!
 SECRET_KEY = "django-insecure-l2i@-07@^2yju3jy_j(o4*41l=yl^tf@k5hq9u$uz-#kw-88&j"
 DEBUG = False
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*]
 
 # Built-in database engines:
 #   * "django.db.backends.postgresql"
@@ -25,9 +25,19 @@ DATABASES = {
         "NAME": "mydatabase",
         "USER": "mydatabaseuser",
         "PASSWORD": "mypassword",
-        "HOST": "127.0.0.1",
+        "HOST": "localhost",
         "PORT": "5432",
     }
+}
+
+# Redis server to asynchronous communication
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("localhost", 6379)],
+        },
+    },
 }
 
 # Static files

@@ -59,7 +59,7 @@ class Question(AbstractModel):
         verbose_name_plural = _("Questions")
 
         indexes = [
-            models.Index(["text"])
+            models.Index(fields=["text"])
         ]
     
     def __str__(self):

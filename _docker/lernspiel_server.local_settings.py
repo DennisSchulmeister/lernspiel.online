@@ -8,7 +8,7 @@
 # Replace with your own secret key !!
 SECRET_KEY = "django-insecure-l2i@-07@^2yju3jy_j(o4*41l=yl^tf@k5hq9u$uz-#kw-88&j"
 DEBUG = False
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 DATABASES = {
     "default": {
@@ -21,10 +21,19 @@ DATABASES = {
     }
 }
 
-STATIC_DIR = "/lernspiel_server/_static"
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("redis", 6379)],
+        },
+    },
+}
+
+STATIC_DIR = "/app/lernspiel_server/_static.volume"
 STATIC_URL = "static/"
 
-MEDIA_DIR = "/lernspiel_server/_media"
+MEDIA_DIR = "/app/lernspiel_server/_media.volume"
 MEDIA_URL = "media/"
 
 USE_TZ = True

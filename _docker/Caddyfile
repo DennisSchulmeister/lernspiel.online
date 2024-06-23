@@ -1,19 +1,29 @@
-localhost {
+{
+    # Comment the next line in production. But also make sure that Docker forwards
+    # the host ports 80 and 443 to the web server.
+    auto_https off
+
+    email webmaster@example.com
+
+    log {
+        level WARN
+    }
+}
+
+# Remove port number in production to allow HTTPS, too
+localhost:80 {
         encode zstd gzip
+        reverse_proxy lernspiel-server:8000
 
-        path /static/* {
-            file_server {
-                root /lernspiel_server/_static
-            }
+        handle_path /static/* {
+            file_server
+            root /srv/www/static.volume
         }
 
-        path /media/* {
-            file_server {
-                root /lernspiel_server/_media
-            }
+        handle_path /media/* {
+            file_server
+            root /srv/www/media.volume
         }
-
-        reverse_proxy lernspiel_server
 }
 
 # # Remove www. prefix

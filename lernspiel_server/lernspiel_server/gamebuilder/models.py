@@ -32,8 +32,8 @@ class GameDefinition(AbstractModel, EditKeyMixin):
         verbose_name_plural = _("Games")
     
         indexes = [
-            models.Index(["name"]),
-            models.Index(["last_access", "id"])
+            models.Index(fields=["name"]),
+            models.Index(fields=["last_access", "id"])
         ]
 
     def __str__(self):

@@ -39,13 +39,20 @@ services:
     #---------------------------------------------------------------------------
     # Lernspiel Server
     #---------------------------------------------------------------------------
-    lernspiel_server:
-        build: ../lernspiel_server
+    lernspiel-server:
+        build:
+            context: ".."
+            dockerfile: _docker/Dockerfile
         restart: unless-stopped
+        #ports:
+        #    - 127.0.0.1:8888:8000
+        depends_on:
+            - postgres
+            - redis
         volumes:
-            - $PWD/lernspiel_server.local_settings.py:lernspiel_server/local_settings.py
-            - lernspiel_static:/lernspiel_server/_static
-            - lernspiel_media:/lernspiel_server/_media
+            - ./lernspiel_server.local_settings.py:/app/lernspiel_server/lernspiel_server/local_settings.py
+            - lernspiel_static:/app/lernspiel_server/_static.volume
+            - lernspiel_media:/app/lernspiel_server/_media.volume
 
     #---------------------------------------------------------------------------
     # Caddy Frontend Web Server - Serves static files and media uploads and
@@ -69,32 +76,20 @@ services:
         cap_add:
             - NET_ADMIN
         ports:
-            # container:host
-            - 80:8080
-            #- 443:80443
-            #- 443:80443/udp
+            - 127.0.0.1:8080:80
+            #- 127.0.0.1:443:443
+            #- 127.0.0.1:443:443/udp
         volumes:
-            - $PWD/Caddyfile:/etc/caddy/Caddyfile
+            - ./Caddyfile:/etc/caddy/Caddyfile
             - caddy_config:/config
             - caddy_data:/data
-            - lernspiel_static:/lernspiel_server/_static
-            - lernspiel_media:/lernspiel_server/_media
-        entrypoint: --domain example.com
+            - lernspiel_static:/srv/www/static.volume
+            - lernspiel_media:/srv/www/media.volume
 
 volumes:
     postgres:
-        external: true
-
     redis:
-        external: true
-
     lernspiel_static:
-        external: true
-
     lernspiel_media:
-        external: true
-
     caddy_config:
-
     caddy_data:
-        external: true

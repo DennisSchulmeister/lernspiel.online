@@ -33,7 +33,7 @@ class GameType(AbstractModel):
         verbose_name_plural = _("Game Types")
     
         indexes = [
-            models.Index(["name"]),
+            models.Index(fields=["name"]),
         ]
 
     def __str__(self):

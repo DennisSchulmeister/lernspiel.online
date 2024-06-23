@@ -42,7 +42,21 @@ Except for the Game SDK, where Node.js is used to connect with the Lernspiel Onl
 Directory Layout
 ----------------
 
-TODO
+Here are a few important directories and files that you might want to know about:
+
+```text
+.                                       Root directory with this file
+├── lernspiel_server                    The server application
+│   ├── lernspiel_server
+│   │   ├── local_settings.py           Use this for your own server configuration
+│   │   ├── settings.py                 Internal settings of the server
+│   │   └── ...
+│   └── manage.py                       Django CLI for the server
+│
+└── lernspiel_game_sdk                  Lernspiel Game SDK
+│   ├── cli                             Game SDK CLI
+│   └── web                             Game SDK Client Library
+```
 
 Poetry Package Management
 -------------------------
@@ -53,6 +67,7 @@ packages, which for this reason need to be declared in the [pyproject.toml](pypr
 plus it fully automates the usage of virtual environments. The most important commands are:
 
 * `poetry init` - Start a new project with the Poetry package manager (already done of course 🙂)
+* `poetry install` - Install all dependencies specified in [pyproject.toml](pyproject.toml)
 * `poetry add xyz` - Add another dependency to library `xyz`
 * `poetry remove xyz` - Remove dependency to library `xyz` again
 * `poetry show --tree` - Show all direct and indirect dependencies

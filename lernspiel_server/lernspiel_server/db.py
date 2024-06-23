@@ -8,7 +8,7 @@
 
 import hashlib, uuid
 
-from django.contrib.auth import User
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -24,7 +24,7 @@ class AbstractModel(models.Model):
     id          = models.UUIDField(verbose_name=_("Id"), primary_key=True, default=uuid.uuid4, editable=False)
     created_by  = models.ForeignKey(User, verbose_name=_("Created By"), on_delete=models.SET_DEFAULT, default="", blank=True)
     created_at  = models.DateTimeField(verbose_name=_("Created At"), auto_now_add=True)
-    modified_by = models.ForeignKey(User, verbose_name=_("Modified By"), on_delete=models.SET_DEFAULT, default="", blank=True)
+    modified_by = models.ForeignKey(User, verbose_name=_("Modified By"), on_delete=models.SET_DEFAULT, default="", blank=True, related_name="+")
     modified_at = models.DateTimeField(verbose_name=_("Modified At"), auto_now=True)
 
     class Meta:

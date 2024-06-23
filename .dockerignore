@@ -1,0 +1,7 @@
+**/_media
+**/_static
+**/__pycache__
+**/*.template
+
+lernspiel_server/frontend
+lernspiel_game_sdk

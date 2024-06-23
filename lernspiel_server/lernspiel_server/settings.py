@@ -18,10 +18,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don"t run with debug turned on in production!
 SECRET_KEY = "django-insecure-l2i@-07@^2yju3jy_j(o4*41l=yl^tf@k5hq9u$uz-#kw-88&j"
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 INSTALLED_APPS = [
+    "daphne",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -67,6 +68,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "lernspiel_server.wsgi.application"
+ASGI_APPLICATION = "lernspiel_server.asgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
