@@ -12,7 +12,7 @@ tries to summarize the most important things.
 1. [Django Web Framework](#django-web-framework)
 1. [Django Project vs. App](#django-project-vs-app)
 1. [NPM and esbuild](#npm-and-esbuild)
-1. [Developing New Game Types](#developing-new-game-types)
+1. [Developing New Game Variants](#developing-new-game-variants)
 
 Technology Choices
 ------------------
@@ -26,7 +26,7 @@ Lernspiel Online is built with the following technology:
 
 The idea is to keep the technical requirements lean to enable easy deployment in custom environments.
 Therefor the choice of Django might be considered "conservative", but in fact it contains all the needed
-functionality like HTTP request routing, service-side templates, database access, ... in a single, stable
+functionality like HTTP request routing, server-side templates, database access, ... in a single, stable
 and well maintained dependency. 
 
 For the frontend we use the following additional things:
@@ -78,8 +78,8 @@ Django Web Framework
 --------------------
 
 [Django](https://www.djangoproject.com/) is our server-side main framework. It comes with its own
-CLI called `django-admin` or `manage.py` inside the project directory. Actually both are identical
-with the latter letter a few environment variables point to the current project.
+CLI called `django-admin` or `manage.py` inside the project directory. Actually both are identical,
+but with the latter a few environment variables point to the current project.
 
 Important commands at the root-level, outside Django projects:
 
@@ -97,7 +97,7 @@ Important commands inside project directories:
 
 After each change to the database model, the following commands need to be run:
 
-* `./manage.py mackemigrations` - Create migrations from latest model changes
+* `./manage.py makemigrations` - Create migrations from latest model changes
 * `./manage.py migrate` - Run database migrations
 
 Once the changes shall be committed to version control, it makes sense to "squash" the migrations,
@@ -115,19 +115,20 @@ live inside the project module, the Django developers recommend splitting the pr
 multiple apps to foster separation of concerns and code re-use.
 
 The only thing we find unfortunate is, that apps by default live outside their parent project.
-This makes sanes for reusable apps, that are meant to be used in multiple projects. But for
+This makes sense for reusable apps, that are meant to be used in multiple projects. But for
 internal apps this clutters the source directory, making it hard for administrators to find
 the settings file and other important directories. It also allows naming clashes with globally
 installed Python packages. For this reasons we put the internal apps of a project **inside**
-the projects module directory.
+the projects module directory. (And still the so called app name can clash, since Django by
+default only uses the last part of the package name for it.)
 
-Take the `lernspiel_server` project and its internal `games` app. Instead of:
+Take the `lernspiel_server` project and its internal `pages` app. Instead of:
 
 ```text
 .
 ├── HACKING.md
 └── lernspiel_server
-    ├── games
+    ├── pages
     │   └── ...
     ├── lernspiel_server
     │   ├── local_settings.py
@@ -143,7 +144,7 @@ We have:
 ├── HACKING.md
 └── lernspiel_server
     ├── lernspiel_server
-    │   ├── games
+    │   ├── pages
     │   │   └── ...
     │   ├── local_settings.py
     │   ├── settings.py
@@ -179,7 +180,7 @@ Node.js and NPM to pull client-side libraries and bundle them into distribution 
 The root-level [package.json](package.json) defines a NPM workspace, so that all NPM projects share
 a global `node_modules` directory. It also defines most build-tools via its `devDependencies`, so
 that they need not be maintained in several locations. Besides that, each sub-project has its own
-`package.json` for runtime dependencies, additional deveopment dependencies and run scripts. Typical
+`package.json` for runtime dependencies, additional development dependencies and run scripts. Typical
 run scripts are:
 
 * `npm run build` - Build distribution files
@@ -197,7 +198,7 @@ Less-often used commands:
 * `npm run prettier` - Check source code formatting with prettier
 * `npm run format` - Auto-correct prettier findings (be careful!)
 
-Developing New Game Types
--------------------------
+Developing New Game Variants
+----------------------------
 
-TODO
+TODO - The Game SDK will be used for this.
