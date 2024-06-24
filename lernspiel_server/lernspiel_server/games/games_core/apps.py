@@ -16,5 +16,5 @@ class QuizzesConfig(AppConfig):
     extension app that extends these basic data types via multi-table inheritance
     for concrete game rules.
     """
-    name         = "lernspiel_server.games.core"
+    name         = "lernspiel_server.games.games_core"
     verbose_name = _("Games: Core")

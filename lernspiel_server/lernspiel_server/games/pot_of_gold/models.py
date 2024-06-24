@@ -9,6 +9,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from ...db import AbstractModel
+from ...core_platform.db import AbstractModel
 
 # Create your models here.

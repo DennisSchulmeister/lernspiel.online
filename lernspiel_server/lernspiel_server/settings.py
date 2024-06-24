@@ -33,11 +33,12 @@ INSTALLED_APPS = [
 
     # Non-game features
     "lernspiel_server",
+    "lernspiel_server.core_platform",
     "lernspiel_server.libraries",
     "lernspiel_server.pages",
 
     # Game types
-    "lernspiel_server.games.core",
+    "lernspiel_server.games.games_core",
     "lernspiel_server.games.open_world",
     "lernspiel_server.games.pot_of_gold",
     "lernspiel_server.games.quiz",

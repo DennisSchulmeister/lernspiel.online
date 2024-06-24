@@ -6,8 +6,13 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-from ..core_platform.db import AbstractModel
-from django.db import models
+from django.apps import AppConfig
 from django.utils.translation import gettext_lazy as _
 
-# Create your models here.
+class QuizzesConfig(AppConfig):
+    """
+    Core platform: Contains mostly shared logic for the other applications plus
+    a few central data models.
+    """
+    name         = "lernspiel_server.core_platform"
+    verbose_name = _("Core Platform")

@@ -6,11 +6,13 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-import hashlib, uuid
+import uuid
 
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+
+from .utils import hash
 
 class AbstractModel(models.Model):
     """
@@ -18,17 +20,21 @@ class AbstractModel(models.Model):
     primary key, because the auto ID fields from Django can only use integer
     sequences. However, for security reasons, as we are using the IDs in our
     URLs, we don't want to have sequential IDs.
-
-    Additionally adds fields for who created or changed the entry when.
     """
-    id          = models.UUIDField(verbose_name=_("Id"), primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(verbose_name=_("Id"), primary_key=True, default=uuid.uuid4, editable=False)
+
+    class Meta:
+        abstract = True
+
+class CreatedModifiedByMixin:
+    """
+    Mixin class for models that shall record the time and user of creation as well as
+    the time and user of the last modification.
+    """
     created_by  = models.ForeignKey(User, verbose_name=_("Created By"), on_delete=models.SET_DEFAULT, default="", blank=True)
     created_at  = models.DateTimeField(verbose_name=_("Created At"), auto_now_add=True)
     modified_by = models.ForeignKey(User, verbose_name=_("Modified By"), on_delete=models.SET_DEFAULT, default="", blank=True, related_name="+")
     modified_at = models.DateTimeField(verbose_name=_("Modified At"), auto_now=True)
-
-    class Meta:
-        abstract = True
 
 class EditKeyMixin:
     """
@@ -38,8 +44,20 @@ class EditKeyMixin:
     thus cannot be retrieved later. Only a hash of the key is saved.
     """
 
+    edit_key = models.CharField(verbose_name=_("Edit Key"), max_length=64, editable=False)
+
     def __init__(self):
-        self.new_edit_key = hashlib.shake_128(uuid.uuid4().bytes).hexdigest(16)
-        self.edit_key.default = "shake_128:16:%s" % hashlib.shake_128(self.new_edit_key).hexdigest(16)
-    
-    edit_key = models.CharField(verbose_name=_("Edit Key"), max_length=32, editable=False)
+        self.reset_edit_key()
+
+    def reset_edit_key(self, save: bool = False) -> str:
+        """
+        Calculate new edit key and temporarily put it to `self.new_edit_key` before
+        returning it. Also change `edit_key` to the new hashed value.
+        """
+        self.new_edit_key = hash.generate_key(16)
+        self.edit_key.default = hash.hash_key(self.new_edit_key)
+
+        if save:
+            self.save()
+        
+        return self.new_edit_key
