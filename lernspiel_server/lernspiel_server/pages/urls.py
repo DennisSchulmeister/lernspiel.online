@@ -6,13 +6,12 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-from django.apps import AppConfig
-from django.utils.translation import gettext_lazy as _
+from . import views
+from django.urls import path
 
-class GameroundsConfig(AppConfig):
-    """
-    Game Builder: This app allows users to build concrete games by customizing the available
-    game types and adding their content.
-    """
-    name         = "lernspiel_server.gamebuilder"
-    verbose_name = _("Game Builder")
+urlpatterns = [
+    # path("archive/", views.archive, {"blog_id": 3}),
+    # path("about/", views.about, {"blog_id": 3}),
+    # path("blog/<int:year>/", views.year_archive, {"foo": "bar"}),
+    # path("<page_slug>-<page_id>/history/", views.history),
+]

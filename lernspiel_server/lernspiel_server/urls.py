@@ -6,25 +6,25 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-"""
-URL configuration for lernspiel_server project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+from django.views.generic.base import RedirectView
+
+from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("",                   RedirectView.as_view(url="/pages/start")),
+    path("join/",              RedirectView.as_view(url="/")),
+    path("edit/",              RedirectView.as_view(url="/")),
+
+    path("join/<key>",         views.join_game, name="join-game"),
+    path("edit/<key>",         views.edit_game, name="edit-game"),
+
+    path("games/core/",        include("lernspiel_server.games.core.urls")),
+    path("games/open-world/",  include("lernspiel_server.games.open_world.urls")),
+    path("games/pot-of-gold/", include("lernspiel_server.games.pot_of_gold.urls")),
+    path("games/quiz/",        include("lernspiel_server.games.quiz.urls")),
+    path("libraries/",         include("lernspiel_server.libraries.urls")),
+    path("pages/",             include("lernspiel_server.pages.urls")),
+    path("admin/",             admin.site.urls),
 ]

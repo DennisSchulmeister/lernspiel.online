@@ -8,12 +8,12 @@
 
 import hashlib, uuid
 
-from ..db import AbstractModel, EditKeyMixin
-from ..models import MediaFile
-
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+
+from ...db import AbstractModel, EditKeyMixin
+from ...models import MediaFile
 
 class Quiz(AbstractModel, EditKeyMixin):
     """

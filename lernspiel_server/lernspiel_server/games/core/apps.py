@@ -9,11 +9,12 @@
 from django.apps import AppConfig
 from django.utils.translation import gettext_lazy as _
 
-class LibrariesConfig(AppConfig):
+class QuizzesConfig(AppConfig):
     """
-    Libraries: Allows signed-up users to group their games and other assets,
-    as well as share them with other users. Also allows to mark contents as private,
-    so that their not publicly visible.
+    Games Core: Core data model for all games. Defines the low-level base blocks for
+    game types, game variants, game content and game sessions. Needs at least one
+    extension app that extends these basic data types via multi-table inheritance
+    for concrete game rules.
     """
-    name         = "lernspiel_server.libraries"
-    verbose_name = _("Libraries")
+    name         = "lernspiel_server.games.core"
+    verbose_name = _("Games: Core")

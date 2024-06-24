@@ -6,14 +6,9 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-from django.apps import AppConfig
+from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-class LibrariesConfig(AppConfig):
-    """
-    Libraries: Allows signed-up users to group their games and other assets,
-    as well as share them with other users. Also allows to mark contents as private,
-    so that their not publicly visible.
-    """
-    name         = "lernspiel_server.libraries"
-    verbose_name = _("Libraries")
+from ...db import AbstractModel
+
+# Create your models here.

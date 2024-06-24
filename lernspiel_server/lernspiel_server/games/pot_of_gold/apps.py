@@ -11,9 +11,8 @@ from django.utils.translation import gettext_lazy as _
 
 class LibrariesConfig(AppConfig):
     """
-    Libraries: Allows signed-up users to group their games and other assets,
-    as well as share them with other users. Also allows to mark contents as private,
-    so that their not publicly visible.
+    Pot of gold games: These are very simple games where each player draws a random entry
+    from a set. Players must then explain the entry.
     """
-    name         = "lernspiel_server.libraries"
-    verbose_name = _("Libraries")
+    name         = "lernspiel_server.games.pot_of_gold"
+    verbose_name = _("Games: Pot of Gold")

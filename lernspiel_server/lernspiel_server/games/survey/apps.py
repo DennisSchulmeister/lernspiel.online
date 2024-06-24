@@ -9,11 +9,9 @@
 from django.apps import AppConfig
 from django.utils.translation import gettext_lazy as _
 
-class TextpagesConfig(AppConfig):
+class LibrariesConfig(AppConfig):
     """
-    Text Pages App: Manages flat text pages and the site navigation menu.
-    The idea is similar to Django's built-in flatpages app, but pages can
-    be translated and navigation menus can be defined.
+    Survey games: Allows to create simple polls and surveys.
     """
-    name         = "lernspiel_server.textpages"
-    verbose_name = _("Text Pages")
+    name         = "lernspiel_server.games.survey"
+    verbose_name = _("Games: Surveys and Polls")

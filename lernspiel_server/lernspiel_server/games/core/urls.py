@@ -6,13 +6,12 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-from django.apps import AppConfig
-from django.utils.translation import gettext_lazy as _
+from . import views
+from django.urls import path
 
-class QuizzesConfig(AppConfig):
-    """
-    Quizzes App: Manages question sets, questions, answers.
-    So anything needed in quiz games.
-    """
-    name         = "lernspiel_server.quizzes"
-    verbose_name = _("Quizzes")
+urlpatterns = [
+    # path("archive/", views.archive, {"blog_id": 3}),
+    # path("about/", views.about, {"blog_id": 3}),
+    # path("blog/<int:year>/", views.year_archive, {"foo": "bar"}),
+    # path("<page_slug>-<page_id>/history/", views.history),
+]

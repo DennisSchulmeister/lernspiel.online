@@ -9,11 +9,11 @@
 from django.apps import AppConfig
 from django.utils.translation import gettext_lazy as _
 
-class GamesConfig(AppConfig):
+class TextpagesConfig(AppConfig):
     """
-    Game Development: This app provides the available game types and generally speaking
-    contains anything that is needed to develop new game types, including management of
-    developer keys and access via the Game SDK CLI.
+    Pages App: Manages flat text pages and the site navigation menu.
+    The idea is similar to Django's built-in flatpages app, but pages can
+    be translated and navigation menus can be defined.
     """
-    name         = "lernspiel_server.gamedev"
-    verbose_name = _("Game Development")
+    name         = "lernspiel_server.pages"
+    verbose_name = _("Pages")

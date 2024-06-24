@@ -22,6 +22,7 @@ ALLOWED_HOSTS = ["*"]
 
 # Application definition
 INSTALLED_APPS = [
+    # Technical apps
     "daphne",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -30,12 +31,17 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
+    # Non-game features
     "lernspiel_server",
-    "lernspiel_server.gamebuilder",
-    "lernspiel_server.gamedev",
-    "lernspiel_server.gameplay",
-    "lernspiel_server.quizzes",
-    "lernspiel_server.textpages",
+    "lernspiel_server.libraries",
+    "lernspiel_server.pages",
+
+    # Game types
+    "lernspiel_server.games.core",
+    "lernspiel_server.games.open_world",
+    "lernspiel_server.games.pot_of_gold",
+    "lernspiel_server.games.quiz",
+    "lernspiel_server.games.survey",
 ]
 
 MIDDLEWARE = [

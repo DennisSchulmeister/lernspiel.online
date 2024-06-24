@@ -9,10 +9,9 @@
 from django.apps import AppConfig
 from django.utils.translation import gettext_lazy as _
 
-class GameroundsConfig(AppConfig):
+class QuizzesConfig(AppConfig):
     """
-    Game Play: Makes it possible to actually play the games. This app manages the
-    game sessions, game state, player scores etc.
+    Quiz games: Knowledge games based on questions and answers.
     """
-    name         = "lernspiel_server.gameplay"
-    verbose_name = _("Game Play")
+    name         = "lernspiel_server.games.quiz"
+    verbose_name = _("Games: Quiz")
