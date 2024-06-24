@@ -31,9 +31,9 @@ Key differences to other lecture game platforms are:
    which the whole class can play together. Outside lessons students can still access and play the game alone.
 
 3. **Hackable:** The Lernspiel Online source code is easy to understand and extend and the server-side
-   platform is separate from the game code. New game types can easily be developed and installed without
+   platform is separate from the game code. New game variants can easily be developed and installed without
    changes to the server. The idea is that Lernspiel Online can be used in programming courses to let
-   students build new game types or otherwise use the platform for practical projects.
+   students build new game variants or otherwise use the platform for practical projects.
 
    But don't be afraid. Of course, Lernspiel Online can perfectly be used as is to build games for any
    lecture. Supporting programming projects is just another feature, that can but don't need
