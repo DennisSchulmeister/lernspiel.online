@@ -11,6 +11,7 @@ tries to summarize the most important things.
 1. [Poetry Package Management](#poetry-package-management)
 1. [Django Web Framework](#django-web-framework)
 1. [Django Project vs. App](#django-project-vs-app)
+1. [SQLite Shell](#sqlite-shell)
 1. [NPM and esbuild](#npm-and-esbuild)
 1. [Developing New Game Variants](#developing-new-game-variants)
 
@@ -162,6 +163,21 @@ Then move the new app directory into the project's python module directory (e.g.
 The new app name with thus become `myproject.myapp`, which needs to be reflected in the `name`
 attribute inside the `apps.py` file. Otherwise Django bails on server startup. When adding the
 app to the `INSTALLED_APPS` settings also use the new name `myproject.myapp`.
+
+SQLite Shell
+------------
+
+The command `./manage.py dbshell?` drops you into a database shell where you can execute SQL
+commands against the database. Unfortunately the SQLite shell typically used during development
+is very spartan. The `SELECT` output doesn't even show the column names. The following special
+commands mitigate this a litte:
+
+* `.tables` - List available tables
+* `.mode column` - Turn column mode on to align the SELECT output in columns
+* `.headers on` - Show column names in the first line
+* `.quit` - Leave SQLite Shell (and use a proper tool 😛)
+
+Make sure to use an extra wide terminal window, as the lines are still unreadebl when wrapped.
 
 NPM and esbuild
 ---------------

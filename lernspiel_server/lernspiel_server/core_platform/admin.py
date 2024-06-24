@@ -9,3 +9,6 @@
 from django.contrib import admin
 
 # Register your models here.
+
+# InlineAdmin for Users -> API-Keys
+# See: https://docs.djangoproject.com/en/5.0/topics/auth/customizing/#extending-user

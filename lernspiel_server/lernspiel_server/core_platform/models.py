@@ -6,9 +6,11 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-from django.db import models
+from django.conf import settings
+from django.contrib.auth.models import AbstractUser
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
+from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from .db import AbstractModel, CreatedModifiedByMixin
@@ -25,7 +27,11 @@ class MediaFile(AbstractModel, CreatedModifiedByMixin):
     content_object = GenericForeignKey("content_type", "object_id")
 
     def calc_file_path(self, filename):
-        return "%(app_label)s/%(model)s/%(filename)s"
+        return "%(app_label)s/%(model)s/%(filename)s" % {
+            "app_label": self.content_type.app_label,
+            "model":     self.content_type.model,
+            "filename":  filename,
+        }
 
     file = models.FileField(verbose_name=_("File"), upload_to=calc_file_path)
 
@@ -37,21 +43,50 @@ class MediaFile(AbstractModel, CreatedModifiedByMixin):
     def __str__(self):
         return self.file.name
 
-class ClientApplication(AbstractModel, CreatedModifiedByMixin):
+class CustomUser(AbstractUser):
     """
-    Remote client application that connects with the server using an API key.
-    This is an advanced feature meant to extend the application with bots that
-    can join games and act on behalf of a real player. This is probably the
-    most useful for open world games, where the bots can navigate on a large
-    map to achieve a goal.
+    Replacement for the default Django User model, so that we can distinguish between
+    normal human users and remote applications. The first cannot access the web APIs,
+    the latter cannot login interactively.
     """
+    HUMAN_USER  = 1
+    APPLICATION = 2
+
+    _USER_TYPES = (
+        (HUMAN_USER,  _("Human User")),
+        (APPLICATION, _("Application")),
+    )
+
+    user_type = models.SmallIntegerField(verbose_name=_("User Type"), choices=_USER_TYPES, default=HUMAN_USER)
+
+class ApplicationUser(AbstractModel, CreatedModifiedByMixin):
+    """
+    API Key for remote access to the server by developers or other API clients.
+    Developers connect to the server to upload and test new game variants via
+    the Game SDK. Other API clients include bots that join games and participate
+    one way or another (e.g. as a challenge for students).
+
+    Technically this is an extension to Django's core User model, so that the
+    Django permission system can be used to restrict access for API clients.
+    But not every User is an Application User.
+    """
+    DEVELOPER  = 1
+    REMOTE_APP = 2
+
+    _KEY_TYPES = (
+        (DEVELOPER,  _("Developer Key")),
+        (REMOTE_APP, _("Application Key")),
+    )
+
+    user        = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="application")
     name        = models.CharField(max_length=255, verbose_name=_("Name"))
     description = models.TextField(verbose_name=_("Description"), blank=True)
     thumbnail   = GenericRelation(MediaFile)
-    owner       = models.ForeignKey("auth.User", verbose_name=_("Owner"), on_delete=models.CASCADE, related_name="client_applications")
+    owner       = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_("Owner"), on_delete=models.CASCADE, related_name="own_applications")
+    key_type    = models.SmallIntegerField(verbose_name=_("Key Type"), choices=_KEY_TYPES)
     api_key     = models.CharField(verbose_name=_("API Key"), max_length=64, editable=False)
     expires     = models.DateTimeField(verbose_name=_("Expires"), null=True, blank=False)
-    active      = models.BooleanField(verbose_name=_("Active", help_text=_("Use this to manually revoke an application without deleting it.")))
+    active      = models.BooleanField(verbose_name=_("Active"), help_text=_("Use this to manually revoke an application without deleting it."))
 
     def __init__(self):
         self.reset_api_key()
@@ -68,3 +103,6 @@ class ClientApplication(AbstractModel, CreatedModifiedByMixin):
             self.save()
         
         return self.new_api_key
+
+# TODO: Custom auth backend needed? No password for API users?
+# https://docs.djangoproject.com/en/5.0/topics/auth/customizing/#specifying-authentication-backends
