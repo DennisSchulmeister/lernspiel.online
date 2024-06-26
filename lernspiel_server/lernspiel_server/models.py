@@ -8,13 +8,13 @@
 
 from django import template
 from django.contrib.auth.models import AbstractUser, Group
+from django.contrib.sites.models import Site as DjangoSite
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from .context_processors import site
 from .db import AbstractModel, CreatedModifiedByMixin
 from .utils import hash
 
@@ -44,6 +44,20 @@ class MediaFile(AbstractModel, CreatedModifiedByMixin):
     
     def __str__(self):
         return self.file.name
+
+class Site(models.Model):
+    """
+    Extended version of Django's built-in Site model that additionally allows to
+    upload a logo.
+    """
+    id     = models.SmallIntegerField(verbose_name=_("Id"), primary_key=True, editable=True)
+    domain = models.CharField(verbose_name=_("Domain Name"), max_length=100)
+    name   = models.CharField(verbose_name=_("Display Name"), max_length=255)
+    logo   = GenericRelation(MediaFile)
+
+    class Meta:
+        verbose_name        = _("Website")
+        verbose_name_plural = _("Websites")
 
 class User(AbstractUser):
     """
@@ -122,14 +136,18 @@ class User(AbstractUser):
             text_template = template.loader.get_template("lernspiel_server/email/api_key_changed.txt")
             html_template = template.loader.get_template("lernspiel_server/email/api_key_changed.html")
 
+            # NOTE: Context processors are only executed when there is a HttpRequest.
+            # The import happens here to avoid circular imports.
+            from .context_processors import site
+            _site = site()
+
             context = {
                 "user_type":   self.get_user_type_display(),
                 "username":    self.username,
                 "first_name":  self.first_name,
                 "new_api_key": new_api_key,
-
-                # Note: Context processors are only executed when there is a HttpRequest
-                "site":        site()["site"],
+                "site":        _site["site"],
+                "site_logo":   _site["site_logo"],
             }
 
             self.email_user(

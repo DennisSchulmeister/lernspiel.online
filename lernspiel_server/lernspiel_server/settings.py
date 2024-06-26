@@ -57,7 +57,6 @@ MIDDLEWARE = [
     "django.contrib.sites.middleware.CurrentSiteMiddleware",
 ]
 
-SITE_ID = 1
 ROOT_URLCONF = "lernspiel_server.urls"
 
 TEMPLATES = [
@@ -123,6 +122,9 @@ EMAIL_BACKEND        = "django.core.mail.backends.console.EmailBackend"
 # EMAIL_HOST_USER     = ""
 # EMAIL_HOST_PASSWORD = ""
 # EMAIL_TIMEOUT       = 30
+
+# Website information
+SITE_ID = 1
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/

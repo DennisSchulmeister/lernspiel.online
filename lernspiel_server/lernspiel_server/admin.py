@@ -11,15 +11,31 @@ import traceback
 from django.contrib import admin, messages
 from django.contrib.auth.admin import UserAdmin, GroupAdmin
 from django.contrib.auth.models import Group
+from django.contrib.contenttypes.admin import GenericTabularInline
+from django.contrib.sites.models import Site as DjangoSite
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
-from .models import User, UserGroup
+from .models import Site, User, UserGroup, MediaFile
 
 admin.site.site_title = admin.site.site_header = _("Lernspiel Online: Admin")
 admin.site.index_title = _("Administration")
 
-@admin.action(description=_("Reset API Key"))
+class SiteLogoInline(GenericTabularInline):
+    model        = MediaFile
+    max_num      = 1
+    verbose_name = _("Logo")
+
+class SiteAdmin(admin.ModelAdmin):
+    model        = Site
+    list_display = ["id", "domain", "name"]
+    fields       = ["id", "domain", "name"]
+    inlines      = [SiteLogoInline]
+
+admin.site.unregister(DjangoSite)
+admin.site.register(Site, SiteAdmin)
+
+@admin.action(description=_("Reset API key of selected users"))
 def reset_api_key(modeladmin, request, queryset):
     """
     Reset the API key of the selected users and send the new key via e-mail.
