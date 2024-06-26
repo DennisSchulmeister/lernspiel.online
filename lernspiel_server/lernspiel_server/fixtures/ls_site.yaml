@@ -1,0 +1,5 @@
+- model: sites.Site
+  pk: 1
+  fields:
+    domain: https://lernspiel.online
+    name: Lernspiel Online

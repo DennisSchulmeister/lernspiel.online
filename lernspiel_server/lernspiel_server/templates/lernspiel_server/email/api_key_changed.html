@@ -1,0 +1,29 @@
+{% extends "lernspiel_server/email/base.html" %}
+{% load i18n %}
+
+{% block body %}
+<p>
+    {% translate "Dear user," %}
+</p>
+<p>
+    {% translate "The following API key has been changed." %}
+</p>
+<ul>
+    <li>
+        <b>{% translate "Access Type:" %}</b> {{ user_type }}
+    </li>
+    <li>
+        <b>{% translate "Technical Name:" %}</b> {{ username }}
+    </li>
+    <li>
+        <b>{% translate "Display Name:" %}</b> {{ first_name }}
+    </li>
+    <li>
+        <b>{% translate "New API Key:" %}</b> {{ new_api_key }}
+    </li>
+</ul>
+<p>
+    {% translate "Please update your application with this new key." %}
+    {% translate "If you had an API key before, it won't work anymore." %}
+</p>
+{% endblock %}

@@ -10,7 +10,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views.generic.base import RedirectView
 
-from .core_platform import views
+from . import views
 
 urlpatterns = [
     path("",                   RedirectView.as_view(url="/pages/start")),
@@ -20,11 +20,11 @@ urlpatterns = [
     path("join/<key>",         views.join_game, name="join-game"),
     path("edit/<key>",         views.edit_game, name="edit-game"),
 
-    path("games/core/",        include("lernspiel_server.games.games_core.urls")),
-    path("games/open-world/",  include("lernspiel_server.games.open_world.urls")),
-    path("games/pot-of-gold/", include("lernspiel_server.games.pot_of_gold.urls")),
-    path("games/quiz/",        include("lernspiel_server.games.quiz.urls")),
-    path("libraries/",         include("lernspiel_server.libraries.urls")),
-    path("pages/",             include("lernspiel_server.pages.urls")),
+    path("games/core/",        include("ls_games_core.urls")),
+    path("games/open-world/",  include("ls_games_open_world.urls")),
+    path("games/pot-of-gold/", include("ls_games_pot_of_gold.urls")),
+    path("games/quiz/",        include("ls_games_quiz.urls")),
+    path("libraries/",         include("ls_libraries.urls")),
+    path("pages/",             include("ls_pages.urls")),
     path("admin/",             admin.site.urls),
 ]

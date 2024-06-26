@@ -40,6 +40,18 @@ CHANNEL_LAYERS = {
     },
 }
 
+# E-Mail Settings
+# See: https://docs.djangoproject.com/en/5.0/ref/settings/#std-setting-EMAIL_BACKEND
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+# DEFAULT_FROM_EMAIL   = "noreply@example.com"
+# EMAIL_SUBJECT_PREFIX = "[Lernspiel Online] "
+# EMAIL_HOST           = "localhost"
+# EMAIL_PORT           = 25
+# EMAIL_HOST_USER      = ""
+# EMAIL_HOST_PASSWORD  = ""
+# EMAIL_TIMEOUT        = 30
+
 # Static files
 # Run `manage.py collectstatic` to copy the files first!
 STATIC_DIR = "/srv/www/mysite.de/static"
@@ -55,3 +67,5 @@ TIME_ZONE = "Europe/Berlin"
 
 LANGUAGE_CODE = "de-de"
 USE_THOUSAND_SEPARATOR = True
+
+SITE_ID = 1

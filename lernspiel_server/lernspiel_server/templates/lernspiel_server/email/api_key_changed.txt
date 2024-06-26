@@ -1,0 +1,11 @@
+{% extends "lernspiel_server/email/base.txt" %}{% load i18n %}{% block body %}{% translate "Dear user," %}
+
+{% translate "The following API key has been changed." %}
+{# Translators: Right-aligned field-labels #}
+{% translate "   Access Type:" %} {{ user_type }}
+{% translate "Technical Name:" %} {{ username }}
+{% translate "  Display Name:" %} {{ first_name }}
+{% translate "   New API Key:" %} {{ new_api_key }}
+
+{% translate "Please update your application with this new key." %}
+{% translate "If you had an API key before, it won't work anymore." %}{% endblock %}

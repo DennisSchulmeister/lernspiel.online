@@ -55,8 +55,8 @@ Here are a few important directories and files that you might want to know about
 │   └── manage.py                       Django CLI for the server
 │
 └── game_sdk                            Lernspiel Game SDK
-│   ├── cli                             Game SDK CLI
-│   └── web                             Game SDK Client Library
+    ├── cli                             Game SDK CLI
+    └── web                             Game SDK Client Library
 ```
 
 Poetry Package Management
@@ -115,54 +115,25 @@ Python modules with certain required source files. Though the whole source code 
 live inside the project module, the Django developers recommend splitting the project into
 multiple apps to foster separation of concerns and code re-use.
 
-The only thing we find unfortunate is, that apps by default live outside their parent project.
-This makes sense for reusable apps, that are meant to be used in multiple projects. But for
-internal apps this clutters the source directory, making it hard for administrators to find
-the settings file and other important directories. It also allows naming clashes with globally
-installed Python packages. For this reasons we put the internal apps of a project **inside**
-the projects module directory. (And still the so called app name can clash, since Django by
-default only uses the last part of the package name for it.)
-
-Take the `lernspiel_server` project and its internal `pages` app. Instead of:
+When you have a project like `lernspiel_server` the Django Admin command created a top-level
+directory of that name, containing a sub-directory of the same name. Next to it the Django
+applications will be created:
 
 ```text
-.
-├── HACKING.md
-└── lernspiel_server
-    ├── pages
+.                                       Root directory with this file
+├── lernspiel_server                    Django project top-level
+    ├── lernspiel_server                Django project python package
+    │   │   └── settings.py             Configuration file
     │   └── ...
-    ├── lernspiel_server
-    │   ├── local_settings.py
-    │   ├── settings.py
+    └── manage.py                       Django CLI for the server
+    │
+    ├── ls_app_1                        Django Application
     │   └── ...
-    └── manage.py
-```
-
-We have:
-
-```text
-.
-├── HACKING.md
-└── lernspiel_server
-    ├── lernspiel_server
-    │   ├── pages
-    │   │   └── ...
-    │   ├── local_settings.py
-    │   ├── settings.py
+    ├── ls_app_2                        Django Application
     │   └── ...
-    └── manage.py
+    └── ls_app_3                        Django Application
+        └── ...
 ```
-
-For this first create an app as usual with:
-
-```sh
-./manage.py startapp myapp
-```
-
-Then move the new app directory into the project's python module directory (e.g. `myproject`).
-The new app name with thus become `myproject.myapp`, which needs to be reflected in the `name`
-attribute inside the `apps.py` file. Otherwise Django bails on server startup. When adding the
-app to the `INSTALLED_APPS` settings also use the new name `myproject.myapp`.
 
 SQLite Shell
 ------------

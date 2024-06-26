@@ -30,19 +30,19 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
 
     # Non-game features
     "lernspiel_server",
-    "lernspiel_server.core_platform",
-    "lernspiel_server.libraries",
-    "lernspiel_server.pages",
+    "ls_libraries",
+    "ls_pages",
 
     # Game types
-    "lernspiel_server.games.games_core",
-    "lernspiel_server.games.open_world",
-    "lernspiel_server.games.pot_of_gold",
-    "lernspiel_server.games.quiz",
-    "lernspiel_server.games.survey",
+    "ls_games_core",
+    "ls_games_open_world",
+    "ls_games_pot_of_gold",
+    "ls_games_quiz",
+    "ls_games_survey",
 ]
 
 MIDDLEWARE = [
@@ -54,8 +54,10 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.locale.LocaleMiddleware",
+    "django.contrib.sites.middleware.CurrentSiteMiddleware",
 ]
 
+SITE_ID = 1
 ROOT_URLCONF = "lernspiel_server.urls"
 
 TEMPLATES = [
@@ -69,6 +71,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "lernspiel_server.context_processors.site",
             ],
         },
     },
@@ -107,7 +110,19 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL="core_platform.CustomUser"
+AUTH_USER_MODEL = "lernspiel_server.User"
+
+# E-Mail Settings
+# See: https://docs.djangoproject.com/en/5.0/ref/settings/#std-setting-EMAIL_BACKEND
+DEFAULT_FROM_EMAIL   = "noreply@example.com"
+EMAIL_SUBJECT_PREFIX = "[Lernspiel Online] "
+EMAIL_BACKEND        = "django.core.mail.backends.console.EmailBackend"
+
+# EMAIL_HOST          = "localhost"
+# EMAIL_PORT          = 25
+# EMAIL_HOST_USER     = ""
+# EMAIL_HOST_PASSWORD = ""
+# EMAIL_TIMEOUT       = 30
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/

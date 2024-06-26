@@ -30,6 +30,8 @@ CHANNEL_LAYERS = {
     },
 }
 
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
 STATIC_DIR = "/app/lernspiel_server/_static.volume"
 STATIC_URL = "static/"
 
@@ -41,3 +43,5 @@ TIME_ZONE = "Europe/Berlin"
 
 LANGUAGE_CODE = "de-de"
 USE_THOUSAND_SEPARATOR = True
+
+SITE_ID = 1
