@@ -2,7 +2,6 @@
 {% block footer %}
 {% translate "Best regards," %}
 {{ site.name }} ({{ site.domain }})
-
 {# Translators: Fixed-width e-mail footer #}
 {% translate "~~~ Engage and motivate your students through collaborative   ~~~" %}
 {% translate "~~~ classroom games. Transform your lectures into interactive ~~~" %}

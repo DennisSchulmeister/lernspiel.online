@@ -7,33 +7,37 @@
 
         <style>
             html {
-                min-height: 100vh;
-
-                display: flex;
-                justify-content: center;
-                align-items: center;
-
-                background: #f2f2f2;
-                padding: 1em;
-            }
-
-            body {
-                border: 1px solid #c9c9c9;
+                font-family: sans-serif;
+                font-size: 11pt;
                 background: white;
-                padding: 1em;
-
-                display: flex;
-                flex-direction: column;
-                gap: 2em;
             }
 
-            #footer_endtext {
+            html, body {
+                padding: 0;
+                margin: 0;
+            }
+
+            header {
+                background: {{ site.header_bg }};
+                padding: 1em;
+            }
+
+            #logo {
+                width: {{ site.logo_width }};
+            }
+
+            main {
+                padding: 1em;
+            }
+
+            .footer_endtext {
                 font-size: 80%;
                 color: grey;
+                margin: 0;
             }
 
             a, a:visited {
-                color: darkred;
+                color: {{ site.link_color }};
                 text-decoration: none;
             }
 
@@ -48,26 +52,24 @@
     </head>
     <body>
         <header>
-            <a href="{{ site.domain }}" target="_blank">
-                <img alt="{{ site.name }}" src="{{ site_logo.file|data_uri }}">
-            </a>
+            <img id="logo" alt="{{ site.name }}" src="{{ site_logo.file|data_uri }}">
         </header>
-
         <main>
-            {% block body %}{% endblock %}
+            <div id="body">
+                {% block body %}{% endblock %}
+            </div>
+            <footer>
+                <p>
+                    {% translate "Best regards," %} <br>
+                    <a href="{{ site.domain }}" target="_blank">{{ site.name }}</a>
+                </p>
+                <p class="footer_endtext">
+                    {% translate "Engage and motivate your students through collaborative classroom games." %}
+                </p>
+                <p class="footer_endtext">
+                    {% translate "Transform your lectures into interactive learning experiences today!" %}             
+                </p>
+            </footer>
         </main>
-
-        <footer>
-            <p>
-                {% translate "Best regards," %} <br>
-                <a href="{{ site.domain }}" target="_blank">{{ site.name }}</a>
-            </p>
-            <p id="footer_endtext">
-                {% translate "Engage and motivate your students through collaborative classroom games." %}
-            </p>
-            <p>
-                {% translate "Transform your lectures into interactive learning experiences today!" %}             
-            </p>
-        </footer>
     </body>
 </html>

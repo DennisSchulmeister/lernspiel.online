@@ -50,10 +50,15 @@ class Site(models.Model):
     Extended version of Django's built-in Site model that additionally allows to
     upload a logo.
     """
-    id     = models.SmallIntegerField(verbose_name=_("Id"), primary_key=True, editable=True)
-    domain = models.CharField(verbose_name=_("Domain Name"), max_length=100)
-    name   = models.CharField(verbose_name=_("Display Name"), max_length=255)
-    logo   = GenericRelation(MediaFile)
+    id         = models.SmallIntegerField(verbose_name=_("Id"), primary_key=True, editable=True)
+    domain     = models.CharField(verbose_name=_("Domain Name"), max_length=100)
+    name       = models.CharField(verbose_name=_("Display Name"), max_length=255)
+    logo       = GenericRelation(MediaFile)
+
+    # Theming values
+    logo_width = models.CharField(verbose_name=_("Logo Width"), max_length=20, default="20em")
+    header_bg  = models.CharField(verbose_name=_("Header Background"), max_length=100, default="#234769")
+    link_color = models.CharField(verbose_name=_("Link Color"), max_length=20, default="crimson")
 
     class Meta:
         verbose_name        = _("Website")
@@ -127,7 +132,7 @@ class User(AbstractUser):
             raise ValidationError(_("Cannot reset the API key of user %s without an e-mail address.") % self.username)
 
         # Reset key
-        new_api_key = hash.generate_key(length=32, grouping=8)
+        new_api_key = hash.generate_key(length=24, grouping=8)
         self.set_password(new_api_key)
 
         if save_and_send_email:
@@ -151,7 +156,7 @@ class User(AbstractUser):
             }
 
             self.email_user(
-                subject      = _("New API Key for %(user_type)s %(username)s") % context,
+                subject      = _("{site.name}: New API Key for {user_type} {username}").format(**context),
                 message      = text_template.render(context),
                 html_message = html_template.render(context),
             )

@@ -113,12 +113,13 @@ AUTH_USER_MODEL = "lernspiel_server.User"
 
 # E-Mail Settings
 # See: https://docs.djangoproject.com/en/5.0/ref/settings/#std-setting-EMAIL_BACKEND
+# The values below assume you started maildev with "npm start" at the root directory.
 DEFAULT_FROM_EMAIL   = "noreply@example.com"
 EMAIL_SUBJECT_PREFIX = "[Lernspiel Online] "
-EMAIL_BACKEND        = "django.core.mail.backends.console.EmailBackend"
 
-# EMAIL_HOST          = "localhost"
-# EMAIL_PORT          = 25
+#EMAIL_BACKEND        = "django.core.mail.backends.console.EmailBackend"
+EMAIL_HOST          = "localhost"
+EMAIL_PORT          = 1025
 # EMAIL_HOST_USER     = ""
 # EMAIL_HOST_PASSWORD = ""
 # EMAIL_TIMEOUT       = 30

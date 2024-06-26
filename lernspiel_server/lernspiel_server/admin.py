@@ -29,8 +29,16 @@ class SiteLogoInline(GenericTabularInline):
 class SiteAdmin(admin.ModelAdmin):
     model        = Site
     list_display = ["id", "domain", "name"]
-    fields       = ["id", "domain", "name"]
     inlines      = [SiteLogoInline]
+
+    fieldsets = (
+        (None, {
+            "fields": ["id", "domain", "name"]
+        }),
+        (_("Theme Parameters (CSS)"), {
+            "fields": ["logo_width", "header_bg", "link_color"]
+        })
+    )
 
 admin.site.unregister(DjangoSite)
 admin.site.register(Site, SiteAdmin)
