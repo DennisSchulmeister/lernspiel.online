@@ -7,8 +7,6 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    replaces = [('lernspiel_server', '0002_usergroup'), ('lernspiel_server', '0003_alter_usergroup_options')]
-
     dependencies = [
         ('auth', '0012_alter_user_first_name_max_length'),
         ('lernspiel_server', '0001_initial'),

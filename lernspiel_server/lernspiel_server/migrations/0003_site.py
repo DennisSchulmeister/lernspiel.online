@@ -5,10 +5,8 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    replaces = [('lernspiel_server', '0004_site'), ('lernspiel_server', '0005_site_header_bg_site_link_color_site_logo_width'), ('lernspiel_server', '0006_alter_site_logo_width'), ('lernspiel_server', '0007_alter_site_logo_width')]
-
     dependencies = [
-        ('lernspiel_server', '0003_alter_usergroup_options'),
+        ('lernspiel_server', '0002_usergroup'),
     ]
 
     operations = [
