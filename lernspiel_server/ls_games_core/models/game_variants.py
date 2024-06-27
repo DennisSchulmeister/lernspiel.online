@@ -13,6 +13,7 @@ from django.utils.translation import gettext_lazy as _
 
 from lernspiel_server.db import AbstractModel, CreatedModifiedByMixin
 from lernspiel_server.models import MediaFile
+from lernspiel_server.utils.database import calc_file_path
 
 class GameVariant(AbstractModel, CreatedModifiedByMixin):
     """
@@ -30,14 +31,18 @@ class GameVariant(AbstractModel, CreatedModifiedByMixin):
     media       = GenericRelation(MediaFile)
 
     # Link to settings for the concrete game type
-    par_content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    par_object_id    = models.UUIDField()
+    par_content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True)
+    par_object_id    = models.UUIDField(null=True)
     parameters       = GenericForeignKey("par_content_type", "par_object_id")
 
     class Meta:
         verbose_name        = _("Game Variant")
         verbose_name_plural = _("Game Variants")
         ordering            = ["name"]
+
+        indexes = [
+            models.Index(fields=["par_content_type", "par_object_id"]),
+        ]
         
     def __str__(self):
         return self.name
@@ -57,10 +62,13 @@ class SourceFile(AbstractModel, CreatedModifiedByMixin):
         JS:   _("JS Source File"),
     }
 
+    def _calc_file_path(self, filename):
+        return calc_file_path(self._meta, filename)
+    
     game_variant = models.ForeignKey(GameVariant, on_delete=models.CASCADE, editable=False)
     file_type    = models.SmallIntegerField(verbose_name=_("File Type"), choices=_FILE_TYPES)
     sort_order   = models.SmallIntegerField(verbose_name=_("Sort Order"))
-    media        = GenericRelation(MediaFile)
+    source_file  = models.FileField(verbose_name=_("Source File"), upload_to=_calc_file_path)
 
     class Meta:
         verbose_name        = _("Source File")
@@ -68,8 +76,7 @@ class SourceFile(AbstractModel, CreatedModifiedByMixin):
         ordering            = ["file_type", "sort_order"]
         
     def __str__(self):
-        media_file = self.media.all()[0]
-        file_name  = media_file.name if media_file is not None else ""
+        file_name  = self.source_file.name if self.source_file else ""
 
         return "{file_type} ({sort_order}): {file_name}".format(
             file_type  = self.file_type,

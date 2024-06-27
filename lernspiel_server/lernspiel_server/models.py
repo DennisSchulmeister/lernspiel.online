@@ -16,6 +16,7 @@ from django.utils.translation import gettext_lazy as _
 
 from .db import AbstractModel, CreatedModifiedByMixin
 from .utils import hash
+from .utils.database import calc_file_path
 
 class MediaFile(AbstractModel, CreatedModifiedByMixin):
     """
@@ -23,36 +24,38 @@ class MediaFile(AbstractModel, CreatedModifiedByMixin):
     like a game type, game or question, using a generic foreign key as defined
     in the built-in `contenttypes` Django app.
     """
+    def _calc_file_path(self, filename):
+        return calc_file_path(self.content_type, filename)
+    
     content_type   = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id      = models.UUIDField()
-    content_object = GenericForeignKey("content_type", "object_id")
-
-    def calc_file_path(self, filename):
-        return "%(app_label)s/%(model)s/%(filename)s" % {
-            "app_label": self.content_type.app_label,
-            "model":     self.content_type.model,
-            "filename":  filename,
-        }
-
-    file = models.FileField(verbose_name=_("File"), upload_to=calc_file_path)
+    content_object = GenericForeignKey("content_type", "object_id")   
+    file           = models.FileField(verbose_name=_("File"), upload_to=_calc_file_path)
 
     class Meta:
         ordering = ["file"]
         verbose_name = _("Media File")
         verbose_name_plural = _("Media Files")
+
+        indexes = [
+            models.Index(fields=["content_type", "object_id"])
+        ]
     
     def __str__(self):
         return self.file.name
-
+    
 class Site(models.Model):
     """
     Extended version of Django's built-in Site model that additionally allows to
     upload a logo.
     """
+    def _calc_file_path(self, filename):
+        return calc_file_path(self._meta, filename)
+
     id         = models.PositiveIntegerField(verbose_name=_("Id"), primary_key=True, editable=True)
     domain     = models.CharField(verbose_name=_("Domain Name"), max_length=100)
     name       = models.CharField(verbose_name=_("Display Name"), max_length=255)
-    logo       = GenericRelation(MediaFile)
+    logo       = models.FileField(verbose_name=_("Logo Image"), upload_to=_calc_file_path)
 
     # Theming values
     logo_width = models.CharField(verbose_name=_("Logo Width"), max_length=20, default="20em")

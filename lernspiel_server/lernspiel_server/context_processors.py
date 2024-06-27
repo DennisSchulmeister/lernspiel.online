@@ -18,12 +18,13 @@ def site(request: HttpRequest = None) -> dict:
     Add the current site as customized in Django's Sites app to all templates.
     """
     try:
-        site_id = settings.SITE_ID or 1
-        site_obj = Site.objects.get(pk=site_id)
+        site_id   = settings.SITE_ID or 1
+        site_obj  = Site.objects.get(pk=site_id)
+        site_logo = site_obj.logo if hasattr(site_obj, "logo") else None
 
         return {
             "site": site_obj,
-            "site_logo": site_obj.logo.all()[0],
+            "site_logo": site_logo,
         }
     except Site.DoesNotExist:
         warning = _("WARNING: Website %s is not customized. Please login to the Admin and maintain its data.") % site_id

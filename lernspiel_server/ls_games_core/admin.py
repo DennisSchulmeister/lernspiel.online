@@ -7,7 +7,7 @@
 # License, or (at your option) any later version.
 
 from django.contrib import admin
-from django.contrib.contenttypes.admin import GenericTabularInline
+from django.contrib.contenttypes.admin import GenericTabularInline, GenericStackedInline
 from django.utils.translation import gettext_lazy as _
 
 from lernspiel_server.models import MediaFile
@@ -19,9 +19,9 @@ class MediaFileInline(GenericTabularInline):
     verbose_name_plural = _("Media Files")
 
 class SourceFileInline(admin.TabularInline):
-    model        = SourceFile
-    max_num      = 1
-    verbose_name = _("Source File")
+    model               = SourceFile
+    verbose_name        = _("Source File")
+    verbose_name_plural = _("Source Files")
 
 class GameVariantAdmin(admin.ModelAdmin):
     model        = GameVariant

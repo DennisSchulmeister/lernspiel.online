@@ -17,7 +17,10 @@ def data_uri(file):
     Generate a data URI with the content of the given file. The file usually will
     be an uploaded media file.
     """
-    mime = mimetypes.guess_type(file.url)[0] or "application/binary"
+    if not file:
+        return ""
+    
+    mime = mimetypes.guess_type(file.name)[0] or "application/binary"
 
     with file.open('rb') as f:
         base64_data = base64.b64encode(f.read()).decode('utf-8')

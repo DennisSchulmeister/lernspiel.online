@@ -21,22 +21,16 @@ from .models import Site, User, UserGroup, MediaFile
 admin.site.site_title = admin.site.site_header = _("Lernspiel Online: Admin")
 admin.site.index_title = _("Administration")
 
-class SiteLogoInline(GenericTabularInline):
-    model        = MediaFile
-    max_num      = 1
-    verbose_name = _("Logo")
-
 class SiteAdmin(admin.ModelAdmin):
     model        = Site
     list_display = ["id", "domain", "name"]
-    inlines      = [SiteLogoInline]
 
     fieldsets = (
         (None, {
             "fields": ["id", "domain", "name"]
         }),
         (_("Theme Parameters (CSS)"), {
-            "fields": ["logo_width", "header_bg", "link_color"]
+            "fields": ["logo", "logo_width", "header_bg", "link_color"]
         })
     )
 
