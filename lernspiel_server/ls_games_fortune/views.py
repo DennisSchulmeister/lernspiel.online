@@ -6,11 +6,6 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-from django.db import models
-from django.utils.translation import gettext_lazy as _
+from django.shortcuts import render
 
-from lernspiel_server.db import AbstractModel
-
-# TODO: Simple polls with 1:n categories with 1:n questions with 1:n answers
-# Question settings: Number of clickable answers, correct answer
-# Answer settings: Wrong/correct/partially correct
+# Create your views here.

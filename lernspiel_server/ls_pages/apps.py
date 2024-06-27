@@ -9,7 +9,7 @@
 from django.apps import AppConfig
 from django.utils.translation import gettext_lazy as _
 
-class TextpagesConfig(AppConfig):
+class PagesConfig(AppConfig):
     """
     Pages App: Manages flat text pages and the site navigation menu.
     The idea is similar to Django's built-in flatpages app, but pages can

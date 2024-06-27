@@ -11,4 +11,8 @@ from django.utils.translation import gettext_lazy as _
 
 from lernspiel_server.db import AbstractModel
 
-# Create your models here.
+# TODO: 1:n pots per game, each pot with title/description/words
+# Game settings:
+#   - Players can choose a pot / Players get N random pots
+#   - Pot order as configures / random
+#   - How many words per pot must be drawn (setting for each pot)

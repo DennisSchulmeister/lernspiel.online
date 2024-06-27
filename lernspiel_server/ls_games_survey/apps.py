@@ -9,9 +9,13 @@
 from django.apps import AppConfig
 from django.utils.translation import gettext_lazy as _
 
-class LibrariesConfig(AppConfig):
+class GameTypeSurveysConfig(AppConfig):
     """
-    Survey games: Allows to create simple polls and surveys.
+    Survey games: Allows to create simple surveys.
     """
     name         = "ls_games_survey"
-    verbose_name = _("Games: Surveys and Polls")
+    verbose_name = _("Games: Surveys")
+
+    def ready(self):
+        from ls_games_core.utils.game_types import register_game_type
+        register_game_type("SURVEY", _("Survey"))

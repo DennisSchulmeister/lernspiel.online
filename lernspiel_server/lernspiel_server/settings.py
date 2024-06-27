@@ -39,6 +39,7 @@ INSTALLED_APPS = [
 
     # Game types
     "ls_games_core",
+    "ls_games_fortune",
     "ls_games_open_world",
     "ls_games_pot_of_gold",
     "ls_games_quiz",

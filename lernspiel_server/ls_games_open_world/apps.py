@@ -9,10 +9,14 @@
 from django.apps import AppConfig
 from django.utils.translation import gettext_lazy as _
 
-class LibrariesConfig(AppConfig):
+class GameTypeOpenWorldConfig(AppConfig):
     """
     Open world games: These are games like "capture the flag", where the players can freely
     move around on map and interact with their environment.
     """
     name         = "ls_games_open_world"
     verbose_name = _("Games: Open World")
+
+    def ready(self):
+        from ls_games_core.utils.game_types import register_game_type
+        register_game_type("OPEN_WORLD", _("Open World"))

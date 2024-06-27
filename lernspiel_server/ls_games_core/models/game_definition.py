@@ -6,10 +6,23 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-# from django.contrib.contenttypes.fields import GenericRelation
-# from django.db import models
-# from django.utils.translation import gettext_lazy as _
-# from django.utils import timezone
+from django.contrib.contenttypes.fields import GenericRelation
+from django.db import models
+from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
+
+# Game Settings:
+#  - Play mode: Each player alone, in teams, all together as one team
+#  - How to advance the game: Each player individually, each team individually, the whole class together
+#  - When to advance the game: Manually by teacher, when all players are ready, when at least N players are ready
+#  - Type of credit (none, unit like points / EUR / ...)
+
+# Game Element:
+#  - Credits on success
+#  - Credits on failure
+#  - Credits on skip
+#  - Can be skipped
+
 
 # from lernspiel_server.db import AbstractModel, CreatedModifiedByMixin, EditKeyMixin
 # from lernspiel_server.models import MediaFile

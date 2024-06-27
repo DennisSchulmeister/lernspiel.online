@@ -9,10 +9,14 @@
 from django.apps import AppConfig
 from django.utils.translation import gettext_lazy as _
 
-class LibrariesConfig(AppConfig):
+class GameTypePotOfGoldConfig(AppConfig):
     """
     Pot of gold games: These are very simple games where each player draws a random entry
     from a set. Players must then explain the entry.
     """
     name         = "ls_games_pot_of_gold"
     verbose_name = _("Games: Pot of Gold")
+
+    def ready(self):
+        from ls_games_core.utils.game_types import register_game_type
+        register_game_type("POT_OF_GOLD", _("Pot of Gold"))

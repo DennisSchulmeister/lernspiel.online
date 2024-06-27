@@ -9,13 +9,13 @@
 from django.apps import AppConfig
 from django.utils.translation import gettext_lazy as _
 
-class GameTypeQuizConfig(AppConfig):
+class GameTypeWheelOfFortunedConfig(AppConfig):
     """
-    Quiz games: Knowledge games based on questions and answers.
+    Wheel of fortune games: Players must guess a word or sentence by finding the right letters.
     """
-    name         = "ls_games_quiz"
-    verbose_name = _("Games: Quiz")
+    name         = "ls_games_fortune"
+    verbose_name = _("Games: Wheel of Fortune")
 
     def ready(self):
         from ls_games_core.utils.game_types import register_game_type
-        register_game_type("QUIZ", _("Quiz"))
+        register_game_type("WHEEL_OF_FORTUNE", _("Wheel of Fortune"))

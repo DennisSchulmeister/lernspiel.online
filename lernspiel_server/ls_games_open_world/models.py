@@ -11,4 +11,6 @@ from django.utils.translation import gettext_lazy as _
 
 from lernspiel_server.db import AbstractModel
 
-# Create your models here.
+# TODO: Generic model for players and non-players on a map.
+# Generic coordinates in 2D, 3D, xD space
+# Generic attributes that can be interpreted by the game variants as needed (captured flags, inventory, ...)

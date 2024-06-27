@@ -11,4 +11,12 @@ from django.utils.translation import gettext_lazy as _
 
 from lernspiel_server.db import AbstractModel
 
-# Create your models here.
+# TODO: Quiz games with 1:n categories with 1:n questions with 1:n answers
+# Question settings:
+#  - Type of question
+#  - Shuffle answers
+#  - Number of selectable answers
+# Answer settings:
+#  - Text
+#  - Description (for assignment questions)
+#  - Wrong/correct/partially correct

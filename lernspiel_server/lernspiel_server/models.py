@@ -8,7 +8,6 @@
 
 from django import template
 from django.contrib.auth.models import AbstractUser, Group
-from django.contrib.sites.models import Site as DjangoSite
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
@@ -25,7 +24,7 @@ class MediaFile(AbstractModel, CreatedModifiedByMixin):
     in the built-in `contenttypes` Django app.
     """
     content_type   = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id      = models.PositiveIntegerField()
+    object_id      = models.UUIDField()
     content_object = GenericForeignKey("content_type", "object_id")
 
     def calc_file_path(self, filename):
@@ -50,7 +49,7 @@ class Site(models.Model):
     Extended version of Django's built-in Site model that additionally allows to
     upload a logo.
     """
-    id         = models.SmallIntegerField(verbose_name=_("Id"), primary_key=True, editable=True)
+    id         = models.PositiveIntegerField(verbose_name=_("Id"), primary_key=True, editable=True)
     domain     = models.CharField(verbose_name=_("Domain Name"), max_length=100)
     name       = models.CharField(verbose_name=_("Display Name"), max_length=255)
     logo       = GenericRelation(MediaFile)
@@ -63,6 +62,9 @@ class Site(models.Model):
     class Meta:
         verbose_name        = _("Website")
         verbose_name_plural = _("Websites")
+
+    def __str__(self):
+        return self.name
 
 class User(AbstractUser):
     """

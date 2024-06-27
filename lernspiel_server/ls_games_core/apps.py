@@ -9,7 +9,7 @@
 from django.apps import AppConfig
 from django.utils.translation import gettext_lazy as _
 
-class QuizzesConfig(AppConfig):
+class GamesCoreConfig(AppConfig):
     """
     Games Core: Core data model for all games. Defines the low-level base blocks for
     game types, game variants, game content and game sessions. Needs at least one
