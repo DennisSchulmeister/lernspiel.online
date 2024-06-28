@@ -18,5 +18,5 @@ class GameTypeOpenWorldConfig(AppConfig):
     verbose_name = _("Games: Open World")
 
     def ready(self):
-        from ls_games_core.utils.game_types import register_game_type
+        from ls_games_core.models import register_game_type
         register_game_type("OPEN_WORLD", _("Open World"))

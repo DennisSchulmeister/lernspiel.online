@@ -17,5 +17,5 @@ class GameTypeQuizConfig(AppConfig):
     verbose_name = _("Games: Quiz")
 
     def ready(self):
-        from ls_games_core.utils.game_types import register_game_type
+        from ls_games_core.models import register_game_type
         register_game_type("QUIZ", _("Quiz"))

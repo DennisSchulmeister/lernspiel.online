@@ -6,10 +6,12 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from lernspiel_server.db import AbstractModel
+from ls_games_core.models import GameVariant
 
 # TODO: Quiz games with 1:n categories with 1:n questions with 1:n answers
 # Question settings:

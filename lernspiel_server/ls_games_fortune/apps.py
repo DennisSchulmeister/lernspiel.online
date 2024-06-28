@@ -17,5 +17,5 @@ class GameTypeWheelOfFortunedConfig(AppConfig):
     verbose_name = _("Games: Wheel of Fortune")
 
     def ready(self):
-        from ls_games_core.utils.game_types import register_game_type
+        from ls_games_core.models import register_game_type
         register_game_type("WHEEL_OF_FORTUNE", _("Wheel of Fortune"))
