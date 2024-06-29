@@ -6,12 +6,13 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-from . import views
 from django.urls import path
+from . import views
 
 urlpatterns = [
-    # path("archive/", views.archive, {"blog_id": 3}),
-    # path("about/", views.about, {"blog_id": 3}),
-    # path("blog/<int:year>/", views.year_archive, {"foo": "bar"}),
-    # path("<page_slug>-<page_id>/history/", views.history),
+    # path("join/", RedirectView.as_view(url="/")),
+    # path("edit/", RedirectView.as_view(url="/")),
+
+    path("join/<key>", views.join_game, name="join-game"),
+    path("edit/<key>", views.edit_game, name="edit-game"),
 ]

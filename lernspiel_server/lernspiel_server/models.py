@@ -8,60 +8,35 @@
 
 from django import template
 from django.contrib.auth.models import AbstractUser, Group
-from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
-from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from .db import AbstractModel, CreatedModifiedByMixin
 from .utils import hash
 from .utils.database import calc_file_path
-
-class MediaFile(AbstractModel, CreatedModifiedByMixin):
-    """
-    Generic model to manage uploaded media files. Each file belongs to a model
-    like a game type, game or question, using a generic foreign key as defined
-    in the built-in `contenttypes` Django app.
-    """
-    def _calc_file_path(self, filename):
-        return calc_file_path(self.content_type, filename)
-    
-    content_type   = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id      = models.UUIDField()
-    content_object = GenericForeignKey("content_type", "object_id")   
-    file           = models.FileField(verbose_name=_("File"), upload_to=_calc_file_path)
-
-    class Meta:
-        ordering = ["file"]
-        verbose_name = _("Media File")
-        verbose_name_plural = _("Media Files")
-
-        indexes = [
-            models.Index(fields=["content_type", "object_id"])
-        ]
-    
-    def __str__(self):
-        return self.file.name
     
 class Site(models.Model):
     """
     Extended version of Django's built-in Site model that additionally allows to
     upload a logo.
     """
+    # Basic site data
+    id     = models.PositiveIntegerField(verbose_name=_("Id"), primary_key=True, editable=True)
+    domain = models.CharField(verbose_name=_("Domain Name"), max_length=100)
+    name   = models.CharField(verbose_name=_("Display Name"), max_length=255)
+
+    # Logo image
     def _calc_file_path(self, filename):
         return calc_file_path(self._meta, filename)
-
-    id         = models.PositiveIntegerField(verbose_name=_("Id"), primary_key=True, editable=True)
-    domain     = models.CharField(verbose_name=_("Domain Name"), max_length=100)
-    name       = models.CharField(verbose_name=_("Display Name"), max_length=255)
-    logo       = models.FileField(verbose_name=_("Logo Image"), upload_to=_calc_file_path)
+    
+    logo = models.FileField(verbose_name=_("Logo Image"), upload_to=_calc_file_path)
 
     # Theming values
     logo_width = models.CharField(verbose_name=_("Logo Width"), max_length=20, default="20em")
     header_bg  = models.CharField(verbose_name=_("Header Background"), max_length=100, default="#234769")
     link_color = models.CharField(verbose_name=_("Link Color"), max_length=20, default="crimson")
 
+    # Django meta information
     class Meta:
         verbose_name        = _("Website")
         verbose_name_plural = _("Websites")
@@ -92,6 +67,7 @@ class User(AbstractUser):
     can be sent. Applications also use the field `first_name` to save the
     clear-text name of the application.
     """
+    # Additional user data
     REGULAR_USER = 0
     DEVELOPER    = 1
     APPLICATION  = 2
@@ -104,9 +80,15 @@ class User(AbstractUser):
 
     user_type    = models.SmallIntegerField(verbose_name=_("User Type"), choices=_USER_TYPES, default=REGULAR_USER)
     description  = models.TextField(verbose_name=_("Description"), blank=True)
-    thumbnail    = GenericRelation(MediaFile)
     date_expires = models.DateTimeField(verbose_name=_("Expiry Date"), null=True, blank=True)
 
+    # Profile picture
+    def _calc_file_path(self, filename):
+        return calc_file_path(self._meta, filename)
+    
+    picture = models.FileField(verbose_name=_("Profile Picture"), upload_to=_calc_file_path)
+
+    # Form validation
     def can_have_api_key(self):
         """
         Check whether a given user is eligable for an API key, meaning it is either a
@@ -122,6 +104,7 @@ class User(AbstractUser):
         if self.can_have_api_key() and not self.email:
             raise ValidationError(_("E-Mail address is required."))
     
+    # Utility methods
     def reset_api_key(self, save_and_send_email: bool) -> str:
         """
         Presumed this is a Developer or Application User, calculate a new API key and change

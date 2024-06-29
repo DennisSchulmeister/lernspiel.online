@@ -6,7 +6,5 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-from .shared     import *       # Shared models
-from .meta       import *       # Meta model
-from .definition import *       # Game definitions
-from .runtime    import *       # Game runtime
+from .custom_site import *      # Custom Admin Site
+from .models import *           # Core Models

@@ -21,9 +21,10 @@ Technology Choices
 Lernspiel Online is built with the following technology:
 
 * Python
+* Poetry - Package Management
 * Django Web Framework - Core Technology
 * Django Channels - Websocket Support
-* Poetry - Package Management
+* Django Ninja - REST API Support
 
 The idea is to keep the technical requirements lean to enable easy deployment in custom environments.
 Therefor the choice of Django might be considered "conservative", but in fact it contains all the needed

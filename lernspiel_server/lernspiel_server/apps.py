@@ -9,7 +9,7 @@
 from django.apps import AppConfig
 from django.utils.translation import gettext_lazy as _
 
-class QuizzesConfig(AppConfig):
+class LernspielServerConfig(AppConfig):
     """
     Main application: Contains shared logic for the other applications
     plus a few central data models.

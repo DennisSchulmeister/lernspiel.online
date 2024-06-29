@@ -21,6 +21,9 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 # Application definition
+#
+# NOTE: Sort the apps in the order they should appear in the Admin Dashboard.
+# We override the default alphabetical order with the order defined here.
 INSTALLED_APPS = [
     # Django built-in apps
     "daphne",
@@ -32,18 +35,10 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.sites",
 
-    # Non-game features
+    # Lernspiel Server
     "lernspiel_server",
-    "ls_libraries",
     "ls_pages",
-
-    # Game types
     "ls_games_core",
-    "ls_games_fortune",
-    "ls_games_open_world",
-    "ls_games_pot_of_gold",
-    "ls_games_quiz",
-    "ls_games_survey",
 ]
 
 MIDDLEWARE = [

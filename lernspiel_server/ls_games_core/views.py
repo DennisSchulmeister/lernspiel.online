@@ -6,6 +6,10 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-from django.shortcuts import render
+from django.http import HttpResponse
 
-# Create your views here.
+def join_game(request, key):
+    return HttpResponse("Join Game: %s" % key)
+
+def edit_game(request, key):
+    return HttpResponse("Edit Game: %s" % key)
