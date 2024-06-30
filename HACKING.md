@@ -123,11 +123,11 @@ applications will be created:
 
 ```text
 .                                       Root directory with this file
-├── lernspiel_server                    Django project top-level
+└── lernspiel_server                    Django project top-level
     ├── lernspiel_server                Django project python package
     │   │   └── settings.py             Configuration file
     │   └── ...
-    └── manage.py                       Django CLI for the server
+    ├── manage.py                       Django CLI for the server
     │
     ├── ls_app_1                        Django Application
     │   └── ...
