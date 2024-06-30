@@ -1,0 +1,48 @@
+# Lernspiel Online: Lecture Game Platform - Server
+# © 2024 Dennis Schulmeister-Zimolong <dennis@wpvs.de>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+
+from django.db import models
+from django.db.models.query import QuerySet
+from django.utils.translation import gettext_lazy as _
+import lernspiel_server.utils.models as db_utils
+from . import GameComponentMeta
+
+class EventMeta(db_utils.UUIDMixin):
+    """
+    Named event of a game component. Game components emit events to trigger game logic, e.g.
+    when a button is pressed or a timeout expires. Game logic scripts can subscribe to these
+    events to update the game state by setting property values of the game components.
+    """
+    parent = models.ForeignKey(GameComponentMeta, on_delete=models.CASCADE, related_name="events")
+    name   = models.CharField(verbose_name=_("Name"), max_length=100, unique=True)
+
+    def get_translations(self, language: str = "") -> QuerySet:
+        return db_utils.get_translations(self, language)
+
+    class Meta:
+        verbose_name        = _("Event")
+        verbose_name_plural = _("Events")
+        ordering            = ["parent", "name"]
+        indexes             = [models.Index(fields=["parent", "name"])]
+    
+    def __str__(self):
+        return self.name
+
+class EventMeta_T(db_utils.UUIDMixin):
+    parent      = models.ForeignKey(EventMeta, on_delete=models.CASCADE, related_name="translations")
+    language    = db_utils.LanguageField()
+    label       = models.CharField(verbose_name=_("Label"), max_length=255)
+
+    class Meta:
+        verbose_name        = _("Translation")
+        verbose_name_plural = _("Translations")
+        ordering            = ["parent", "language"]
+        indexes             = [models.Index(fields=["parent", "language"])]
+    
+    def __str__(self):
+        return self.label

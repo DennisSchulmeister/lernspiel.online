@@ -1,4 +1,4 @@
-# Lernspiel Online: Lecture Game Platform - Core App
+# Lernspiel Online: Lecture Game Platform - Server
 # © 2024 Dennis Schulmeister-Zimolong <dennis@wpvs.de>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -10,9 +10,5 @@ from django.apps import AppConfig
 from django.utils.translation import gettext_lazy as _
 
 class LernspielServerConfig(AppConfig):
-    """
-    Main application: Contains shared logic for the other applications
-    plus a few central data models.
-    """
     name         = "lernspiel_server"
     verbose_name = _("Lernspiel Server")

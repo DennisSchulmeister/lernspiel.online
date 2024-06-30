@@ -27,11 +27,11 @@ Core Architecture
 
 ### Short-term improvements
 
+- [ ] Fixtures for dummy data during development
 - [ ] Automatically fill created_by / modified_by fields in the Admin (and forms in general)
 - [ ] Create admin mixin class for CreatedModifiedByMixin model
 - [ ] Create admin mixin class for EditKeyMixin model
 - [ ] Create model mixin for translation models
-- [ ] Create admin utility to simplify definition semi-nested inlines (see meta model admin)
 
 ### Website
 
@@ -52,6 +52,8 @@ Core Architecture
 Game SDK
 --------
 
+### Game SDK Library
+
 - [ ] Source structure for game components and game definitions
     - [ ] YAML descriptions
     - [ ] Directory layout for YAML, HTML, JS, CSS, GAMESCRIPT
@@ -64,6 +66,13 @@ Game SDK
 
 - [ ] Documentation
 - [ ] Publish to npmjs.org
+
+### Server-Side
+
+- [ ] Developer API for publishing, unpublishing, ... game components and games
+- [ ] Review process to review source code before it is really published
+    - [ ] Initially fully manual
+    - [ ] Later with AI assistance?
 
 
 Playing Games

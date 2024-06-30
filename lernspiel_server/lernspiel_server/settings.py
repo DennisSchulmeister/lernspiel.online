@@ -1,4 +1,4 @@
-# Lernspiel Online: Lecture Game Platform - Core App
+# Lernspiel Online: Lecture Game Platform - Server
 # © 2024 Dennis Schulmeister-Zimolong <dennis@wpvs.de>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -39,8 +39,12 @@ INSTALLED_APPS = [
 
     # Lernspiel Server
     "lernspiel_server",
-    "ls_pages",
-    "ls_games_core",
+    "ls_game_definition",
+    "ls_game_meta",
+    "ls_game_runtime",
+    "ls_ui_game_creator",
+    "ls_ui_game_player",
+    "ls_ui_static_pages",
 ]
 
 MIDDLEWARE = [

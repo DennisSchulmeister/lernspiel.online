@@ -1,4 +1,4 @@
-# Lernspiel Online: Lecture Game Platform - Core App
+# Lernspiel Online: Lecture Game Platform - Server
 # © 2024 Dennis Schulmeister-Zimolong <dennis@wpvs.de>
 #
 # This program is free software: you can redistribute it and/or modify
