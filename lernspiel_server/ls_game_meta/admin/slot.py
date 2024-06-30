@@ -6,14 +6,9 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-from django.contrib import admin
+from django.contrib           import admin
 from django.utils.translation import gettext_lazy as _
-from .. import models
-
-class SlotMetaInline(admin.TabularInline):
-    model            = models.SlotMeta
-    extra            = 0
-    show_change_link = True
+from ..                       import models
 
 class SlotMetaTInline(admin.TabularInline):
     model = models.SlotMeta_T
@@ -22,3 +17,8 @@ class SlotMetaTInline(admin.TabularInline):
 class SlotMetaAdmin(admin.ModelAdmin):
     model   = models.SlotMeta
     inlines = [SlotMetaTInline]
+
+class SlotMetaInline(admin.TabularInline):
+    model            = models.SlotMeta
+    extra            = 0
+    show_change_link = True

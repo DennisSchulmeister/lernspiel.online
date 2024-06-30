@@ -7,12 +7,12 @@
 # License, or (at your option) any later version.
 
 from django.contrib.contenttypes.fields import GenericRelation
-from django.db import models
-from django.db.models.query import QuerySet
-from django.utils.translation import gettext_lazy as _
-import lernspiel_server.utils.models as db_utils
-from lernspiel_server.models import MediaFile, SourceFile
-from . import Category
+from django.db                          import models
+from django.db.models.query             import QuerySet
+from django.utils.translation           import gettext_lazy as _
+from lernspiel_server.utils             import models as db_utils
+from lernspiel_server.models            import MediaFile, SourceFile
+from .category                          import Category
 
 class GameComponentMeta(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
     """

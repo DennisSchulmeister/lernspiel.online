@@ -6,11 +6,13 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-from django.contrib import admin
+from django.contrib           import admin
 from django.utils.translation import gettext_lazy as _
-from lernspiel_server.admin import MediaFileInline, SourceFileInline
-from . import PropertyMetaInline, EventMetaInline, SlotMetaInline
-from .. import models
+from lernspiel_server.admin   import MediaFileInline, SourceFileInline
+from .property                import PropertyMetaInline
+from .event                   import EventMetaInline
+from .slot                    import SlotMetaInline
+from ..                       import models
 
 class GameComponentMetaTInline(admin.TabularInline):
     model = models.GameComponentMeta_T

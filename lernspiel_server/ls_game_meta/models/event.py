@@ -6,11 +6,11 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-from django.db import models
-from django.db.models.query import QuerySet
+from django.db                import models
+from django.db.models.query   import QuerySet
 from django.utils.translation import gettext_lazy as _
-import lernspiel_server.utils.models as db_utils
-from . import GameComponentMeta
+from lernspiel_server.utils   import models as db_utils
+from .game_component          import GameComponentMeta
 
 class EventMeta(db_utils.UUIDMixin):
     """

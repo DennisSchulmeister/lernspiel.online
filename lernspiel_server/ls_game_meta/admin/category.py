@@ -6,9 +6,9 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-from django.contrib import admin
+from django.contrib           import admin
 from django.utils.translation import gettext_lazy as _
-from .. import models
+from ..                       import models
 
 class CategoryTInline(admin.TabularInline):
     model = models.Category_T

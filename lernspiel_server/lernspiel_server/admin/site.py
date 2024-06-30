@@ -8,11 +8,10 @@
 
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
-
-from ..models import Site
+from .. import models
 
 class SiteAdmin(admin.ModelAdmin):
-    model              = Site
+    model              = models.Site
     list_display       = ["id", "domain", "name"]
     list_display_links = ["id", "domain"]
     search_fields      = ["domain", "name"]

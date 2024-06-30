@@ -14,11 +14,11 @@ from .language     import *
 from .site         import *
 from .user         import *
 
-from ..models import User, UserGroup
+from .. import models
 
 admin_site = CustomAdminSite()
 
-admin_site.register(Site, SiteAdmin)
-admin_site.register(Language, LanguageAdmin)
-admin_site.register(User, CustomUserAdmin)
-admin_site.register(UserGroup, GroupAdmin)
+admin_site.register(models.Site, SiteAdmin)
+admin_site.register(models.Language, LanguageAdmin)
+admin_site.register(models.User, CustomUserAdmin)
+admin_site.register(models.UserGroup, GroupAdmin)

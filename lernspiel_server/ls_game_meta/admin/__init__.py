@@ -16,9 +16,9 @@ from .slot            import *
 from lernspiel_server.admin import admin_site
 from .. import models
 
-admin_site.register(models.Category, CategoryAdmin)
-admin_site.register(models.GameComponentMeta, GameComponentMetaAdmin)
-admin_site.register(models.PropertyMeta, PropertyMetaAdmin)
-admin_site.register(models.EventMeta, EventMetaAdmin)
+admin_site.register(models.Category,           CategoryAdmin)
+admin_site.register(models.GameComponentMeta,  GameComponentMetaAdmin)
+admin_site.register(models.PropertyMeta,       PropertyMetaAdmin)
+admin_site.register(models.EventMeta,          EventMetaAdmin)
 admin_site.register(models.EventParameterMeta, EventParameterMetaAdmin)
-admin_site.register(models.SlotMeta, SlotMetaAdmin)
+admin_site.register(models.SlotMeta,           SlotMetaAdmin)

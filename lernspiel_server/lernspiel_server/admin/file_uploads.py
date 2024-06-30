@@ -8,15 +8,14 @@
 
 from django.contrib.contenttypes.admin import GenericTabularInline
 from django.utils.translation import gettext_lazy as _
-
-from ..models import MediaFile, SourceFile
+from .. import models
 
 class MediaFileInline(GenericTabularInline):
-    model               = MediaFile
+    model               = models.MediaFile
     verbose_name        = _("Media File")
     verbose_name_plural = _("Media Files")
 
 class SourceFileInline(GenericTabularInline):
-    model               = SourceFile
+    model               = models.SourceFile
     verbose_name        = _("Source File")
     verbose_name_plural = _("Source Files")

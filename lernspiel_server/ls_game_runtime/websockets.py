@@ -7,9 +7,7 @@
 # License, or (at your option) any later version.
 
 from django.urls import path
-from . import consumers
-
-app_name = "ls_game_runtime"
+from .           import consumers
 
 urlpatterns = [
     path('game_client/', consumers.GameClientWebsocketConsumer.as_asgi()),

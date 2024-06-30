@@ -6,11 +6,12 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-from django.db import models
-from django.db.models.query import QuerySet
+from django.db                import models
+from django.db.models.query   import QuerySet
 from django.utils.translation import gettext_lazy as _
-import lernspiel_server.utils.models as db_utils
-from . import EventMeta, TypedValueMixin
+from lernspiel_server.utils   import models as db_utils
+from .event                   import EventMeta
+from .typed_value             import TypedValueMixin
 
 class EventParameterMeta(db_utils.UUIDMixin, TypedValueMixin):
     """
@@ -24,9 +25,9 @@ class EventParameterMeta(db_utils.UUIDMixin, TypedValueMixin):
         return db_utils.get_translations(self, language)
 
     class Meta:
-        verbose_name        = _("Parameter")
-        verbose_name_plural = _("Parameters")
-        ordering            = ["parent", "name"]
+        verbose_name        = _("Event Parameter")
+        verbose_name_plural = _("Event Parameters")
+        # ordering            = ["parent", "name"],        # Makes the Django Admin crash?!
         indexes             = [models.Index(fields=["parent", "name"])]
     
     def __str__(self):
