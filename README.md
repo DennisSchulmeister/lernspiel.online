@@ -52,6 +52,7 @@ most important points for different target groups:
 
 * [CHANGELOG.md](CHANGELOG.md): Release change log
 * [PLANNING.md](PLANNING.md): Planned developments
+* [BACKLOG.md](BACKLOG.md): Ideas what could be done
 * [HACKING.md](HACKING.md): Information for developers
 * [DEPLOYMENT.md](DEPLOYMENT.md): Installation notes for administrators
 * [CONTRIBUTORS.md](CONTRIBUTORS.md): List of contributors (patches welcome)
