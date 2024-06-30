@@ -102,7 +102,7 @@ class User(AbstractUser):
 
             # NOTE: Context processors are only executed when there is a HttpRequest.
             # The import happens here to avoid circular imports.
-            from .context_processors import site
+            from ..context_processors import site
             _site = site()
 
             context = {

@@ -1,0 +1,9 @@
+- model: lernspiel_server.Site
+  pk: 1
+  fields:
+    domain:     lernspiel.online
+    name:       Lernspiel Online
+    logo:       default_logo.svg
+    logo_width: 20em
+    header_bg:  "#234769"
+    link_color: crimson

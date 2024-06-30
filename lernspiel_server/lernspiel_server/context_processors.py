@@ -6,12 +6,11 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-from django.conf import settings
-from django.contrib import messages
-from django.http import HttpRequest
+from django.conf              import settings
+from django.contrib           import messages
+from django.http              import HttpRequest
 from django.utils.translation import gettext_lazy as _
-
-from .models import Site
+from .models                  import Site
 
 def site(request: HttpRequest = None) -> dict:
     """

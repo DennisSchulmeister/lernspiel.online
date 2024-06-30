@@ -5,11 +5,6 @@
 # Node.js
 node_modules/
 
-# Django uploads and collected static files
-_media
-_static
-
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

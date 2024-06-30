@@ -25,6 +25,15 @@ ALLOWED_HOSTS = ["*"]
 # NOTE: Sort the apps in the order they should appear in the Admin Dashboard.
 # We override the default alphabetical order with the order defined here.
 INSTALLED_APPS = [
+    # Lernspiel Server
+    "lernspiel_server",
+    "ls_game_definition",
+    "ls_game_meta",
+    "ls_game_runtime",
+    "ls_ui_game_creator",
+    "ls_ui_game_player",
+    "ls_ui_static_pages",
+
     # 3rd-party reusable apps
     "daphne",
 
@@ -36,15 +45,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sites",
-
-    # Lernspiel Server
-    "lernspiel_server",
-    "ls_game_definition",
-    "ls_game_meta",
-    "ls_game_runtime",
-    "ls_ui_game_creator",
-    "ls_ui_game_player",
-    "ls_ui_static_pages",
 ]
 
 MIDDLEWARE = [
