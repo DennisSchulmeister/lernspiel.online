@@ -6,7 +6,7 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-from ..db import AbstractModel, EditKeyMixin
+from ..db import UUIDMixin, EditKeyMixin
 from ..models import MediaFile
 from ..quizzes.models import Question
 from ..gamedev.models import GameType
@@ -15,7 +15,7 @@ from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-class GameDefinition(AbstractModel, EditKeyMixin):
+class GameDefinition(models.Model, UUIDMixin, EditKeyMixin):
     """
     Header data for a game definition.
     """
@@ -43,7 +43,7 @@ class GameDefinition(AbstractModel, EditKeyMixin):
         # TODO
         return ""
     
-class AbstractGameElement(AbstractModel):
+class AbstractGameElement(models.Model, UUIDMixin):
     """
     Abstract base class for game elements. Game elements can be questions, text panels
     and possibly many things more in future.
@@ -61,7 +61,7 @@ class QuestionElement(AbstractGameElement):
     """
     question = models.ForeignKey(Question, on_delete=models.SET_DEFAULT, default="", blank=True)
 
-class AnswerScoringRule(AbstractModel):
+class AnswerScoringRule(models.Model, UUIDMixin):
     """
     An answer to a quiz question within a game. Of course the answers are already linked
     to the questions inside the quizzes app. But here additional information on how to

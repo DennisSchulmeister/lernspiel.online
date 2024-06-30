@@ -11,10 +11,9 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from lernspiel_server.db import AbstractModel, CreatedModifiedByMixin
-from lernspiel_server.utils.database import calc_file_path
+import lernspiel_server.utils.models as db_utils
 
-class AbstractFileModel(AbstractModel, CreatedModifiedByMixin):
+class AbstractFileModel(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
     """
     Abstract base class for the generic file upload models below. Contains the common
     fields and functionality like a generic relation to the owner model and fields for
@@ -22,7 +21,7 @@ class AbstractFileModel(AbstractModel, CreatedModifiedByMixin):
     """
     # Link to related model
     def _calc_file_path(self, filename):
-        return calc_file_path(self.content_type, filename)
+        return db_utils.calc_file_path(self.content_type, filename)
     
     content_type   = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id      = models.UUIDField()
@@ -64,10 +63,10 @@ class SourceFile(AbstractFileModel):
     `GenericRelation` to the model that can shall have source files.
     """
     # Source file data
-    HTML   = 1
-    CSS    = 2
-    JS     = 3
-    SCRIPT = 4
+    HTML   = "html"
+    CSS    = "css"
+    JS     = "js"
+    SCRIPT = "script"
 
     _FILE_TYPES = {
         HTML:   _("HTML Template"),
@@ -76,7 +75,7 @@ class SourceFile(AbstractFileModel):
         SCRIPT: _("Game Script"),
     }
 
-    source_type = models.SmallIntegerField(verbose_name=_("Source Type"), choices=_FILE_TYPES)
+    source_type = models.CharField(verbose_name=_("Source Type"), max_length=10, choices=_FILE_TYPES)
     sort_order  = models.SmallIntegerField(verbose_name=_("Sort Order"))
 
     # Django meta information

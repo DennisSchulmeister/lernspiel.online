@@ -24,11 +24,11 @@ from django.utils import timezone
 #  - Can be skipped
 
 
-# from lernspiel_server.db import AbstractModel, CreatedModifiedByMixin, EditKeyMixin
+# from lernspiel_server.db import UUIDMixin, CreatedModifiedByMixin, EditKeyMixin
 # from lernspiel_server.models import MediaFile
 # from . import GameType, GameVariant
 
-# class GameDefinition(AbstractModel, CreatedModifiedByMixin, EditKeyMixin):
+# class GameDefinition(models.Model, UUIDMixin, CreatedModifiedByMixin, EditKeyMixin):
 #     """
 #     xxx
 #     """
@@ -66,7 +66,7 @@ from django.utils import timezone
 #         self.last_access = timezone.now()
 #         self.save() if save else None
 
-# class GameElement(AbstractModel, CreatedModifiedByMixin):
+# class GameElement(models.Model, UUIDMixin, CreatedModifiedByMixin):
 #     """
 #     xxx
 #     """

@@ -14,11 +14,14 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
 from .custom_site import admin_site
-from ..models import Site, User, UserGroup
+from ..models import Site, User, UserGroup, Language
+
 
 class SiteAdmin(admin.ModelAdmin):
-    model        = Site
-    list_display = ["id", "domain", "name"]
+    model              = Site
+    list_display       = ["id", "domain", "name"]
+    list_display_links = ["id", "domain"]
+    search_fields      = ["domain", "name"]
 
     fieldsets = (
         (None, {
@@ -30,6 +33,17 @@ class SiteAdmin(admin.ModelAdmin):
     )
 
 admin_site.register(Site, SiteAdmin)
+
+
+class LanguageAdmin(admin.ModelAdmin):
+    model              = Language
+    list_display       = ["language", "name"]
+    list_display_links = ["language", "name"]
+    search_fields      = ["language", "name"]
+    fields             = ["language", "name"]
+
+admin_site.register(Language, LanguageAdmin)
+
 
 @admin.action(description=_("Reset API key of selected users"))
 def reset_api_key(modeladmin, request, queryset):
@@ -50,7 +64,7 @@ class CustomUserAdmin(UserAdmin):
     """
     actions = (reset_api_key,)
     list_display = UserAdmin.list_display + ("user_type", "date_expires",)
-    list_filter = UserAdmin.list_filter + ("user_type", "date_expires",)
+    list_filter  = UserAdmin.list_filter + ("user_type", "date_expires",)
 
     def get_form(self, request, obj=None, **kwargs):
         """

@@ -10,10 +10,10 @@ from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from ...db import AbstractModel, EditKeyMixin
+from ...db import UUIDMixin, EditKeyMixin
 from ...models import MediaFile
 
-class Quiz(AbstractModel, EditKeyMixin):
+class Quiz(models.Model, UUIDMixin, EditKeyMixin):
     """
     A single quiz with questions and answers.
     """
@@ -26,7 +26,7 @@ class Quiz(AbstractModel, EditKeyMixin):
         # TODO
         return ""
     
-class Question(AbstractModel):
+class Question(models.Model, UUIDMixin):
     """
     A single quiz question.
     """
@@ -67,7 +67,7 @@ class Question(AbstractModel):
         # TODO
         return ""
 
-class Answer(AbstractModel):
+class Answer(models.Model, UUIDMixin):
     """
     Possible answer to a question.
     """

@@ -25,8 +25,10 @@ ALLOWED_HOSTS = ["*"]
 # NOTE: Sort the apps in the order they should appear in the Admin Dashboard.
 # We override the default alphabetical order with the order defined here.
 INSTALLED_APPS = [
-    # Django built-in apps
+    # 3rd-party reusable apps
     "daphne",
+
+    # Django built-in apps
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

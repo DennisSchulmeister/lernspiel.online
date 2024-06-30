@@ -13,8 +13,9 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from .utils import hash
-from .utils.database import calc_file_path
+from .utils.models import calc_file_path
     
+
 class Site(models.Model):
     """
     Extended version of Django's built-in Site model that additionally allows to
@@ -43,6 +44,23 @@ class Site(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Language(models.Model):
+    """
+    Simple data model for available languages. Administrators need to customize a list of
+    languages that should be supported by the installation. This allows to maintain translations
+    of these langauges for all translatable database models.
+
+    NOTE: Some translated texts come from the application itself. They need to be translated
+    with the Django `manage.py` command and gettext.
+    """
+    language = models.CharField(verbose_name=_("Language Code"), max_length=3, primary_key=True)
+    name     = models.CharField(verbose_name=_("Translated Name"), max_length=64)
+
+    def __str__(self):
+        return self.language
+
 
 class User(AbstractUser):
     """
@@ -150,6 +168,7 @@ class User(AbstractUser):
             )
 
         return new_api_key
+
 
 class UserGroup(Group):
     """
