@@ -104,7 +104,7 @@ class User(AbstractUser):
     def _calc_file_path(self, filename):
         return calc_file_path(self._meta, filename)
     
-    picture = models.FileField(verbose_name=_("Profile Picture"), upload_to=_calc_file_path)
+    picture = models.FileField(verbose_name=_("Profile Picture"), upload_to=_calc_file_path, null=True, blank=True)
 
     # Form validation
     def can_have_api_key(self):

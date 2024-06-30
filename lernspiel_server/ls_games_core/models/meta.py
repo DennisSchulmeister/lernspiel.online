@@ -41,14 +41,17 @@ class Category(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
     def __str__(self):
         return self.name
 
+# TODO: Mixin class for translations to reduce code duplication
 class Category_T(db_utils.UUIDMixin):
     parent   = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="translations")
     language = db_utils.LanguageField()
     label    = models.CharField(verbose_name=_("Label"), max_length=255)
 
     class Meta:
-        ordering = ["parent", "language"]
-        indexes  = [models.Index(fields=["parent", "language"])]
+        verbose_name        = _("Translation")
+        verbose_name_plural = _("Translations")
+        ordering            = ["parent", "language"]
+        indexes             = [models.Index(fields=["parent", "language"])]
     
     def __str__(self):
         return self.label
@@ -64,7 +67,7 @@ class GameComponentMeta(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
     
     name       = models.CharField(verbose_name=_("Name"), max_length=255, unique=True)
     category   = models.ForeignKey(Category, verbose_name=_("Category"), on_delete=models.SET_NULL, null=True, blank=True)
-    thumbnail  = models.FileField(verbose_name=_("Thumbnail"), upload_to=_calc_file_path)
+    thumbnail  = models.FileField(verbose_name=_("Thumbnail"), upload_to=_calc_file_path, null=True, blank=True)
 
     # Translated texts
     def get_translations(self, language: str = "") -> QuerySet:
@@ -91,43 +94,11 @@ class GameComponentMeta_T(db_utils.UUIDMixin):
     description = models.TextField(verbose_name=_("Description"), blank=True)
 
     class Meta:
-        ordering = ["parent", "language"]
-        indexes  = [models.Index(fields=["parent", "language"])]
+        verbose_name        = _("Translation")
+        verbose_name_plural = _("Translations")
+        ordering            = ["parent", "language"]
+        indexes             = [models.Index(fields=["parent", "language"])]
 
-    def __str__(self):
-        return self.label
-
-
-class SlotMeta(db_utils.UUIDMixin):
-    """
-    Named slot of a game component. Slots define the areas, where a component can embed
-    child components. This is very similar to web components that can also have multiple
-    named slots where child elements can be inserted.
-    """
-    parent = models.ForeignKey(GameComponentMeta, on_delete=models.CASCADE, related_name="slots")
-    name   = models.CharField(verbose_name=_("Name"), max_length=100, unique=True)
-
-    def get_translations(self, language: str = "") -> QuerySet:
-        return db_utils.get_translations(self, language)
-    
-    class Meta:
-        verbose_name        = _("Slot")
-        verbose_name_plural = _("Slots")
-        ordering            = ["parent", "name"]
-        indexes             = [models.Index(fields=["parent", "name"])]
-    
-    def __str__(self):
-        return self.name
-
-class SlotMeta_T(db_utils.UUIDMixin):
-    parent      = models.ForeignKey(SlotMeta, on_delete=models.CASCADE, related_name="translations")
-    language    = db_utils.LanguageField()
-    label       = models.CharField(verbose_name=_("Label"), max_length=255)
-
-    class Meta:
-        ordering = ["parent", "language"]
-        indexes  = [models.Index(fields=["parent", "language"])]
-    
     def __str__(self):
         return self.label
 
@@ -150,9 +121,9 @@ class TypedValueMixin(models.Model):
         DICTIONARY:     _("Dictionary"),
     }
 
-    name      = models.CharField(verbose_name=_("Name"), max_length=100, unique=True)
+    name      = models.CharField(verbose_name=_("Name"), max_length=100)
     data_type = models.CharField(verbose_name=_(""), max_length=10, choices=_DATA_TYPES)
-    length    = models.PositiveSmallIntegerField(verbose_name=_("Length"), blank=True)
+    length    = models.PositiveSmallIntegerField(verbose_name=_("Length"), null=True, blank=True)
     is_array  = models.BooleanField(verbose_name=_("Is Array"))
 
     class Meta:
@@ -171,8 +142,8 @@ class PropertyMeta(db_utils.UUIDMixin, TypedValueMixin):
         return db_utils.get_translations(self, language)
 
     class Meta:
-        verbose_name        = _("Property")
-        verbose_name_plural = _("Properties")
+        verbose_name        = _("Meta: Property")
+        verbose_name_plural = _("Meta: Properties")
         ordering            = ["parent", "name"]
         indexes             = [models.Index(fields=["parent", "name"])]
     
@@ -185,8 +156,10 @@ class PropertyMeta_T(db_utils.UUIDMixin):
     label       = models.CharField(verbose_name=_("Label"), max_length=255)
 
     class Meta:
-        ordering = ["parent", "language"]
-        indexes  = [models.Index(fields=["parent", "language"])]
+        verbose_name        = _("Translation")
+        verbose_name_plural = _("Translations")
+        ordering            = ["parent", "language"]
+        indexes             = [models.Index(fields=["parent", "language"])]
     
     def __str__(self):
         return self.label
@@ -205,8 +178,8 @@ class EventMeta(db_utils.UUIDMixin):
         return db_utils.get_translations(self, language)
 
     class Meta:
-        verbose_name        = _("Property")
-        verbose_name_plural = _("Properties")
+        verbose_name        = _("Meta: Event")
+        verbose_name_plural = _("Meta: Events")
         ordering            = ["parent", "name"]
         indexes             = [models.Index(fields=["parent", "name"])]
     
@@ -219,8 +192,10 @@ class EventMeta_T(db_utils.UUIDMixin):
     label       = models.CharField(verbose_name=_("Label"), max_length=255)
 
     class Meta:
-        ordering = ["parent", "language"]
-        indexes  = [models.Index(fields=["parent", "language"])]
+        verbose_name        = _("Translation")
+        verbose_name_plural = _("Translations")
+        ordering            = ["parent", "language"]
+        indexes             = [models.Index(fields=["parent", "language"])]
     
     def __str__(self):
         return self.label
@@ -238,8 +213,8 @@ class EventParameterMeta(db_utils.UUIDMixin, TypedValueMixin):
         return db_utils.get_translations(self, language)
 
     class Meta:
-        verbose_name        = _("Parameter")
-        verbose_name_plural = _("Parameters")
+        verbose_name        = _("Meta: Parameter")
+        verbose_name_plural = _("Meta: Parameters")
         ordering            = ["parent", "name"]
         indexes             = [models.Index(fields=["parent", "name"])]
     
@@ -252,8 +227,46 @@ class EventParameterMeta_T(db_utils.UUIDMixin):
     label       = models.CharField(verbose_name=_("Label"), max_length=255)
 
     class Meta:
-        ordering = ["parent", "language"]
-        indexes  = [models.Index(fields=["parent", "language"])]
+        verbose_name        = _("Translation")
+        verbose_name_plural = _("Translations")
+        ordering            = ["parent", "language"]
+        indexes             = [models.Index(fields=["parent", "language"])]
+    
+    def __str__(self):
+        return self.label
+
+
+class SlotMeta(db_utils.UUIDMixin):
+    """
+    Named slot of a game component. Slots define the areas, where a component can embed
+    child components. This is very similar to web components that can also have multiple
+    named slots where child elements can be inserted.
+    """
+    parent = models.ForeignKey(GameComponentMeta, on_delete=models.CASCADE, related_name="slots")
+    name   = models.CharField(verbose_name=_("Name"), max_length=100, unique=True)
+
+    def get_translations(self, language: str = "") -> QuerySet:
+        return db_utils.get_translations(self, language)
+    
+    class Meta:
+        verbose_name        = _("Meta: Slot")
+        verbose_name_plural = _("Meta: Slots")
+        ordering            = ["parent", "name"]
+        indexes             = [models.Index(fields=["parent", "name"])]
+    
+    def __str__(self):
+        return self.name
+
+class SlotMeta_T(db_utils.UUIDMixin):
+    parent      = models.ForeignKey(SlotMeta, on_delete=models.CASCADE, related_name="translations")
+    language    = db_utils.LanguageField()
+    label       = models.CharField(verbose_name=_("Label"), max_length=255)
+
+    class Meta:
+        verbose_name        = _("Translation")
+        verbose_name_plural = _("Translations")
+        ordering            = ["parent", "language"]
+        indexes             = [models.Index(fields=["parent", "language"])]
     
     def __str__(self):
         return self.label

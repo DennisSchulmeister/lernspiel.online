@@ -14,7 +14,8 @@ from .shared import MediaFileInline, SourceFileInline
 from ..models import meta
 
 class CategoryTInline(admin.TabularInline):
-    model  = meta.Category_T
+    model = meta.Category_T
+    extra = 0
 
 class CategoryAdmin(admin.ModelAdmin):
     model           = meta.Category
@@ -37,39 +38,61 @@ class CategoryAdmin(admin.ModelAdmin):
         """
         Set created by / modified by user
         """
-        # TODO: Automatically fill created_by / modified_by
+        # TODO: Automatically fill created_by / modified_by -> move to utils/base class
         form = super(CategoryAdmin, self).get_form(request, obj, **kwargs)
         # form.base_fields["created_by"].
         # form.base_fields["modified_by"].
         return form
 
-admin_site.register(meta.Category, CategoryAdmin)
 
+# TODO: Utility class to simplify these three into one
+# class PropertyMetaAdmin -> model, translations, class Inline, class Change
+class PropertyMetaInline(admin.TabularInline):
+    model            = meta.PropertyMeta
+    extra            = 0
+    show_change_link = True
 
-# TODO: Fix nested inlines -> https://stackoverflow.com/questions/14308050/django-admin-nested-inline
-class GameComponentTInline(admin.TabularInline):
-    model = meta.GameComponentMeta_T
-
-class SlotTInline(admin.TabularInline):
-    model = meta.SlotMeta_T
-
-class PropertyTInline(admin.TabularInline):
+class PropertyMetaTInline(admin.TabularInline):
     model = meta.PropertyMeta_T
+    extra = 0
 
-class EventTInline(admin.TabularInline):
-    model   = meta.EventMeta_T
-
-class SlotInline(admin.StackedInline):
-    model   = meta.SlotMeta
-    inlines = [SlotTInline]
-
-class PropertyInline(admin.StackedInline):
+class PropertyMetaAdmin(admin.ModelAdmin):
     model   = meta.PropertyMeta
-    inlines = [PropertyTInline]
+    inlines = [PropertyMetaTInline]
 
-class EventInline(admin.StackedInline):
+
+class EventMetaInline(admin.TabularInline):
+    model            = meta.EventMeta
+    extra            = 0
+    show_change_link = True
+
+class EventMetaTInline(admin.TabularInline):
+    model = meta.EventMeta_T
+    extra = 0
+
+class EventMetaAdmin(admin.ModelAdmin):
     model   = meta.EventMeta
-    inlines = [EventTInline]
+    inlines = [EventMetaTInline]
+
+
+
+class SlotMetaInline(admin.TabularInline):
+    model            = meta.SlotMeta
+    extra            = 0
+    show_change_link = True
+
+class SlotMetaTInline(admin.TabularInline):
+    model = meta.SlotMeta_T
+    extra = 0
+
+class SlotMetaAdmin(admin.ModelAdmin):
+    model   = meta.SlotMeta
+    inlines = [SlotMetaTInline]
+
+
+class GameComponentMetaTInline(admin.TabularInline):
+    model = meta.GameComponentMeta_T
+    extra = 0
 
 class GameComponentMetaAdmin(admin.ModelAdmin):
     model           = meta.GameComponentMeta
@@ -77,7 +100,7 @@ class GameComponentMetaAdmin(admin.ModelAdmin):
     list_display    = ["name", "category", "created_by", "created_at", "modified_by", "modified_at"]
     list_filter     = ["name", "category", "created_by", "created_at", "modified_by", "modified_at"]
     readonly_fields = ["created_by", "created_at", "modified_by", "modified_at"]
-    inlines         = [GameComponentTInline, SlotInline, PropertyInline, EventInline, MediaFileInline, SourceFileInline]
+    inlines         = [GameComponentMetaTInline, PropertyMetaInline, EventMetaInline, SlotMetaInline, MediaFileInline, SourceFileInline]
 
     fieldsets = (
         (None, {
@@ -88,4 +111,9 @@ class GameComponentMetaAdmin(admin.ModelAdmin):
         })
     )
 
+
+admin_site.register(meta.Category, CategoryAdmin)
 admin_site.register(meta.GameComponentMeta, GameComponentMetaAdmin)
+admin_site.register(meta.PropertyMeta, PropertyMetaAdmin)
+admin_site.register(meta.EventMeta, EventMetaAdmin)
+admin_site.register(meta.SlotMeta, SlotMetaAdmin)
