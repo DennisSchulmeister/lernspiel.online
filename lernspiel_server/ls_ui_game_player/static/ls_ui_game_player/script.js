@@ -1,13 +1,15 @@
 window.addEventListener("DOMContentLoaded", () => {
-    const body           = document.querySelector("body");
-    const startSection   = document.querySelector("#start");
-    const titleSection   = document.querySelector("#title");
-    const gameSection    = document.querySelector("#game");
-    const finishSection  = document.querySelector("#finish");
-    const moneyDiv       = gameSection.querySelector(".money");
-    const questionDiv    = gameSection.querySelector(".question");
-    const subtitleSpan   = titleSection.querySelector(".subtitle");
-    const finalScoreSpan = finishSection.querySelector(".final_score");
+    const body            = document.querySelector("body");
+    const startSection    = document.querySelector("#start");
+    const titleSection    = document.querySelector("#title");
+    const gameSection     = document.querySelector("#game");
+    const finishSection   = document.querySelector("#finish");
+    const moneyDiv        = gameSection.querySelector(".money");
+    const questionDiv     = gameSection.querySelector(".question");
+    const subtitleSpan    = titleSection.querySelector(".subtitle");
+    const finalScoreSpan  = finishSection.querySelector(".final_score");
+    const scoreboardTable = document.querySelector("#scoreboard");
+    const playerCountSpan = document.querySelector("#player_count");
 
     const answerDiv = {
         A: gameSection.querySelector(".answers > .A"),
@@ -27,6 +29,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const minIndex = 0;
     const maxIndex = window.questions.length - 1;
+
+    const server_url = "/broadcast";
+    const websocket = new WebSocket(server_url);
 
     const gotoQuestion = i => {
         if (gameEnded) return;
@@ -112,6 +117,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const updateScore = new_score => {
         finalScoreSpan.textContent = new_score;
+
+        websocket.send(JSON.stringify({
+            player: window.player_name,
+            score:  new_score,
+        }));
     };
 
     body.addEventListener("keyup", event => {
@@ -147,4 +157,65 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     updateScreen();
+
+    // -------- Websocket ------------
+    websocket.onopen = event => {
+        console.log("ON OPEN", event);
+
+        websocket.send(JSON.stringify({
+            player: window.player_name,
+            score:  "0 €",
+        }));
+    }
+
+    websocket.onerror = event => {
+        console.log("ON ERROR", event);
+    };
+
+    websocket.onclose = event => {
+        console.log("ON CLOSE", event);
+    };
+
+    websocket.onmessage = event => {
+        console.log("ON MESSAGE", event);
+        let data = event.data;
+        
+        if (data instanceof Blob) {
+            const reader = new FileReader();
+            reader.onload = event => {
+                onWebsocketMessage(event.target.result);
+            };
+            reader.readAsText(data);
+        } else {
+            onWebsocketMessage(event.data);
+        }
+    };
+
+    const players = {};
+
+    const onWebsocketMessage = data => {
+        data = JSON.parse(data);
+        console.log("WS MESSAGE", data);
+
+        players[data.player] = {
+            player: data?.player || "No name",
+            score:  data?.score  || "---",
+        };
+
+        updateScoreBoard();
+    };
+
+    const updateScoreBoard = function() {
+        playerCountSpan.textContent = Object.keys(players).length;
+        scoreboardTable.innerHTML = "";
+
+        for (let key of Object.keys(players)) {
+            let player = players[key];
+
+            scoreboardTable.innerHTML += `<tr>
+                <td class="player_name">${player.player}</td>
+                <td class="player_score">${player.score}</td>
+            </tr>`;
+        }
+    }
 });
