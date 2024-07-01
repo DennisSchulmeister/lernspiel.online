@@ -10,11 +10,13 @@ from django.contrib.contenttypes.admin import GenericTabularInline
 from ..                                import models
 
 class MediaFileInline(GenericTabularInline):
-    model  = models.MediaFile
-    extra  = 1
-    fields = ["file_data", "file_name"]
+    model   = models.MediaFile
+    extra   = 1
+    fields  = ["file_data", "file_name"]
+    classes = ["collapse"]
 
 class SourceFileInline(GenericTabularInline):
-    model  = models.SourceFile
-    extra  = 1
-    fields = ["file_data", "file_name", "source_type", "position"]
+    model   = models.SourceFile
+    extra   = 1
+    fields  = ["file_data", "file_name", "source_type", "position"]
+    classes = ["collapse"]

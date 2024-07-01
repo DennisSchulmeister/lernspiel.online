@@ -21,16 +21,18 @@ class GameComponentMetaTInline(admin.StackedInline):
 class GameComponentMetaAdmin(admin.ModelAdmin):
     model           = models.GameComponentMeta
     search_fields   = ["name", "category"]
-    list_display    = ["name", "category", "created_by", "created_at", "modified_by", "modified_at"]
+    list_display    = ["name", "category", "created_modified_by"]
     list_filter     = ["name", "category", "created_by", "created_at", "modified_by", "modified_at"]
-    readonly_fields = ["created_by", "created_at", "modified_by", "modified_at"]
+    readonly_fields = ["created_modified_by"]
+    fields          = ["name", "category", "thumbnail", "created_modified_by"]
     inlines         = [GameComponentMetaTInline, PropertyMetaInline, EventMetaInline, SlotMetaInline, MediaFileInline, SourceFileInline]
 
-    fieldsets = (
-        (None, {
-            "fields": ["name", "category", "thumbnail"]
-        }),
-        (_("Last Changed"), {
-            "fields": ["created_by", "created_at", "modified_by", "modified_at"]
-        })
-    )
+    # def get_form(self, request, obj=None, **kwargs):
+    #     """
+    #     Set created by / modified by user
+    #     """
+    #     # TODO: Automatically fill created_by / modified_by -> move to utils/base class
+    #     form = super(models.GameComponentMeta, self).get_form(request, obj, **kwargs)
+    #     # form.base_fields["created_by"].
+    #     # form.base_fields["modified_by"].
+    #     return form

@@ -140,7 +140,7 @@ def mailto(tagname: str, email: str = "", quote='"') -> str:
     example = _("{date} or {date %%Y-%%m-%%d}"),
     help    = _("Hide e-mail address from spammers")
 )
-def date(tagname: str, formatstring: str = "%%x") -> str:
+def date(tagname: str, formatstring: str = "%x") -> str:
     """
     Insert current date into page. The formatstring must contain any option
     accepted by Python's `date.strftime()` method.

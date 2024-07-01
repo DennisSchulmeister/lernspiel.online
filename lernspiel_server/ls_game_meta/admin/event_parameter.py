@@ -30,5 +30,5 @@ class EventParameterMetaAdmin(admin.ModelAdmin):
 
 class EventParameterMetaInline(admin.TabularInline):
     model            = models.EventParameterMeta
-    extra            = 0
+    extra            = 1
     show_change_link = True

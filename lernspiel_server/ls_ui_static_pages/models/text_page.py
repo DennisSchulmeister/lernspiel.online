@@ -8,6 +8,7 @@
 
 from datetime                           import date
 from typing                             import Optional
+from django.contrib                     import admin
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db                          import models
 from django.urls                        import reverse
@@ -51,8 +52,8 @@ class TextPage(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
     menus       = GenericRelation(MenuAssignment, help_text=_("Use this to override the menu assignments from the page type."))
     
     # Publishing status
-    login_required = models.BooleanField(verbose_name=_("Login Required"), default=False, help_text=_("If this is checked, only logged-in users will be able to view the page."))
-    published      = models.BooleanField(verbose_name=_("Page is published"), default=False, null=False)
+    login_required = models.BooleanField(verbose_name=_("Login Required"), default=False)
+    published      = models.BooleanField(verbose_name=_("Publish Page"), default=False, null=False)
     publish_start  = models.DateField(verbose_name=_("Publish On"), blank=True, null=True)
     publish_end    = models.DateField(verbose_name=_("Publish Until"), blank=True, null=True)
 
@@ -79,6 +80,8 @@ class TextPage(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
     def get_published_url(self):
         return reverse("textpage", kwargs={"url": str(self.url)})
 
+    @property
+    @admin.display(description=_("Page is published"))
     def is_published(self):
         today = date.today()
 

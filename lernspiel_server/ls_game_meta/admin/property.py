@@ -30,5 +30,5 @@ class PropertyMetaAdmin(admin.ModelAdmin):
 
 class PropertyMetaInline(admin.TabularInline):
     model            = models.PropertyMeta
-    extra            = 0
+    extra            = 1
     show_change_link = True

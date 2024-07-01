@@ -10,5 +10,6 @@ from django.contrib.contenttypes.admin import GenericStackedInline
 from ..                                import models
 
 class CustomCSSInline(GenericStackedInline):
-    model = models.CustomCSS
-    extra = 1
+    model   = models.CustomCSS
+    extra   = 1
+    classes = ["collapse"]

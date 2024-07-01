@@ -10,6 +10,7 @@ import uuid
 
 from typing                   import Optional
 from django.conf              import settings
+from django.contrib           import admin
 from django.db                import models
 from django.db.models         import Q
 from django.utils.translation import gettext_lazy as _, get_language
@@ -39,6 +40,41 @@ class CreatedModifiedByMixin(models.Model):
 
     class Meta:
         abstract = True
+    
+    @property
+    @admin.display(description=_("Last Changed"))
+    def created_modified_by(self):
+        """
+        Get formatted string to display in the Admin or on the website.
+        """
+        if self.created_by and self.created_at:
+            created = _("Created by {created_by} at {created_at}.").format(
+                created_by = self.created_by,
+                created_at = self.created_at.strftime("%x"),
+            )
+        elif self.created_by:
+            created = _("Created by {created_by}.").format(created_by=self.created_by)
+        elif self.created_at:
+            created = _("Created at {created_at}.").format(created_at=self.created_at.strftime("%x"))
+
+        if self.modified_by and self.modified_at:
+            modified = _("Modified by {modified_by} at {modified_at}.").format(
+                modified_by = self.modified_by,
+                modified_at = self.modified_at.strftime("%x"),
+            )
+        elif self.modified_by:
+            modified = _("Modified by {modified_by}.").format(modified_by=self.modified_by)
+        elif self.modified_at:
+            modified = _("Modified at {modified_at}.").format(modified_at=self.modified_at.strftime("%x"))
+
+        if created and modified:
+            return "%s %s" % (created, modified)
+        elif created:
+            return created
+        elif modified:
+            return modified
+        else:
+            return ""
 
 class EditKeyMixin(models.Model):
     """

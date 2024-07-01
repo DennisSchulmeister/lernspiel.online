@@ -8,6 +8,7 @@
 
 from django.contrib           import admin
 from django.utils.translation import gettext_lazy as _
+from .event_parameter         import EventParameterMetaInline
 from ..                       import models
 
 class EventMetaTInline(admin.TabularInline):
@@ -16,9 +17,9 @@ class EventMetaTInline(admin.TabularInline):
 
 class EventMetaAdmin(admin.ModelAdmin):
     model   = models.EventMeta
-    inlines = [EventMetaTInline]
+    inlines = [EventMetaTInline, EventParameterMetaInline]
 
 class EventMetaInline(admin.TabularInline):
     model            = models.EventMeta
-    extra            = 0
+    extra            = 1
     show_change_link = True

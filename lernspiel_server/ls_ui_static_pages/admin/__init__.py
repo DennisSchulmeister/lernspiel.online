@@ -9,7 +9,6 @@
 from lernspiel_server.admin import admin_site
 from .background            import *
 from .custom_css            import *
-from .menu_assignment       import *
 from .menu_entry            import *
 from .menu                  import *
 from .page_type             import *
