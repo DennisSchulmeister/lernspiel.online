@@ -29,6 +29,7 @@ Core Architecture
 
 - [X] Fixtures for dummy data during development
 - [X] Include model primary key in the upload path of media files(!)
+- [ ] Fix crash during startup in Docker
 - [ ] Automatically fill created_by / modified_by fields in the Admin (and forms in general)
 - [ ] Create admin mixin class for CreatedModifiedByMixin model
 - [ ] Create admin mixin class for EditKeyMixin model
@@ -44,11 +45,12 @@ Core Architecture
 
 ### Game Prototype
 
-- [ ] Websocket class in Django which for broadcasts between players (not the final API)
-- [ ] Game join screen prototype
-- [ ] Game play screen prototype (sidebar with player + game content + simple chat)
-- [ ] Hard-coded "Who wants to be a Millionaire" style game
-- [ ] Deployment of prototype on lernspiel.online
+- [X] Websocket class in Django which for broadcasts between players (not the final API)
+- [X] Game join screen prototype
+- [X] Game play screen prototype (sidebar with player + game content + simple chat)
+- [X] Hard-coded "Who wants to be a Millionaire" style game
+- [X] Deployment of prototype on lernspiel.online
+- [ ] Remove again and rework each part to the real architecture
 
 
 Game SDK

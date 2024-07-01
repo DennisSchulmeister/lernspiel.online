@@ -53,6 +53,8 @@ services:
             - ./lernspiel_server.local_settings.py:/app/lernspiel_server/lernspiel_server/local_settings.py
             - lernspiel_static:/app/lernspiel_server/_static.volume
             - lernspiel_media:/app/lernspiel_server/_media.volume
+        environment:
+            DJANGO_SETTINGS_MODULE: lernspiel_server.settings
 
     #---------------------------------------------------------------------------
     # Caddy Frontend Web Server - Serves static files and media uploads and
