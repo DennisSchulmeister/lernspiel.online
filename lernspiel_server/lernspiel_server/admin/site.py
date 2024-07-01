@@ -20,7 +20,14 @@ class SiteAdmin(admin.ModelAdmin):
         (None, {
             "fields": ["id", "domain", "name"]
         }),
+        (_("Icon and Logo"), {
+            "fields": ["favicon", "logo", "logo_width"]
+        }),
         (_("Theme Parameters (CSS)"), {
-            "fields": ["logo", "logo_width", "header_bg", "link_color"]
+            "fields": [
+                "header_bg", "header_fg", "header_link",
+                "main_bg",   "main_fg",   "main_link",
+                "footer_bg", "footer_fg", "footer_link",
+            ]
         })
     )

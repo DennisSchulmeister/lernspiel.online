@@ -1,0 +1,133 @@
+/** GAME FRAME */
+main {
+    display: flex;
+}
+
+#game_frame {
+    flex: 1;
+}
+
+#sidebar {
+    background: rgba(0,0,0, 0.33);
+    padding: 1em;
+    font-size: 150%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#sidebar .player_name {
+    padding-right: 1em;
+}
+
+#sidebar .player_score {
+    font-weight: bold;
+    color: beige;
+}
+
+section {
+    box-sizing: border-box;
+    height: 100%;
+    /* min-width: 100vw;
+    min-height: 100vh; */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/** START SCREEN **/
+#start {
+    font-size: 200%;
+    color: white;
+    text-shadow: 1px 1px 0px black, 2px 2px 0px black, 3px 3px 0px black, 4px 4px 0px black;
+}
+
+/** TITLE SCREEN **/
+#title .logo {
+    width: 50%;
+}
+
+#title .subtitle {
+    font-size: 200%;
+    color: #ee9417;
+    text-shadow: 1px 1px 0px black, 2px 2px 0px black, 3px 3px 0px black;
+}
+
+/** GAME MAIN SCREEN **/
+#game {
+    padding: 2rem;
+    justify-content: space-between;
+    font-size: 200%;
+    color: white;
+}
+
+#game .logo {
+    width: 20%;
+}
+
+#game .question,
+#game .answers > * {
+    background: rgba(0,0,0, 0.85);
+    border-radius: 1em;
+    padding: 0.25em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+
+    box-shadow: 0px 0px 10px rgba(255,255,255, 0.5);
+}
+
+#game .money {
+    font-size: 150%;
+
+    background-image: linear-gradient(to right top, #e08017, #e48c14, #e79911, #e9a510, #ebb212);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0px 0px 10px rgba(255,255,255, 0.5);
+
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black;
+}
+
+#game .question {
+    font-size: 120%;
+}
+
+#game .answers {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+#game .answers > * {
+    width: 40%;
+    transition: background 1s;
+}
+
+#game .answers > *::before {
+    color: rgb(228, 182, 119);
+    margin-right: 0.5em;
+}
+
+#game .answers > *.A::before { content: "A"; }
+#game .answers > *.B::before { content: "B"; }
+#game .answers > *.C::before { content: "C"; }
+#game .answers > *.D::before { content: "D"; }
+
+#game .answers > *.selected { background: rgb(237, 138, 18) !important; }
+#game .answers > *.correct { background: rgba(57, 154, 41, 0.85) !important; }
+#game .answers > *.wrong { background: rgba(176, 44, 44, 0.85) !important; }
+
+/** END SCREEN **/
+#finish .logo {
+    width: 50%;
+}
+
+#finish .subtitle {
+    font-size: 400%;
+    color: white;
+    text-shadow: 1px 1px 0px black, 2px 2px 0px black, 3px 3px 0px black;
+}

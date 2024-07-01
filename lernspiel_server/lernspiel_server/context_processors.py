@@ -6,6 +6,7 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
+import random
 from django.conf              import settings
 from django.contrib           import messages
 from django.http              import HttpRequest
@@ -20,10 +21,12 @@ def site(request: HttpRequest = None) -> dict:
         site_id   = settings.SITE_ID or 1
         site_obj  = Site.objects.get(pk=site_id)
         site_logo = site_obj.logo if hasattr(site_obj, "logo") else None
+        favicon   = site_obj.favicon if hasattr(site_obj, "favicon") else None
 
         return {
-            "site": site_obj,
+            "site":      site_obj,
             "site_logo": site_logo,
+            "favicon":   favicon,
         }
     except Site.DoesNotExist:
         warning = _("WARNING: Website %s is not customized. Please login to the Admin and maintain its data.") % site_id
@@ -31,3 +34,13 @@ def site(request: HttpRequest = None) -> dict:
         print(warning)
 
         return {}
+
+def random_background(request: HttpRequest = None) -> dict:
+    """
+    TODO: Prototype - Use textpage model for backgrounds
+    """
+    backgrounds = ["background1.png", "background2.png", "background3.png", "background4.png", "background5.png"]
+
+    return {
+        "random_background": "%s%s" % (settings.MEDIA_URL, random.choice(backgrounds))
+    }

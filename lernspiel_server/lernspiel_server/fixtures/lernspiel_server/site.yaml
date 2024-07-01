@@ -3,7 +3,18 @@
   fields:
     domain:     lernspiel.online
     name:       Lernspiel Online
+    favicon:    default_favicon.svg
     logo:       default_logo.svg
-    logo_width: 20em
+    logo_width: 17em
+    
     header_bg:  "#234769"
-    link_color: crimson
+    header_fg:  white
+    header_link: white;
+
+    main_bg: none
+    main_fg: white
+    main_link: crimson
+
+    footer_bg: rgb(25, 25, 25)
+    footer_fg: lightgrey
+    footer_link: lightgrey

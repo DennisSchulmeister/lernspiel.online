@@ -12,9 +12,7 @@ from . import views
 app_name = "ls_ui_game_player"
 
 urlpatterns = [
-    # path("join/", RedirectView.as_view(url="/")),
-    # path("edit/", RedirectView.as_view(url="/")),
-
-    path("join/<key>", views.join_game, name="join-game"),
-    path("edit/<key>", views.edit_game, name="edit-game"),
+    # TODO: Prototype - Change
+    path("", views.JoinGame.as_view(), name="join-game"),
+    path("game/<game_code>/<player_name>", views.PlayGame.as_view(), name="play-game"),
 ]

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="166.78429mm"
+   height="61.205791mm"
+   viewBox="0 0 166.78429 61.205791"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   sodipodi:docname="logo.svg"
+   inkscape:export-filename="logo.png"
+   inkscape:export-xdpi="182.6"
+   inkscape:export-ydpi="182.6"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#cccccc"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.84096521"
+     inkscape:cx="331.16709"
+     inkscape:cy="205.12145"
+     inkscape:window-width="960"
+     inkscape:window-height="1059"
+     inkscape:window-x="960"
+     inkscape:window-y="21"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient951">
+      <stop
+         style="stop-color:#eb9d00;stop-opacity:1;"
+         offset="0"
+         id="stop947" />
+      <stop
+         style="stop-color:#ffc788;stop-opacity:1;"
+         offset="0.99906778"
+         id="stop949" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient951"
+       id="linearGradient953"
+       x1="21.8867"
+       y1="65.280373"
+       x2="112.13022"
+       y2="65.280373"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0025509,0,0,0.99745561,14.789426,48.851657)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient951"
+       id="linearGradient953-5"
+       x1="21.8867"
+       y1="65.280373"
+       x2="112.13022"
+       y2="65.280373"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0025509,0,0,0.99745561,4.5250719,20.033026)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient951"
+       id="linearGradient1086"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0025509,0,0,0.99745561,16.834311,119.8876)"
+       x1="21.8867"
+       y1="65.280373"
+       x2="112.13022"
+       y2="65.280373" />
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter1088"
+       x="-0.044580181"
+       y="-0.14450451"
+       width="1.0891604"
+       height="1.289009">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="2.7475099"
+         id="feGaussianBlur1090" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient951"
+       id="linearGradient953-4"
+       x1="21.8867"
+       y1="65.280373"
+       x2="112.13022"
+       y2="65.280373"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0025509,0,0,0.99745561,61.61631,17.836299)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient951"
+       id="linearGradient1169"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0025509,0,0,0.99745561,40.64045,140.28243)"
+       x1="21.8867"
+       y1="65.280373"
+       x2="112.13022"
+       y2="65.280373" />
+    <filter
+       inkscape:label="People"
+       inkscape:menu="Overlays"
+       inkscape:menu-tooltip="Colorized blotches, like a crowd of people"
+       style="color-interpolation-filters:sRGB"
+       id="filter1219"
+       x="-0.0016284378"
+       y="-0.0052785026"
+       width="1.0032569"
+       height="1.010557">
+      <feTurbulence
+         result="result7"
+         type="fractalNoise"
+         numOctaves="3"
+         baseFrequency="0.2 0.09"
+         id="feTurbulence1205" />
+      <feColorMatrix
+         result="result5"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 5.5 -2 "
+         id="feColorMatrix1207" />
+      <feComposite
+         result="result6"
+         in="SourceGraphic"
+         operator="in"
+         in2="result7"
+         id="feComposite1209" />
+      <feDisplacementMap
+         in="result5"
+         xChannelSelector="R"
+         yChannelSelector="A"
+         scale="9"
+         result="result4"
+         in2="result6"
+         id="feDisplacementMap1211" />
+      <feComposite
+         result="result2"
+         operator="in"
+         in2="result4"
+         in="SourceGraphic"
+         id="feComposite1213" />
+      <feComposite
+         in="result2"
+         operator="in"
+         in2="SourceGraphic"
+         result="result91"
+         id="feComposite1215" />
+      <feBlend
+         mode="multiply"
+         in2="result91"
+         id="feBlend1217" />
+    </filter>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-14.751795,-48.976273)">
+    <text
+       xml:space="preserve"
+       style="font-size:24.0763px;line-height:27.0859px;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans';text-decoration:none;text-decoration-line:none;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;mix-blend-mode:normal;fill:url(#linearGradient1086);fill-opacity:1;stroke:#000000;stroke-width:0.500001;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1088);stop-color:#000000"
+       x="100.592"
+       y="146.11728"
+       id="text236-4"
+       transform="matrix(0.99745559,0,0,1.0025509,-2.0396828,-71.217149)"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Incised901 NdIt BT';-inkscape-font-specification:'Incised901 NdIt BT';text-align:center;text-anchor:middle;fill:url(#linearGradient1086);fill-opacity:1;stroke-width:0.500001;stroke-dasharray:none"
+         x="100.592"
+         y="146.11728"
+         id="tspan238-7">Greif den</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Incised901 NdIt BT';-inkscape-font-specification:'Incised901 NdIt BT';text-align:center;text-anchor:middle;fill:url(#linearGradient1086);fill-opacity:1;stroke-width:0.500001;stroke-dasharray:none"
+         x="100.592"
+         y="173.58813"
+         id="tspan292-4">Zaster!</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:24.0763px;line-height:27.0859px;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans';text-decoration:none;text-decoration-line:none;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient953);fill-opacity:1;stroke:#000000;stroke-width:0.500001;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+       x="98.988838"
+       y="70.655846"
+       id="text236"
+       transform="scale(0.99745559,1.0025509)"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Incised901 NdIt BT';-inkscape-font-specification:'Incised901 NdIt BT';text-align:center;text-anchor:middle;fill:url(#linearGradient953);fill-opacity:1;stroke-width:0.500001;stroke-dasharray:none"
+         x="98.988838"
+         y="70.655846"
+         id="tspan238">Greif den</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Incised901 NdIt BT';-inkscape-font-specification:'Incised901 NdIt BT';text-align:center;text-anchor:middle;fill:url(#linearGradient953);fill-opacity:1;stroke-width:0.500001;stroke-dasharray:none"
+         x="98.988838"
+         y="98.126694"
+         id="tspan292">Zaster!</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:24.0763px;line-height:27.0859px;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans';text-decoration:none;text-decoration-line:none;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;opacity:0.441065;fill:url(#linearGradient1169);fill-opacity:1;stroke:#000000;stroke-width:0.500001;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1219);stop-color:#000000"
+       x="124.62475"
+       y="161.53302"
+       id="text236-7"
+       transform="matrix(0.99745559,0,0,1.0025509,-25.785248,-91.664)"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Incised901 NdIt BT';-inkscape-font-specification:'Incised901 NdIt BT';text-align:center;text-anchor:middle;fill:url(#linearGradient1169);fill-opacity:1;stroke-width:0.500001;stroke-dasharray:none"
+         x="124.62475"
+         y="161.53302"
+         id="tspan238-8">Greif den</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Incised901 NdIt BT';-inkscape-font-specification:'Incised901 NdIt BT';text-align:center;text-anchor:middle;fill:url(#linearGradient1169);fill-opacity:1;stroke-width:0.500001;stroke-dasharray:none"
+         x="124.62475"
+         y="189.00388"
+         id="tspan292-6">Zaster!</tspan></text>
+  </g>
+</svg>

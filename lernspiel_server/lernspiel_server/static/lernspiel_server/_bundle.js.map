@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "sources": ["../../../frontend/src/index.ts"],
-  "sourcesContent": ["/*\n * Lernspiel Online: Lecture Game Platform - Core App\n * \u00A9 2024 Dennis Schulmeister-Zimolong <dennis@wpvs.de>\n *\n * This program is free software: you can redistribute it and/or modify\n * it under the terms of the GNU Affero General Public License as\n * published by the Free Software Foundation, either version 3 of the\n * License, or (at your option) any later version.\n */\n\nconsole.log(\"Hello, esbuild from the Frontend!\");"],
-  "mappings": "mBAUA,QAAQ,IAAI,mCAAmC",
+  "sources": [],
+  "sourcesContent": [],
+  "mappings": "",
   "names": []
 }

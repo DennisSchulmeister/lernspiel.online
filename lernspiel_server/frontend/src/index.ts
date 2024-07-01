@@ -8,4 +8,5 @@
  * License, or (at your option) any later version.
  */
 
-console.log("Hello, esbuild from the Frontend!");
+import "./fonts.css"
+import "./index.css"

@@ -1,0 +1,71 @@
+{% extends "lernspiel_server/website/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block extra_head %}
+    <script src="{% static 'ls_ui_game_player/questions.js' %}"></script>
+    <script src="{% static 'ls_ui_game_player/script.js' %}"></script>
+    <link href="{% static 'ls_ui_game_player/style.css' %}" rel="stylesheet">
+
+    <script>
+        window.player_name = "{{ player_name }}";
+    </script>
+{% endblock %}
+
+{% block header_menu %}
+    <h2>
+        Greif den Zaster
+    </h2>
+{% endblock %}
+
+{% block main %}
+    <div id="sidebar">
+        <table>
+            <tr>
+                <td class="player_name">Dennis</td>
+                <td class="player_score">100€</td>
+            </tr>
+            <tr>
+                <td class="player_name">Anderer Spieler</td>
+                <td class="player_score">100€</td>
+            </tr>
+        </table>
+
+        <div>
+            <strong><span id="player_count">0</span> Spieler online</strong>
+        </div>
+    </div>
+
+    <div id="game_frame">
+        <section id="start">
+            <h1>Bitte ENTER drücken!</h1>
+        </section>
+
+        <section id="title">
+            <img src="{% static 'ls_ui_game_player/assets/logo.png' %}" class="logo" />
+            <span class="subtitle"></span>
+        </section>
+
+        <section id="game" class="hidden">
+            <img src="{% static 'ls_ui_game_player/assets/logo.png' %}" class="logo" />
+
+            <div class="money">5.000 €</div>
+            <div class="question">Wer gilt als Erfinder des World Wide Web?</div>
+
+            <div class="answers">
+                <div class="A selected">Vince Cerf</div>
+                <div class="B">Bill Gates</div>
+                <div class="C wrong">Steve Jobs</div>
+                <div class="D">Tim Berners-Lee</div>
+            </div>
+        </section>
+
+        <section id="finish">
+            <img src="{% static 'ls_ui_game_player/assets/logo.png' %}" class="logo" />
+            <span class="subtitle">
+                <b>Dein Gewinn:</b>
+                <span class="final_score">1.000 €</span>
+            </span>
+        </section>
+    </div>
+{% endblock %}

@@ -10,7 +10,8 @@
     "scripts": {
         "runserver": "lernspiel_server/manage.py runserver",
         "maildev": "maildev -s 1025 -w 8887",
-        "start": "conc -n django,fake-smtp -c auto \"npm run runserver\" \"npm run maildev\""
+        "frontend": "cd lernspiel_server/frontend; npm run watch",
+        "start": "conc -n django,fake-smtp,frontend -c auto \"npm run runserver\" \"npm run maildev\" \"npm run frontend\""
     },
     "devDependencies": {
         "@types/node": "^20.14.8",

@@ -21,16 +21,26 @@ class Site(models.Model):
     domain = models.CharField(verbose_name=_("Domain Name"), max_length=100)
     name   = models.CharField(verbose_name=_("Display Name"), max_length=255)
 
-    # Logo image
+    # Icon and logo
     def _calc_file_path(self, filename):
         return calc_file_path(self._meta, self.id, filename)
     
-    logo = models.FileField(verbose_name=_("Logo Image"), upload_to=_calc_file_path)
+    favicon = models.FileField(verbose_name=_("Website Icon"), upload_to=_calc_file_path)
+    logo    = models.FileField(verbose_name=_("Logo Image"), upload_to=_calc_file_path)
+    logo_width = models.CharField(verbose_name=_("Logo Width"), max_length=20, default="20em")
 
     # Theming values
-    logo_width = models.CharField(verbose_name=_("Logo Width"), max_length=20, default="20em")
-    header_bg  = models.CharField(verbose_name=_("Header Background"), max_length=100, default="#234769")
-    link_color = models.CharField(verbose_name=_("Link Color"), max_length=20, default="crimson")
+    header_bg   = models.CharField(verbose_name=_("Header Background"), max_length=100, default="#234769")
+    header_fg   = models.CharField(verbose_name=_("Header Foreground"), max_length=100, default="white")
+    header_link = models.CharField(verbose_name=_("Header Link Color"), max_length=20, default="crimson")
+
+    main_bg   = models.CharField(verbose_name=_("Main Background"), max_length=100, default="white")
+    main_fg   = models.CharField(verbose_name=_("Main Foreground"), max_length=100, default="rgb(10, 10, 10)")
+    main_link = models.CharField(verbose_name=_("Main Link Color"), max_length=20, default="crimson")
+
+    footer_bg   = models.CharField(verbose_name=_("Footer Background"), max_length=100, default="rgb(25, 25, 25)")
+    footer_fg   = models.CharField(verbose_name=_("Footer Foreground"), max_length=100, default="lightgrey")
+    footer_link = models.CharField(verbose_name=_("Footer Link Color"), max_length=20, default="lightgrey")
 
     # Django meta information
     class Meta:

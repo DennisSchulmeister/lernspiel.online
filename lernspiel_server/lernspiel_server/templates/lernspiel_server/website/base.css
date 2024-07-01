@@ -1,0 +1,37 @@
+body {
+    background-image: url({{ random_background }});
+}
+
+header {
+    color: {{ site.header_fg }};
+    background: {{ site.header_bg }};
+}
+
+header .logo {
+    width: {{ site.logo_width }};
+}
+
+header a,
+header a:visited {
+    color: {{ site.header_link }};
+}
+
+main {
+    color: {{ site.main_fg }};
+    background: {{ site.main_bg }};
+}
+
+main a,
+main a:visited {
+    color: {{ site.main_link }};
+}
+
+footer {
+    color: {{ site.footer_fg }};
+    background: {{ site.footer_bg }};
+}
+
+footer a,
+footer a:visited {
+    color: {{ site.footer_link }};
+}

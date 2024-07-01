@@ -1,2 +1,2 @@
-"use strict";(()=>{console.log("Hello, esbuild from the Frontend!");})();
+"use strict";(()=>{})();
 //# sourceMappingURL=_bundle.js.map

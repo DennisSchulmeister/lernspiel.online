@@ -1,0 +1,6 @@
+{% extends "lernspiel_server/website/error.html" %}
+{% load i18n %}
+
+{% block error-title %}{% trans "Error" %} 500 - {% trans "Internal server error" %}{% endblock %}
+{% block error-number %}{% trans "Error" %} 500{% endblock %}
+{% block error-description %}{% trans "A severe technical error has occured. An emergency call has been made to our webmaster." %}{% endblock %}

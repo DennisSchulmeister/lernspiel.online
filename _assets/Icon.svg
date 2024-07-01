@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="20mm"
+   height="20mm"
+   viewBox="0 0 27.281132 27.281134"
+   version="1.1"
+   id="svg1"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1">
+    <linearGradient
+       id="linearGradient78">
+      <stop
+         style="stop-color:#da65d2;stop-opacity:1;"
+         offset="0"
+         id="stop78" />
+      <stop
+         style="stop-color:#ffc550;stop-opacity:1;"
+         offset="0.47329393"
+         id="stop80" />
+      <stop
+         style="stop-color:#1fd1eb;stop-opacity:1;"
+         offset="1"
+         id="stop79" />
+    </linearGradient>
+    <linearGradient
+       xlink:href="#linearGradient78"
+       id="linearGradient79"
+       x1="7.299015"
+       y1="16.161655"
+       x2="284.83621"
+       y2="16.161655"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(12.839175,10.267093)" />
+  </defs>
+  <g
+     id="layer1"
+     transform="translate(-12.839175,-10.267094)">
+    <rect
+       style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#234769;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.721813;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000;stop-opacity:1"
+       id="rect1"
+       width="27.281132"
+       height="27.281134"
+       x="12.839174"
+       y="10.267094" />
+    <path
+       style="font-size:24.4289px;line-height:25.2631px;font-family:'Freehand575 BT';-inkscape-font-specification:'Freehand575 BT';letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient79);stroke-width:0.264583px"
+       d="m 22.841862,33.374808 c 1.488061,-0.307875 2.89274,-0.538781 4.214037,-0.69272 1.321296,-0.166764 2.539967,-0.250148 3.656014,-0.250148 0.695439,0 5.142506,1.231598 -0.461812,1.962708 -1.834422,0.256562 -3.745811,0.622163 -5.73417,1.096804 -1.975529,0.461812 -3.072333,0.692718 -3.290411,0.692718 -0.448984,0 -0.782515,-0.147524 -1.000593,-0.44257 -0.20525,-0.295047 -0.307875,-0.744031 -0.307875,-1.346952 0,-0.692718 0.551609,-3.027436 1.654827,-7.004153 1.103218,-3.989544 2.469412,-8.363934 4.098584,-13.123166 0.03847,-0.102613 0.08979,-0.243729 0.153929,-0.423328 0.513125,-1.475233 1.173773,-2.21285 1.981944,-2.21285 0.744031,0 1.346952,0.08979 1.808764,0.269391 0.474642,0.179593 0.711962,0.416913 0.711962,0.71196 0,0.230906 -0.186008,0.628578 -0.558023,1.193015 l -0.03849,0.07697 c -1.77028,4.09217 -3.258341,7.844393 -4.464184,11.256673 -1.193016,3.41228 -2.001187,6.157497 -2.424515,8.235653 z"
+       id="text1"
+       aria-label="Lernspiel Online" />
+  </g>
+</svg>

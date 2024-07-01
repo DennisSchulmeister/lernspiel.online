@@ -73,6 +73,8 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "lernspiel_server.context_processors.site",
+                # TODO: Prototype - Remove again
+                "lernspiel_server.context_processors.random_background",
             ],
         },
     },
