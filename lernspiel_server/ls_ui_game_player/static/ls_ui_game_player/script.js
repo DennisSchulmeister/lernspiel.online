@@ -197,10 +197,12 @@ window.addEventListener("DOMContentLoaded", () => {
         data = JSON.parse(data);
         console.log("WS MESSAGE", data);
 
-        players[data.player] = {
-            player: data?.player || "No name",
-            score:  data?.score  || "---",
-        };
+        for (let key of Object.keys(data)) {
+            players[key] = {
+                player: data[key].player || "No name",
+                score:  data[key].score  || "---",
+            };
+        }
 
         updateScoreBoard();
     };

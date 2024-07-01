@@ -20,25 +20,36 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "lernspiel_server.settings")
 # })
 
 # TODO: Prototype - Remove again
+import json
 from channels.layers            import get_channel_layer
 from channels.generic.websocket import AsyncWebsocketConsumer
 from django.urls                import path
 
+players = {}
+
 class BroadcastConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        await self.channel_layer.group_add('broadcast', self.channel_name)
         await self.accept()
 
+        # Send the current list of players to the new connection
+        await self.send(json.dumps(players))
+
     async def disconnect(self, close_code):
-        await self.channel_layer.group_discard('broadcast', self.channel_name)
+        pass
 
     async def receive(self, text_data):
-        print(">>>>>>> Received: %s" % text_data)
-        await self.channel_layer.group_send('broadcast', {'type': 'broadcast_message', 'message': text_data})
+        data = json.loads(text_data)
+        player = data['player']
+        score = data['score']
+
+        players[player] = {'player': player, 'score': score}
+
+        # Send the updated list of players to all connections
+        await self.channel_layer.group_send('broadcast', {'type': 'broadcast_message', 'message': json.dumps(players)})
 
     async def broadcast_message(self, event):
-        print(">>>>>>> Sending: %s" % event['message'])
-        await self.send(event['message'])
+        message = event['message']
+        await self.send(message)
 
 application = ProtocolTypeRouter({
     "http": get_asgi_application(),
