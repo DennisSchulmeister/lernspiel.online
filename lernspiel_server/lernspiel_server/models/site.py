@@ -23,7 +23,7 @@ class Site(models.Model):
 
     # Logo image
     def _calc_file_path(self, filename):
-        return calc_file_path(self._meta, filename)
+        return calc_file_path(self._meta, self.id, filename)
     
     logo = models.FileField(verbose_name=_("Logo Image"), upload_to=_calc_file_path)
 

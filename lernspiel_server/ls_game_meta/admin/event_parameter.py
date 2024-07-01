@@ -12,7 +12,7 @@ from ..                       import models
 
 class EventParameterMetaTInline(admin.TabularInline):
     model = models.EventParameterMeta_T
-    extra = 0
+    extra = 1
 
 class EventParameterMetaAdmin(admin.ModelAdmin):
     model       = models.EventParameterMeta

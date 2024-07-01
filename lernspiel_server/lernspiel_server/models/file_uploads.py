@@ -13,7 +13,7 @@ from django.utils.translation import gettext_lazy as _
 
 from ..utils import models as db_utils
 
-class AbstractFileModel(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
+class AbstractFileModel(db_utils.UUIDMixin):
     """
     Abstract base class for the generic file upload models below. Contains the common
     fields and functionality like a generic relation to the owner model and fields for
@@ -21,7 +21,7 @@ class AbstractFileModel(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
     """
     # Link to related model
     def _calc_file_path(self, filename):
-        return db_utils.calc_file_path(self.content_type, filename)
+        return db_utils.calc_file_path(self.content_type, self.id, filename)
     
     content_type   = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id      = models.UUIDField()
@@ -76,23 +76,23 @@ class SourceFile(AbstractFileModel):
     }
 
     source_type = models.CharField(verbose_name=_("Source Type"), max_length=10, choices=_FILE_TYPES)
-    sort_order  = models.SmallIntegerField(verbose_name=_("Sort Order"))
+    position    = models.SmallIntegerField(verbose_name=_("Sort Order"))
 
     # Django meta information
     class Meta(AbstractFileModel.Meta):
         verbose_name        = _("Source File")
         verbose_name_plural = _("Source Files")
-        ordering            = ["content_type", "object_id", "source_type", "sort_order"]
+        ordering            = ["content_type", "object_id", "source_type", "position"]
 
         indexes = AbstractFileModel.Meta.indexes + [
-            models.Index(fields=["content_type", "object_id", "source_type", "sort_order"])
+            models.Index(fields=["content_type", "object_id", "source_type", "position"])
         ]
         
     def __str__(self):
         file_name  = self.source_file.name if self.source_file else ""
 
-        return "{source_type} ({sort_order}): {file_name}".format(
+        return "{source_type} ({position}): {file_name}".format(
             source_type = self.source_type,
-            sort_order  = self.sort_order,
+            position    = self.position,
             file_name   = file_name
         )

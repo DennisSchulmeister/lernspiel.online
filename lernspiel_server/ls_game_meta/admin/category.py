@@ -12,19 +12,19 @@ from ..                       import models
 
 class CategoryTInline(admin.TabularInline):
     model = models.Category_T
-    extra = 0
+    extra = 1
 
 class CategoryAdmin(admin.ModelAdmin):
     model           = models.Category
     search_fields   = ["name"],
-    list_display    = ["name", "parent", "sort_order", "created_by", "created_at", "modified_by", "modified_at"]
+    list_display    = ["name", "parent", "position", "created_by", "created_at", "modified_by", "modified_at"]
     list_filter     = ["name", "parent", "created_by", "created_at", "modified_by", "modified_at"]
     readonly_fields = ["created_by", "created_at", "modified_by", "modified_at"]
     inlines         = [CategoryTInline]
     
     fieldsets = (
         (None, {
-            "fields": ["name", "parent", "sort_order"]
+            "fields": ["name", "parent", "position"]
         }),
         (_("Last Changed"), {
             "fields": ["created_by", "created_at", "modified_by", "modified_at"]

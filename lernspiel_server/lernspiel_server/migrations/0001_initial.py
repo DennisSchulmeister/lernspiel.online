@@ -124,7 +124,7 @@ class Migration(migrations.Migration):
                 ('file_size', models.PositiveIntegerField(verbose_name='File Size')),
                 ('mime_type', models.CharField(max_length=64, verbose_name='MIME Type')),
                 ('source_type', models.CharField(choices=[('html', 'HTML Template'), ('css', 'CSS Stylesheet'), ('js', 'JS Source File'), ('script', 'Game Script')], max_length=10, verbose_name='Source Type')),
-                ('sort_order', models.SmallIntegerField(verbose_name='Sort Order')),
+                ('position', models.SmallIntegerField(verbose_name='Sort Order')),
                 ('content_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='contenttypes.contenttype')),
                 ('created_by', models.ForeignKey(blank=True, default='', null=True, on_delete=django.db.models.deletion.SET_DEFAULT, to=settings.AUTH_USER_MODEL, verbose_name='Created By')),
                 ('modified_by', models.ForeignKey(blank=True, default='', null=True, on_delete=django.db.models.deletion.SET_DEFAULT, related_name='+', to=settings.AUTH_USER_MODEL, verbose_name='Modified By')),
@@ -132,9 +132,9 @@ class Migration(migrations.Migration):
             options={
                 'verbose_name': 'Source File',
                 'verbose_name_plural': 'Source Files',
-                'ordering': ['content_type', 'object_id', 'source_type', 'sort_order'],
+                'ordering': ['content_type', 'object_id', 'source_type', 'position'],
                 'abstract': False,
-                'indexes': [models.Index(fields=['content_type', 'object_id', 'file_name'], name='lernspiel_s_content_c7a840_idx'), models.Index(fields=['content_type', 'object_id', 'source_type', 'sort_order'], name='lernspiel_s_content_604ecf_idx')],
+                'indexes': [models.Index(fields=['content_type', 'object_id', 'file_name'], name='lernspiel_s_content_c7a840_idx'), models.Index(fields=['content_type', 'object_id', 'source_type', 'position'], name='lernspiel_s_content_604ecf_idx')],
             },
         ),
     ]

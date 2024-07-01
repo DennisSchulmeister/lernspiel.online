@@ -7,15 +7,14 @@
 # License, or (at your option) any later version.
 
 from django.contrib.contenttypes.admin import GenericTabularInline
-from django.utils.translation import gettext_lazy as _
-from .. import models
+from ..                                import models
 
 class MediaFileInline(GenericTabularInline):
-    model               = models.MediaFile
-    verbose_name        = _("Media File")
-    verbose_name_plural = _("Media Files")
+    model  = models.MediaFile
+    extra  = 1
+    fields = ["file_data", "file_name"]
 
 class SourceFileInline(GenericTabularInline):
-    model               = models.SourceFile
-    verbose_name        = _("Source File")
-    verbose_name_plural = _("Source Files")
+    model  = models.SourceFile
+    extra  = 1
+    fields = ["file_data", "file_name", "source_type", "position"]

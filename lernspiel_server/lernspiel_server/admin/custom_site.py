@@ -61,13 +61,13 @@ class CustomAdminSite(admin.AdminSite):
             if model_or_iterable in self._models_:
                 self._models_.remove(model_or_iterable)
 
-    def get_app_list(self, request):
+    def get_app_list(self, request, *args):
         """
         Hook into Django Admin's `get_app_list()` method to override the order in
         which the applications and models appear.
         """
         # Sort apps in the order they appear in the settings
-        app_list = super().get_app_list(request)
+        app_list = super().get_app_list(request, *args)
 
         for admin_app in app_list:
             app_config = apps.get_app_config(admin_app["app_label"])

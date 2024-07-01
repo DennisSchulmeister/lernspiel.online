@@ -6,6 +6,9 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-from django.db import models
+from django.contrib.contenttypes.admin import GenericStackedInline
+from ..                                import models
 
-# Create your models here.
+class CustomCSSInline(GenericStackedInline):
+    model = models.CustomCSS
+    extra = 1

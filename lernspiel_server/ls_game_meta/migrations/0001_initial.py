@@ -36,7 +36,7 @@ class Migration(migrations.Migration):
                 ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
                 ('modified_at', models.DateTimeField(auto_now=True, verbose_name='Modified At')),
                 ('name', models.CharField(max_length=255, verbose_name='Name')),
-                ('sort_order', models.SmallIntegerField(verbose_name='Sort Order')),
+                ('position', models.SmallIntegerField(verbose_name='Sort Order')),
                 ('created_by', models.ForeignKey(blank=True, default='', null=True, on_delete=django.db.models.deletion.SET_DEFAULT, to=settings.AUTH_USER_MODEL, verbose_name='Created By')),
                 ('modified_by', models.ForeignKey(blank=True, default='', null=True, on_delete=django.db.models.deletion.SET_DEFAULT, related_name='+', to=settings.AUTH_USER_MODEL, verbose_name='Modified By')),
                 ('parent', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='ls_game_meta.category', verbose_name='Parent Category')),
@@ -44,7 +44,7 @@ class Migration(migrations.Migration):
             options={
                 'verbose_name': 'Category',
                 'verbose_name_plural': 'Categories',
-                'ordering': ['sort_order'],
+                'ordering': ['position'],
             },
         ),
         migrations.CreateModel(
@@ -202,7 +202,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AddIndex(
             model_name='category',
-            index=models.Index(fields=['parent', 'sort_order'], name='ls_game_met_parent__252ed2_idx'),
+            index=models.Index(fields=['parent', 'position'], name='ls_game_met_parent__252ed2_idx'),
         ),
         migrations.AddIndex(
             model_name='category',

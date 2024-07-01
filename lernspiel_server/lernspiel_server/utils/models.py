@@ -8,14 +8,12 @@
 
 import uuid
 
-from django.conf import settings
-from django.db import models
-from django.db.models import Q
-from django.db.models.query import QuerySet
+from typing                   import Optional
+from django.conf              import settings
+from django.db                import models
+from django.db.models         import Q
 from django.utils.translation import gettext_lazy as _, get_language
-
-from . import hash
-
+from .                        import hash
 
 class UUIDMixin(models.Model):
     """
@@ -29,7 +27,6 @@ class UUIDMixin(models.Model):
     class Meta:
         abstract = True
 
-
 class CreatedModifiedByMixin(models.Model):
     """
     Mixin class for models that shall record the time and user of creation as well as
@@ -42,7 +39,6 @@ class CreatedModifiedByMixin(models.Model):
 
     class Meta:
         abstract = True
-
 
 class EditKeyMixin(models.Model):
     """
@@ -72,7 +68,6 @@ class EditKeyMixin(models.Model):
     class Meta:
         abstract = True
 
-
 def LanguageField():
     """
     A special model field for language codes. Technically this is a simple foreign key to
@@ -80,10 +75,9 @@ def LanguageField():
     """
     return models.ForeignKey("lernspiel_server.Language", on_delete=models.CASCADE)
 
-
-def get_translations(object:models.Model, language:str = "",
-                     attr_id = "id", attr_translations:str = "translations",
-                     attr_t_parent:str = "parent", attr_t_language:str = "language") -> QuerySet:
+def get_translations(object: models.Model, language: str = "",
+                     attr_id: str = "id", attr_translations: str = "translations",
+                     attr_t_parent: str = "parent", attr_t_language: str = "language") -> Optional[models.Model]:
     """
     Mixing method to get translations of a model with translations. By default translations are
     stored in a second model, that installs an `translations` ("attr_translations") related attribute.
@@ -92,6 +86,8 @@ def get_translations(object:models.Model, language:str = "",
 
     Tries to find translations for the given language (default: language of the current thread)
     or the `LANGUAGE_CODE` setting as fallback, if different.
+
+    Returns the best found translation or None, if none exists.
     """
     if not language:
         language = get_language()
@@ -105,12 +101,26 @@ def get_translations(object:models.Model, language:str = "",
     translations = getattr(object, attr_translations)
 
     if default_kwargs == language_kwargs:
-        return translations.filter(**language_kwargs);
+        results = translations.filter(**language_kwargs);
     else:
-        return translations.filter(Q(**language_kwargs) | Q(**default_kwargs))
+        results = translations.filter(Q(**language_kwargs) | Q(**default_kwargs))
+   
+    if results.count() == 0:
+        return None
+    elif results.count() == 1:
+        return results.first()
+    else:
+        return results.get(**language_kwargs)
 
+class TranslationMissing(Exception):
+    """
+    An exception that can be throws, when a translation for something is missing.
+    Note, that the `get_translations()` function doesn't throw this exception but
+    rather returns `None`.
+    """
+    pass
 
-def calc_file_path(object, filename):
+def calc_file_path(object, pk, filename):
     """
     Callable for the `upload_to` property of `model.FileField`. Determines the upload bath
     by joining the app label and model name.
@@ -121,7 +131,7 @@ def calc_file_path(object, filename):
     """
     model = object.model if type(object) is str else object.model.__name__
 
-    return "%(app_label)s/%(model)s/%(filename)s" % {
+    return "%(app_label)s/%(model)s/%(pk)s/%(filename)s" % {
         "app_label": object.app_label,
         "model":     model,
         "filename":  filename,

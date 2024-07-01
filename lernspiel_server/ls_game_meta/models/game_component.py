@@ -6,9 +6,9 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
+from typing                             import Optional
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db                          import models
-from django.db.models.query             import QuerySet
 from django.utils.translation           import gettext_lazy as _
 from lernspiel_server.utils             import models as db_utils
 from lernspiel_server.models            import MediaFile, SourceFile
@@ -27,7 +27,7 @@ class GameComponentMeta(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
     thumbnail  = models.FileField(verbose_name=_("Thumbnail"), upload_to=_calc_file_path, null=True, blank=True)
 
     # Translated texts
-    def get_translations(self, language: str = "") -> QuerySet:
+    def get_translations(self, language: str = "") -> Optional[models.Model]:
         return db_utils.get_translations(self, language)
 
     # Source files

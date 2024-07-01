@@ -12,7 +12,7 @@ from ..                       import models
 
 class SlotMetaTInline(admin.TabularInline):
     model = models.SlotMeta_T
-    extra = 0
+    extra = 1
 
 class SlotMetaAdmin(admin.ModelAdmin):
     model   = models.SlotMeta

@@ -6,15 +6,14 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-from .category        import *
-from .event           import *
-from .event_parameter import *
-from .game_component  import *
-from .property        import *
-from .slot            import *
-
 from lernspiel_server.admin import admin_site
-from .. import models
+from .category              import *
+from .event                 import *
+from .event_parameter       import *
+from .game_component        import *
+from .property              import *
+from .slot                  import *
+from ..                     import models
 
 admin_site.register(models.Category,           CategoryAdmin)
 admin_site.register(models.GameComponentMeta,  GameComponentMetaAdmin)

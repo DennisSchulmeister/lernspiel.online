@@ -27,7 +27,8 @@ Core Architecture
 
 ### Short-term improvements
 
-- [ ] Fixtures for dummy data during development
+- [X] Fixtures for dummy data during development
+- Include model primary key in the upload path of media files(!)
 - [ ] Automatically fill created_by / modified_by fields in the Admin (and forms in general)
 - [ ] Create admin mixin class for CreatedModifiedByMixin model
 - [ ] Create admin mixin class for EditKeyMixin model

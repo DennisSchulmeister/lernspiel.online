@@ -6,8 +6,8 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
+from typing                   import Optional
 from django.db                import models
-from django.db.models.query   import QuerySet
 from django.utils.translation import gettext_lazy as _
 from lernspiel_server.utils   import models as db_utils
 from .event                   import EventMeta
@@ -21,7 +21,7 @@ class EventParameterMeta(db_utils.UUIDMixin, TypedValueMixin):
     """
     parent = models.ForeignKey(EventMeta, on_delete=models.CASCADE, related_name="parameters")
 
-    def get_translations(self, language: str = "") -> QuerySet:
+    def get_translations(self, language: str = "") -> Optional[models.Model]:
         return db_utils.get_translations(self, language)
 
     class Meta:

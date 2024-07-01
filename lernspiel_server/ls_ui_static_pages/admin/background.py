@@ -6,6 +6,10 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-from django.contrib import admin
+from django.contrib         import admin
+from lernspiel_server.admin import MediaFileInline
+from ..                     import models
 
-# Register your models here.
+class BackgroundAdmin(admin.ModelAdmin):
+    model   = models.Background
+    inlines = [MediaFileInline]

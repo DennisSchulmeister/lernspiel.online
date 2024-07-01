@@ -7,11 +7,10 @@
 # License, or (at your option) any later version.
 
 import traceback
-
-from django.contrib import admin, messages
+from django.contrib            import admin, messages
 from django.contrib.auth.admin import UserAdmin
-from django.core.exceptions import ValidationError
-from django.utils.translation import gettext_lazy as _
+from django.core.exceptions    import ValidationError
+from django.utils.translation  import gettext_lazy as _
 
 @admin.action(description=_("Reset API key of selected users"))
 def reset_api_key(modeladmin, request, queryset):

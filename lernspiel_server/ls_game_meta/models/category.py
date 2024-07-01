@@ -7,9 +7,9 @@
 # License, or (at your option) any later version.
 
 from django.db                import models
-from django.db.models.query   import QuerySet
 from django.utils.translation import gettext_lazy as _
 from lernspiel_server.utils   import models as db_utils
+from typing                   import Optional
 
 class Category(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
     """
@@ -17,20 +17,20 @@ class Category(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
     structure to cluster related components and make them easier to find in
     the game editor UI.
     """
-    name       = models.CharField(verbose_name=_("Name"), max_length=255)
-    parent     = models.ForeignKey("self", verbose_name=_("Parent Category"), on_delete=models.CASCADE, null=True, blank=True)
-    sort_order = models.SmallIntegerField(verbose_name=_("Sort Order"))
+    name     = models.CharField(verbose_name=_("Name"), max_length=255)
+    parent   = models.ForeignKey("self", verbose_name=_("Parent Category"), on_delete=models.CASCADE, null=True, blank=True)
+    position = models.SmallIntegerField(verbose_name=_("Position"))
 
-    def get_translations(self, language: str = "") -> QuerySet:
+    def get_translations(self, language: str = "") -> Optional[models.Model]:
         return db_utils.get_translations(self, language)
     
     class Meta:
         verbose_name        = _("Category")
         verbose_name_plural = _("Categories")
-        ordering            = ["sort_order"]      # "parent" -> Infinite loop caused by ordering.
+        ordering            = ["position"]      # "parent" -> Infinite loop caused by ordering.
         
         indexes = [
-            models.Index(fields=["parent", "sort_order"]),
+            models.Index(fields=["parent", "position"]),
             models.Index(fields=["parent", "name"]),
         ]
 

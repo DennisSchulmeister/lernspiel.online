@@ -12,7 +12,7 @@ from ..                       import models
 
 class PropertyMetaTInline(admin.TabularInline):
     model = models.PropertyMeta_T
-    extra = 0
+    extra = 1
 
 class PropertyMetaAdmin(admin.ModelAdmin):
     model       = models.PropertyMeta

@@ -14,9 +14,9 @@ from .event                   import EventMetaInline
 from .slot                    import SlotMetaInline
 from ..                       import models
 
-class GameComponentMetaTInline(admin.TabularInline):
+class GameComponentMetaTInline(admin.StackedInline):
     model = models.GameComponentMeta_T
-    extra = 0
+    extra = 1
 
 class GameComponentMetaAdmin(admin.ModelAdmin):
     model           = models.GameComponentMeta
