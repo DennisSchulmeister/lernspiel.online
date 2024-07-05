@@ -6,16 +6,21 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
+# Don't import anything from the project before getting the ASGI application!
 import os
 from django.core.asgi import get_asgi_application
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "lernspiel_server.settings")
+asgi_application = get_asgi_application();
+
+
 from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.auth    import AuthMiddlewareStack
 from .urls            import websocket_urlpatterns
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "lernspiel_server.settings")
 
 # application = ProtocolTypeRouter({
-#     "http":      get_asgi_application(),
+#     "http":      asgi_application,
 #     "websocket": AuthMiddlewareStack(URLRouter(websocket_urlpatterns)),
 # })
 
@@ -52,7 +57,7 @@ class BroadcastConsumer(AsyncWebsocketConsumer):
         await self.send(message)
 
 application = ProtocolTypeRouter({
-    "http": get_asgi_application(),
+    "http": asgi_application,
     "websocket": AuthMiddlewareStack(
         URLRouter([
             path('broadcast', BroadcastConsumer.as_asgi()),
