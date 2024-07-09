@@ -15,6 +15,8 @@ class Command(BaseCommand):
     FIXTURES = [
         "lernspiel_server/site",
         "lernspiel_server/languages",
+        "ls_game_definition/game_definitions",
+        "ls_game_runtime/game_instances",
     ]
 
     def handle(self, *args, **options):

@@ -30,7 +30,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const minIndex = 0;
     const maxIndex = window.questions.length - 1;
 
-    const server_url = "/broadcast";
+    const server_url = "/ws/runtime/game_client";
     const websocket = new WebSocket(server_url);
 
     const gotoQuestion = i => {

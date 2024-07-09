@@ -83,10 +83,10 @@ class EditKeyMixin(models.Model):
     calculated by hashing an UUID. Note that the key itself will not be persistent and
     thus cannot be retrieved later. Only a hash of the key is saved.
     """
-    edit_key = models.CharField(verbose_name=_("Edit Key"), max_length=64, editable=False)
+    edit_key = models.CharField(verbose_name=_("Edit Key"), max_length=64, editable=False, blank=True)
 
-    def __init__(self):
-        self.reset_edit_key()
+    class Meta:
+        abstract = True
 
     def reset_edit_key(self, save: bool = False) -> str:
         """
@@ -94,15 +94,12 @@ class EditKeyMixin(models.Model):
         version to be saved in the database.
         """
         new_edit_key = hash.generate_key(length=16, grouping=4)
-        self.edit_key.default = hash.hash_key(new_edit_key)
+        self.edit_key = hash.hash_key(new_edit_key)
 
         if save:
             self.save()
         
         return new_edit_key
-
-    class Meta:
-        abstract = True
 
 def LanguageField():
     """

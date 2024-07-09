@@ -6,4 +6,8 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-# from .xyz import *
+from .game_definition       import *
+from lernspiel_server.admin import admin_site
+from ..                     import models
+
+admin_site.register(models.GameDefinition, GameDefinitionAdmin)

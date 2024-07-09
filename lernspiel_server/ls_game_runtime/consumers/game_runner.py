@@ -6,9 +6,10 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-from django.urls import path
-from .           import consumers
+from channels.consumer import AsyncConsumer
 
-urlpatterns = [
-    path('game_client/', consumers.GameClientWebsocketConsumer.as_asgi()),
-]
+class GameRunner(AsyncConsumer):
+    """
+    """
+    async def hello(self, event):
+        print("Hello from %s" % self.channel_name, flush=True)

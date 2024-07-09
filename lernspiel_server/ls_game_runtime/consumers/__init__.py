@@ -7,3 +7,4 @@
 # License, or (at your option) any later version.
 
 from .game_client import *
+from .game_runner import *

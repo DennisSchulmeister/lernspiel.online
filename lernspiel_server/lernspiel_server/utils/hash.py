@@ -10,9 +10,11 @@ import hashlib, uuid
 
 def generate_key(length: int, grouping=0) -> str:
     """
-    Generate a new key of the given length. The key will contains only hexadecimal
-    characters without separators. Internally a UUID is hashed with SHAKE128, which
-    can produce any number of characters.
+    Generate a new key of the given length. By default the key will contains only hexadecimal
+    characters without separators. If the grouping parameter is set to a positive number, minus
+    signs will be inserted every N characters.
+
+    This method uses the SHAKE128 algorithm, which can produce any number of characters.
     """
     hash_value = uuid.uuid4().bytes
 

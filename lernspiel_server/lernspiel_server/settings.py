@@ -27,15 +27,16 @@ ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS = [
     # Lernspiel Server
     "lernspiel_server",
-    "ls_game_definition",
+    "ls_ui_static_pages",
     "ls_game_meta",
+    "ls_game_definition",
     "ls_game_runtime",
     "ls_ui_game_creator",
     "ls_ui_game_player",
-    "ls_ui_static_pages",
 
     # 3rd-party reusable apps
     "daphne",
+    "channels",
 
     # Django built-in apps
     "django.contrib.admin",
@@ -99,9 +100,14 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Django Channels
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer",
+        #"BACKEND": "channels.layers.InMemoryChannelLayer",
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("localhost", 6379)],
+        },
     },
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

@@ -6,7 +6,6 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-from channels.routing                import URLRouter
 from django.conf                     import settings
 from django.conf.urls.static         import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
@@ -17,7 +16,6 @@ from ninja                           import NinjaAPI
 from ls_game_meta.api                import router as game_meta_api_router
 from ls_game_definition.api          import router as game_definition_api_router
 from ls_game_runtime.api             import router as game_runtime_api_router
-from ls_game_runtime.websockets      import urlpatterns as game_runtime_ws_urlpatterns
 
 from .admin                          import admin_site
 from .                               import views
@@ -42,12 +40,6 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns += staticfiles_urlpatterns()
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-websocket_urlpatterns = [
-    path("ws/", URLRouter([
-        path("runtime/", URLRouter(game_runtime_ws_urlpatterns)),
-    ])),
-]
 
 handler400 = views.Error400.as_view()
 handler403 = views.Error403.as_view()

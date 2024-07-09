@@ -6,6 +6,7 @@ fancy things -- if you already know Python, Poetry, Django, NPM, … But finding
 information might not be easy when working with so much different technology. This document
 tries to summarize the most important things.
 
+1. [Quick Start](#quick-start)
 1. [Technology Choices](#technology-choices)
 1. [Directory Layout](#directory-layout)
 1. [Poetry Package Management](#poetry-package-management)
@@ -15,6 +16,39 @@ tries to summarize the most important things.
 1. [NPM and esbuild](#npm-and-esbuild)
 1. [The Game Server Data Model](#the-game-server-data-model)
 1. [Developing New Game Components](#developing-new-game-variants)
+
+Quick Start
+-----------
+
+The following tools must be available on your development machine:
+
+* Python
+* Node.js
+* Redis
+
+Then you can install all dependent libraries:
+
+```sh
+poetry install
+npm install
+```
+
+To run all components locally:
+
+```sh
+npm start
+```
+
+This will start the following things:
+
+* Daphne Webserver in watch mode
+* Redis Key/Value-Store
+* Two game runner instances
+* A local fake SMTP server
+* Esbuild in watch mode
+
+The setup will be fairly similar to a typical production environment minus the database.
+For local development we use SQLite as per Django's defaults.
 
 Technology Choices
 ------------------

@@ -8,10 +8,12 @@
         "game_sdk"
     ],
     "scripts": {
+        "redis": "redis-server",
         "runserver": "lernspiel_server/manage.py runserver",
+        "game-runner": "lernspiel_server/manage.py runworker game-runner",
         "maildev": "maildev -s 1025 -w 8887",
         "frontend": "cd lernspiel_server/frontend; npm run watch",
-        "start": "conc -n django,fake-smtp,frontend -c auto \"npm run runserver\" \"npm run maildev\" \"npm run frontend\""
+        "start": "conc -n redis,django,game-runner-1,game-runner-2,fake-smtp,frontend -c auto \"npm run redis\" \"npm run runserver\" \"npm run game-runner\" \"npm run game-runner\" \"npm run maildev\" \"npm run frontend\""
     },
     "devDependencies": {
         "@types/node": "^20.14.8",
