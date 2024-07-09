@@ -37,8 +37,8 @@ RUN .env/bin/pip install psycopg
 RUN .env/bin/pip install channels-redis
 
 COPY . .
-COPY _docker/lernspiel_server.start.sh lernspiel_server/start.sh
-RUN chmod +x lernspiel_server/start.sh
+COPY _docker/lernspiel_server.entrypoint.sh lernspiel_server/entrypoint.sh
+RUN chmod +x lernspiel_server/entrypoint.sh
 
 # This copies to …/_static, according to settings.py
 # start.sh then copies the files onto the volume …/_static.volume
@@ -49,4 +49,4 @@ VOLUME /app/lernspiel_server/_static.volume
 EXPOSE 8000
 
 WORKDIR /app/lernspiel_server
-CMD ["./start.sh"]
+ENTRYPOINT ["./entrypoint.sh"]

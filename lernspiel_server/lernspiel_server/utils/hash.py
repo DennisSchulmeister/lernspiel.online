@@ -19,7 +19,7 @@ def generate_key(length: int, grouping=0) -> str:
     hash_value = uuid.uuid4().bytes
 
     for i in range(72000):
-        hash_value = hashlib.shake_128(hash_value).digest(length)
+        hash_value = hashlib.shake_128(hash_value).digest(int(length / 2))
 
     result = hash_value.hex()
 

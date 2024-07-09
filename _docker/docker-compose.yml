@@ -55,6 +55,23 @@ services:
             - lernspiel_media:/app/lernspiel_server/_media.volume
         environment:
             DJANGO_SETTINGS_MODULE: lernspiel_server.settings
+            LS_LOAD_INITIAL_DATA: 1
+    
+    game-runner:
+        build:
+            context: ".."
+            dockerfile: _docker/Dockerfile
+        scale: 2
+        restart: unless-stopped
+        depends_on:
+            - lernspiel-server
+        volumes:
+            - ./lernspiel_server.local_settings.py:/app/lernspiel_server/lernspiel_server/local_settings.py
+            - lernspiel_static:/app/lernspiel_server/_static.volume
+            - lernspiel_media:/app/lernspiel_server/_media.volume
+        environment:
+            DJANGO_SETTINGS_MODULE: lernspiel_server.settings
+        command: game-runner
 
     #---------------------------------------------------------------------------
     # Caddy Frontend Web Server - Serves static files and media uploads and

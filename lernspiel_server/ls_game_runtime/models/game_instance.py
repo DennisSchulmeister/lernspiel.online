@@ -22,16 +22,16 @@ class GameInstance(db_utils.CreatedModifiedByMixin):
     The game runtime uses these internally when executing the game instances.
     """
     def _generate_game_id():
-        return generate_key(length=12, grouping=4)
+        return generate_key(length=12, grouping=6)
     
     # Game state
     id         = models.CharField(verbose_name=_("Game ID"), max_length=64, primary_key=True, default=_generate_game_id, editable=False)
     definition = models.ForeignKey(GameDefinition, on_delete=models.CASCADE, verbose_name=_("Game Definition"))
 
     # Game Runner status
-    running   = models.BooleanField(verbose_name=_("Running"))
+    running   = models.BooleanField(verbose_name=_("Currently Running"))
     channel   = models.CharField(verbose_name=_("Channel"), max_length=255, blank=True)
-    heartbeat = models.DateTimeField(verbose_name="Heartbeat", blank=True)
+    heartbeat = models.DateTimeField(verbose_name="Heartbeat", blank=True, null=True)
 
     # Django meta information
     class Meta:
@@ -50,5 +50,5 @@ class GameInstance(db_utils.CreatedModifiedByMixin):
     
     @property
     @admin.display(ordering="definition__name", description=_("Game Definition"))
-    def definition_name(self, obj):
-        return obj.definition.name
+    def definition_name(self):
+        return self.definition.name

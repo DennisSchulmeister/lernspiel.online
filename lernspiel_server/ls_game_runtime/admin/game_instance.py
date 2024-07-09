@@ -15,11 +15,11 @@ class GameInstanceAdmin(admin.ModelAdmin):
     search_fields   = ["definition_name", "channel"]
     list_display    = ["id", "definition", "running", "channel", "heartbeat", "created_modified_by"]
     list_filter     = ["created_by", "created_at", "modified_by", "modified_at"]
-    readonly_fields = ["id", "created_modified_by"]
+    readonly_fields = ["id", "definition_name", "created_modified_by"]
 
     fieldsets = (
         (None, {
-            "fields": ["id", "definition_name", "created_modified_by"],
+            "fields": ["id", "definition", "created_modified_by"],
         }),
         (_("Game Runner"), {
             "fields": ["running", "channel", "heartbeat"],
@@ -27,4 +27,4 @@ class GameInstanceAdmin(admin.ModelAdmin):
     )
 
     def get_queryset(self, request):
-        return super(GameInstanceAdmin, self).get_queryset(request).select_related("definition")
+        return super().get_queryset(request).select_related("definition")
