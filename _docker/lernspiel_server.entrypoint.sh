@@ -6,7 +6,7 @@
 
 if [ -n "$1" ]; then
     echo ">>> Starting worker process: $1 <<<"
-    ../.env/bin/python ./manage.py runworker "$1"
+    exec ../.env/bin/python ./manage.py runworker "$1"
 else
     echo ">>> Starting lernspiel-server <<<"
 
@@ -19,5 +19,5 @@ else
         ../.env/bin/python ./manage.py load_initial_data
     fi
 
-    ../.env/bin/daphne -p 8000 -b 0.0.0.0 lernspiel_server.asgi:application
+    exec ../.env/bin/daphne -p 8000 -b 0.0.0.0 lernspiel_server.asgi:application
 fi
