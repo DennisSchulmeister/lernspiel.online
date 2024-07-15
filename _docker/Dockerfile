@@ -34,7 +34,6 @@ COPY --from=build /app/requirements.txt .
 RUN python -m venv .env
 RUN .env/bin/pip install -r requirements.txt
 RUN .env/bin/pip install psycopg
-RUN .env/bin/pip install channels-redis
 
 COPY . .
 COPY _docker/lernspiel_server.entrypoint.sh lernspiel_server/entrypoint.sh
