@@ -108,6 +108,40 @@ def LanguageField():
     """
     return models.ForeignKey("lernspiel_server.Language", on_delete=models.CASCADE)
 
+class TranslatableMixin(models.Model):
+    """
+    Mixin for translation models that provide translated texts for a parent model.
+    Given a model named `Example`, this is how translations can be added to it:
+
+    ```python
+    class Example_T(models.Model, TranslatableMixin):
+        parent = models.ForeignKey(Example, on_delete=models.CASCADE, related_name="translations")
+
+        text1  = models.CharField(verbose_name=_("Some Text 1"), max_length=255)
+        text2  = models.CharField(verbose_name=_("Some Text 2"), max_length=255)
+        text3  = models.CharField(verbose_name=_("Some Text 3"), max_length=255)
+
+        class Meta(TranslatableMixin.Meta):
+            pass
+    ```
+
+    The translation model simply needs a foreign key to the parent model (usually called `parent`
+    with related name `translations`) and char fields for the translatable texts.
+
+    This class can be combined with the `UUIDMixin`, if the parent class used it, too.
+    """
+    language = LanguageField()
+
+    class Meta:
+        abstract            = True
+        verbose_name        = _("Translation")
+        verbose_name_plural = _("Translations")
+        ordering            = ["parent", "language"]
+        indexes             = [models.Index(fields=["parent", "language"])]
+    
+    def __str__(self):
+        return self.language.name
+    
 def get_translations(object: models.Model, language: str = "",
                      attr_id: str = "id", attr_translations: str = "translations",
                      attr_t_parent: str = "parent", attr_t_language: str = "language") -> Optional[models.Model]:

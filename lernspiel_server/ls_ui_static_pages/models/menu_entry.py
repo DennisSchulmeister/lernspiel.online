@@ -64,16 +64,9 @@ class MenuEntry(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
     def __str__(self):
         return self.name
 
-class MenuEntry_T(db_utils.UUIDMixin):
-    parent   = models.ForeignKey(MenuEntry, on_delete=models.CASCADE, related_name="translations")
-    language = db_utils.LanguageField()
-    title    = models.CharField(verbose_name=_("Title"), max_length=255)
+class MenuEntry_T(db_utils.UUIDMixin, db_utils.TranslatableMixin):
+    parent = models.ForeignKey(MenuEntry, on_delete=models.CASCADE, related_name="translations")
+    title  = models.CharField(verbose_name=_("Title"), max_length=255)
 
-    class Meta:
-        verbose_name        = _("Translation")
-        verbose_name_plural = _("Translations")
-        ordering            = ["parent", "language"]
-        indexes             = [models.Index(fields=["parent", "language"])]
-
-    def __str__(self):
-        return self.title
+    class Meta(db_utils.TranslatableMixin.Meta):
+        pass

@@ -43,15 +43,11 @@ class Snippet(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
     def __str__(self):
         return self.name
 
-class Snippet_T(db_utils.UUIDMixin, FormattedContentMixin):
+class Snippet_T(db_utils.UUIDMixin, db_utils.TranslatableMixin, FormattedContentMixin):
     parent   = models.ForeignKey(Snippet, on_delete=models.CASCADE, related_name="translations")
-    language = db_utils.LanguageField()
 
-    class Meta:
-        verbose_name        = _("Translation")
-        verbose_name_plural = _("Translations")
-        ordering            = ["parent", "language"]
-        indexes             = [models.Index(fields=["parent", "language"])]
+    class Meta(db_utils.TranslatableMixin.Meta):
+        pass
 
     def __str__(self):
         if len(self.content) > 50:

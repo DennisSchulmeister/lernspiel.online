@@ -33,16 +33,9 @@ class PropertyMeta(db_utils.UUIDMixin, TypedValueMixin):
     def __str__(self):
         return self.name
 
-class PropertyMeta_T(db_utils.UUIDMixin):
-    parent      = models.ForeignKey(PropertyMeta, on_delete=models.CASCADE, related_name="translations")
-    language    = db_utils.LanguageField()
-    label       = models.CharField(verbose_name=_("Label"), max_length=255)
+class PropertyMeta_T(db_utils.UUIDMixin, db_utils.TranslatableMixin):
+    parent = models.ForeignKey(PropertyMeta, on_delete=models.CASCADE, related_name="translations")
+    label  = models.CharField(verbose_name=_("Label"), max_length=255)
 
-    class Meta:
-        verbose_name        = _("Translation")
-        verbose_name_plural = _("Translations")
-        ordering            = ["parent", "language"]
-        indexes             = [models.Index(fields=["parent", "language"])]
-    
-    def __str__(self):
-        return self.label
+    class Meta(db_utils.TranslatableMixin.Meta):
+        pass

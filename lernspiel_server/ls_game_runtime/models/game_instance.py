@@ -13,13 +13,14 @@ from lernspiel_server.utils                    import models as db_utils
 from ls_game_definition.models.game_definition import GameDefinition
 from lernspiel_server.utils.hash               import generate_key
 
-
 # TODO: This is currently a stub. Full implementation needed. :-)
 class GameInstance(db_utils.CreatedModifiedByMixin):
     """
-    Abstract definition of a game. This is what game authors work with in the game builder.
-    It defines the component structure, rules and additional source files of the game.
-    The game runtime uses these internally when executing the game instances.
+    Possibly running instance of a game. This is the result of someone starting the game
+    to create an invite code. The invite code is simply the ID of this table. Latest when
+    a participant joins, one of the game runner instances will pick up the game from here,
+    execute the server-side game logic and update this table periodically to persist the
+    game state and signal that it is still alive.
     """
     def _generate_game_id():
         return generate_key(length=12, grouping=6)
