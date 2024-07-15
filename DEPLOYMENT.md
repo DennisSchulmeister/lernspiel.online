@@ -47,7 +47,7 @@ for all details. Below is a quick summary including a few notable considerations
 * __Redis:__ Since we are using Django Channels for websocket support and inter-process communication
   a [Channel Layer](https://channels.readthedocs.io/en/stable/topics/channel_layers.html) must be set-up.
   The pre-configured default option is to use [Redis](https://redis.io/) for this. The default configuration
-  expect the Redis server to listen to `localhost:6379` but this setting can be overwritten in the local
+  expects the Redis server to listen to `localhost:6379` but this setting can be overwritten in the local
   settings file.
 
 * __Database:__ A database like [MariaDB](https://mariadb.org/) or [Postgres](https://www.postgresql.org/)
@@ -120,7 +120,7 @@ player connections. This allows games to have a server-side global state that ca
 no matter which participant is currently connected with the server. In practice this means:
 
 * At least one game runner process must be running in parallel to the ASGI server.
-* [Redis]((https://redis.io/) or any other channel layer backend must be setup.
+* [Redis](https://redis.io/) or any other channel layer backend must be setup.
 
 The default option to connect multiple processes in the Django Channels world is Redis. This is the pre-defined
 default option for the Lernspiel Server, too, during development and in production. Once this is running, the
