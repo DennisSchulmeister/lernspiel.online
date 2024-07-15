@@ -27,3 +27,14 @@ class GameDefinition(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin, db_uti
     
     def __str__(self):
         return self.name
+
+# class GameDefinition_T(db_utils.UUIDMixin, db_utils.TranslatableMixin):
+#     pass
+
+# class ParticipantRole(db_utils.UUIDMixin):
+#     """
+#     """
+#     pass
+
+# class ParticipantRole_T(db_utils.UUIDMixin, db_utils.TranslatableMixin):
+#     pass
