@@ -1,9 +1,7 @@
 - model: ls_game_runtime.gameinstance
   pk: 76596fdc-2f44-4efa-a89a-43a7e9c3a9b6
   fields:
-    created_by: null
     created_at: 2024-07-16 07:45:57.045392+00:00
-    modified_by: null
     modified_at: 2024-07-16 07:56:40.025402+00:00
     definition: b0230b30-bb66-4acb-b0cc-2217050e7eac
     max_inactivity: 1
