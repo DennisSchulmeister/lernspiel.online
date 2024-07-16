@@ -23,14 +23,14 @@ class GameInstance(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
     """
     # Game definition and state
     definition     = models.ForeignKey(GameDefinition, on_delete=models.CASCADE, verbose_name=_("Game Definition"))
-    max_inactivity = models.SmallIntegerField(verbose_name=_("Max. Inactivity Minutes"), default=1, blank=True, null=True, help_text=_("Game execution will stop if no participant joins within this period. The game will be resumed once a participant joins. Zero means to never stop."))
+    max_inactivity = models.SmallIntegerField(verbose_name=_("Max. Inactivity Minutes"), default=1, blank=True, help_text=_("Game execution will stop if no participant joins within this period. The game will be resumed once a participant joins. Zero means to never stop."))
 
     # Game Runner status
     running   = models.BooleanField(verbose_name=_("Currently Running"))
     channel   = models.CharField(verbose_name=_("Channel"), max_length=255, blank=True)
     heartbeat = models.DateTimeField(verbose_name=_("Heartbeat"), blank=True, null=True)
 
-    participants_count = models.IntegerField(verbose_name=_("Current Participants"), blank=True, null=True)
+    participants_count = models.IntegerField(verbose_name=_("Current Participants"), default=0, blank=True)
     participants_since = models.DateTimeField(verbose_name=_("Last Join or Leave"), blank=True, null=True)
 
     # Django meta information
@@ -46,7 +46,7 @@ class GameInstance(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
         ]
 
     def __str__(self):
-        return self.id
+        return "%s (%s)" % (self.definition.name, self.id)
     
     @property
     @admin.display(ordering="definition__name", description=_("Game Definition"))

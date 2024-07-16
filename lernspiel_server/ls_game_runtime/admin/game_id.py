@@ -11,8 +11,10 @@ from django.utils.translation import gettext_lazy as _
 from ..                       import models
 
 class GameIdAdmin(admin.ModelAdmin):
-    model        = models.GameId
-    list_display = ["game_instance", "participant_role"]
+    model            = models.GameId
+    list_display     = ["game_instance", "participant_role"]
+    fields           = ["id", "game_instance", "participant_role"]
+    readonly_fields  = ["id"]
 
 class GameIdInline(admin.TabularInline):
     model            = models.GameId
