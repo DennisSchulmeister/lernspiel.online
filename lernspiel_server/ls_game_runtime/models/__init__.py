@@ -6,4 +6,5 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
+from .game_id       import *
 from .game_instance import *

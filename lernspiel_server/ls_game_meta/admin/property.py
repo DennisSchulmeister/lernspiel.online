@@ -15,9 +15,9 @@ class PropertyMetaTInline(admin.TabularInline):
     extra = 1
 
 class PropertyMetaAdmin(admin.ModelAdmin):
-    model       = models.PropertyMeta
-    inlines     = [PropertyMetaTInline]
-    list_fields = ["parent", "name", "data_type", "length", "is_array"]
+    model        = models.PropertyMeta
+    inlines      = [PropertyMetaTInline]
+    list_display = ["parent", "name", "data_type", "length", "is_array"]
     
     fieldsets = (
         (None, {

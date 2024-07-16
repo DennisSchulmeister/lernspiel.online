@@ -8,13 +8,18 @@
 
 from django.contrib           import admin
 from django.utils.translation import gettext_lazy as _
+from .participant_role        import ParticipantRoleInline
 from ..                       import models
+
+class GameDefinitionTInline(admin.TabularInline):
+    model = models.GameDefinition_T
+    extra = 1
 
 class GameDefinitionAdmin(admin.ModelAdmin):
     model              = models.GameDefinition
     search_fields      = ["name"]
     list_display       = ["name", "created_modified_by"]
     list_filter        = ["name", "created_by", "created_at", "modified_by", "modified_at"]
-    # list_display_links = ["name"]
     readonly_fields    = ["created_modified_by"]
     fields             = ["name", "created_modified_by"]
+    inlines            = [GameDefinitionTInline, ParticipantRoleInline]

@@ -1,6 +1,65 @@
+# Game definition: prototype-1
 - model: ls_game_definition.GameDefinition
   pk: "b0230b30-bb66-4acb-b0cc-2217050e7eac"
   fields:
-    name: Prototype 1
+    name: prototype-1
     created_at: "2024-07-09T17:40:23.638Z"
     modified_at: "2024-07-09T17:40:23.638Z"
+
+- model: ls_game_definition.GameDefinition_T
+  pk: 9c2e6b88-d8e9-41cb-8228-3a8c8ee5125a
+  fields:
+    language: en
+    parent: b0230b30-bb66-4acb-b0cc-2217050e7eac
+    label: Prototype 1
+
+- model: ls_game_definition.GameDefinition_T
+  pk: d487ca26-98c0-4056-930d-460bb17f32f6
+  fields:
+    language: de
+    parent: b0230b30-bb66-4acb-b0cc-2217050e7eac
+    label: Prototyp 1
+
+# Participant Role: Student
+- model: ls_game_definition.ParticipantRole
+  pk: 6f3b6b82-6571-425c-b114-37690eefbdea
+  fields:
+    parent: b0230b30-bb66-4acb-b0cc-2217050e7eac
+    name: student
+    limit: 0
+
+- model: ls_game_definition.ParticipantRole_T
+  pk: 88f8f1c5-7bee-4e0d-9adb-9f306c42deca
+  fields:
+    language: en
+    parent: 6f3b6b82-6571-425c-b114-37690eefbdea
+    label: Student
+
+- model: ls_game_definition.ParticipantRole_T
+  pk: ae86ab1c-c66a-4b4f-98a8-ad4dfa2f9000
+  fields:
+    language: de
+    parent: 6f3b6b82-6571-425c-b114-37690eefbdea
+    label: Student
+
+# Participant Role: teacher
+- model: ls_game_definition.ParticipantRole
+  pk: cfe05bb1-6f2a-41c1-9793-6bace073025e
+  fields:
+    parent: b0230b30-bb66-4acb-b0cc-2217050e7eac
+    name: teacher
+    limit: 1
+
+- model: ls_game_definition.ParticipantRole_T
+  pk: 16c51cd2-cc97-4a10-8a4a-b9bcae05c055
+  fields:
+    language: en
+    parent: cfe05bb1-6f2a-41c1-9793-6bace073025e
+    label: Teacher
+
+- model: ls_game_definition.ParticipantRole_T
+  pk: 8511983f-a980-4e17-9441-317f0498f802
+  fields:
+    language: de
+    parent: cfe05bb1-6f2a-41c1-9793-6bace073025e
+    label: Dozent

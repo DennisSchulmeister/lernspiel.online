@@ -15,9 +15,9 @@ class EventParameterMetaTInline(admin.TabularInline):
     extra = 1
 
 class EventParameterMetaAdmin(admin.ModelAdmin):
-    model       = models.EventParameterMeta
-    inlines     = [EventParameterMetaTInline]
-    list_fields = ["parent", "name", "data_type", "length", "is_array"]
+    model        = models.EventParameterMeta
+    inlines      = [EventParameterMetaTInline]
+    list_display = ["parent", "name", "data_type", "length", "is_array"]
     
     fieldsets = (
         (None, {

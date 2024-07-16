@@ -28,13 +28,9 @@ class GameDefinition(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin, db_uti
     def __str__(self):
         return self.name
 
-# class GameDefinition_T(db_utils.UUIDMixin, db_utils.TranslatableMixin):
-#     pass
+class GameDefinition_T(db_utils.UUIDMixin, db_utils.TranslatableMixin):
+    parent = models.ForeignKey(GameDefinition, on_delete=models.CASCADE, related_name="translations")
+    label  = models.CharField(verbose_name=_("Label"), max_length=255)
 
-# class ParticipantRole(db_utils.UUIDMixin):
-#     """
-#     """
-#     pass
-
-# class ParticipantRole_T(db_utils.UUIDMixin, db_utils.TranslatableMixin):
-#     pass
+    class Meta(db_utils.TranslatableMixin.Meta):
+        pass

@@ -7,7 +7,9 @@
 # License, or (at your option) any later version.
 
 from .game_instance         import *
+from .game_id               import *
 from lernspiel_server.admin import admin_site
 from ..                     import models
 
 admin_site.register(models.GameInstance, GameInstanceAdmin)
+admin_site.register(models.GameId, GameIdAdmin)

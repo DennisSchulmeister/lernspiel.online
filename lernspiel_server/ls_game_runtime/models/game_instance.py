@@ -11,10 +11,9 @@ from django.db                                 import models
 from django.utils.translation                  import gettext_lazy as _
 from lernspiel_server.utils                    import models as db_utils
 from ls_game_definition.models.game_definition import GameDefinition
-from lernspiel_server.utils.hash               import generate_key
 
 # TODO: This is currently a stub. Full implementation needed. :-)
-class GameInstance(db_utils.CreatedModifiedByMixin):
+class GameInstance(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
     """
     Possibly running instance of a game. This is the result of someone starting the game
     to create an invite code. The invite code is simply the ID of this table. Latest when
@@ -22,17 +21,17 @@ class GameInstance(db_utils.CreatedModifiedByMixin):
     execute the server-side game logic and update this table periodically to persist the
     game state and signal that it is still alive.
     """
-    def _generate_game_id():
-        return generate_key(length=12, grouping=6)
-    
-    # Game state
-    id         = models.CharField(verbose_name=_("Game ID"), max_length=64, primary_key=True, default=_generate_game_id, editable=False)
-    definition = models.ForeignKey(GameDefinition, on_delete=models.CASCADE, verbose_name=_("Game Definition"))
+    # Game definition and state
+    definition     = models.ForeignKey(GameDefinition, on_delete=models.CASCADE, verbose_name=_("Game Definition"))
+    max_inactivity = models.SmallIntegerField(verbose_name=_("Max. Inactivity Minutes"), default=1, blank=True, null=True, help_text=_("Game execution will stop if no participant joins within this period. The game will be resumed once a participant joins. Zero means to never stop."))
 
     # Game Runner status
     running   = models.BooleanField(verbose_name=_("Currently Running"))
     channel   = models.CharField(verbose_name=_("Channel"), max_length=255, blank=True)
-    heartbeat = models.DateTimeField(verbose_name="Heartbeat", blank=True, null=True)
+    heartbeat = models.DateTimeField(verbose_name=_("Heartbeat"), blank=True, null=True)
+
+    participants_count = models.IntegerField(verbose_name=_("Current Participants"), blank=True, null=True)
+    participants_since = models.DateTimeField(verbose_name=_("Last Join or Leave"), blank=True, null=True)
 
     # Django meta information
     class Meta:

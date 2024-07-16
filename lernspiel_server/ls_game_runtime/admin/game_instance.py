@@ -9,6 +9,7 @@
 from django.contrib           import admin
 from django.utils.translation import gettext_lazy as _
 from ..                       import models
+from .game_id                 import GameIdInline
 
 class GameInstanceAdmin(admin.ModelAdmin):
     model           = models.GameInstance
@@ -16,6 +17,7 @@ class GameInstanceAdmin(admin.ModelAdmin):
     list_display    = ["id", "definition", "running", "channel", "heartbeat", "created_modified_by"]
     list_filter     = ["created_by", "created_at", "modified_by", "modified_at"]
     readonly_fields = ["id", "definition_name", "created_modified_by"]
+    inlines         = [GameIdInline]
 
     fieldsets = (
         (None, {
