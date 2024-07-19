@@ -20,10 +20,7 @@ class SlotMeta(db_utils.UUIDMixin):
     """
     parent = models.ForeignKey(GameComponentMeta, on_delete=models.CASCADE, related_name="slots")
     name   = models.CharField(verbose_name=_("Name"), max_length=100, unique=True)
-
-    def get_translations(self, language: str = "") -> Optional[models.Model]:
-        return db_utils.get_translations(self, language)
-    
+   
     class Meta:
         verbose_name        = _("Slot")
         verbose_name_plural = _("Slots")
@@ -32,6 +29,9 @@ class SlotMeta(db_utils.UUIDMixin):
     
     def __str__(self):
         return self.name
+
+    def get_translations(self, language: str = "") -> Optional[models.Model]:
+        return db_utils.get_translations(self, language)
 
 class SlotMeta_T(db_utils.UUIDMixin, db_utils.TranslatableMixin):
     parent = models.ForeignKey(SlotMeta, on_delete=models.CASCADE, related_name="translations")

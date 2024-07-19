@@ -19,9 +19,6 @@ class Menu(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
     """
     name = models.CharField(_("Name"), max_length=255, blank=False)
 
-    def get_translations(self, language: str = "") -> Optional[models.Model]:
-        return db_utils.get_translations(self, language)
-
     class Meta:
         verbose_name        = _("Menu")
         verbose_name_plural = _("Menus")
@@ -33,6 +30,9 @@ class Menu(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
 
     def __str__(self):
         return self.name
+
+    def get_translations(self, language: str = "") -> Optional[models.Model]:
+        return db_utils.get_translations(self, language)
 
     def entries(self):
         """

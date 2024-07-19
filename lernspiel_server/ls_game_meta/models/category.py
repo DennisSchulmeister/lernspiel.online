@@ -20,10 +20,7 @@ class Category(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
     name     = models.CharField(verbose_name=_("Name"), max_length=255)
     parent   = models.ForeignKey("self", verbose_name=_("Parent Category"), on_delete=models.CASCADE, null=True, blank=True)
     position = models.SmallIntegerField(verbose_name=_("Position"))
-
-    def get_translations(self, language: str = "") -> Optional[models.Model]:
-        return db_utils.get_translations(self, language)
-    
+   
     class Meta:
         verbose_name        = _("Category")
         verbose_name_plural = _("Categories")
@@ -36,6 +33,9 @@ class Category(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
 
     def __str__(self):
         return self.name
+
+    def get_translations(self, language: str = "") -> Optional[models.Model]:
+        return db_utils.get_translations(self, language)
 
 class Category_T(db_utils.UUIDMixin, db_utils.TranslatableMixin):
     parent = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="translations")

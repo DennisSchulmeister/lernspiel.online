@@ -21,9 +21,6 @@ class EventParameterMeta(db_utils.UUIDMixin, TypedValueMixin):
     """
     parent = models.ForeignKey(EventMeta, on_delete=models.CASCADE, related_name="parameters")
 
-    def get_translations(self, language: str = "") -> Optional[models.Model]:
-        return db_utils.get_translations(self, language)
-
     class Meta:
         verbose_name        = _("Event Parameter")
         verbose_name_plural = _("Event Parameters")
@@ -32,6 +29,9 @@ class EventParameterMeta(db_utils.UUIDMixin, TypedValueMixin):
     
     def __str__(self):
         return self.name
+
+    def get_translations(self, language: str = "") -> Optional[models.Model]:
+        return db_utils.get_translations(self, language)
 
 class EventParameterMeta_T(db_utils.UUIDMixin, db_utils.TranslatableMixin):
     parent = models.ForeignKey(EventParameterMeta, on_delete=models.CASCADE, related_name="translations")

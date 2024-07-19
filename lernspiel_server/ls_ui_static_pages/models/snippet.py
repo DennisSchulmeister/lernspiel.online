@@ -27,10 +27,7 @@ class Snippet(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
     """
     name        = models.CharField(_("Name"), max_length=64, blank=False, null=False, unique=True)
     media_files = GenericRelation(MediaFile)
-
-    def get_translations(self, language: str = "") -> Optional[models.Model]:
-        return db_utils.get_translations(self, language)
-    
+  
     class Meta:
         verbose_name        = _("Snippet")
         verbose_name_plural = _("Snippets")
@@ -42,6 +39,9 @@ class Snippet(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
 
     def __str__(self):
         return self.name
+
+    def get_translations(self, language: str = "") -> Optional[models.Model]:
+        return db_utils.get_translations(self, language)
 
 class Snippet_T(db_utils.UUIDMixin, db_utils.TranslatableMixin, FormattedContentMixin):
     parent   = models.ForeignKey(Snippet, on_delete=models.CASCADE, related_name="translations")

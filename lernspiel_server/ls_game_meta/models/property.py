@@ -21,9 +21,6 @@ class PropertyMeta(db_utils.UUIDMixin, TypedValueMixin):
     """
     parent = models.ForeignKey(GameComponentMeta, on_delete=models.CASCADE, related_name="properties")
     
-    def get_translations(self, language: str = "") -> Optional[models.Model]:
-        return db_utils.get_translations(self, language)
-
     class Meta:
         verbose_name        = _("Property")
         verbose_name_plural = _("Properties")
@@ -32,6 +29,9 @@ class PropertyMeta(db_utils.UUIDMixin, TypedValueMixin):
     
     def __str__(self):
         return self.name
+
+    def get_translations(self, language: str = "") -> Optional[models.Model]:
+        return db_utils.get_translations(self, language)
 
 class PropertyMeta_T(db_utils.UUIDMixin, db_utils.TranslatableMixin):
     parent = models.ForeignKey(PropertyMeta, on_delete=models.CASCADE, related_name="translations")

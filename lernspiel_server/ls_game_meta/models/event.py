@@ -21,9 +21,6 @@ class EventMeta(db_utils.UUIDMixin):
     parent = models.ForeignKey(GameComponentMeta, on_delete=models.CASCADE, related_name="events")
     name   = models.CharField(verbose_name=_("Name"), max_length=100, unique=True)
 
-    def get_translations(self, language: str = "") -> Optional[models.Model]:
-        return db_utils.get_translations(self, language)
-
     class Meta:
         verbose_name        = _("Event")
         verbose_name_plural = _("Events")
@@ -32,6 +29,9 @@ class EventMeta(db_utils.UUIDMixin):
     
     def __str__(self):
         return self.name
+
+    def get_translations(self, language: str = "") -> Optional[models.Model]:
+        return db_utils.get_translations(self, language)
 
 class EventMeta_T(db_utils.UUIDMixin, db_utils.TranslatableMixin):
     parent = models.ForeignKey(EventMeta, on_delete=models.CASCADE, related_name="translations")

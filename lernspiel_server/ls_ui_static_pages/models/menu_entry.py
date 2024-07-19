@@ -37,10 +37,7 @@ class MenuEntry(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
     name       = models.CharField(verbose_name=_("Name"), max_length=255)
     new_window = models.BooleanField(verbose_name=_("Open in new window or tab"))
     link_type  = models.CharField(_("Link type"), max_length=10, choices=_LINK_TYPES)
-
-    def get_translations(self, language: str = "") -> Optional[models.Model]:
-        return db_utils.get_translations(self, language)
-    
+   
     # Link parameters
     link_url       = models.URLField(verbose_name=_("URL"), blank=True)
     link_page      = models.ForeignKey(TextPage, on_delete=models.SET_NULL, blank=True, null=True)
@@ -63,6 +60,10 @@ class MenuEntry(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
 
     def __str__(self):
         return self.name
+
+    # Translated texts
+    def get_translations(self, language: str = "") -> Optional[models.Model]:
+        return db_utils.get_translations(self, language)
 
 class MenuEntry_T(db_utils.UUIDMixin, db_utils.TranslatableMixin):
     parent = models.ForeignKey(MenuEntry, on_delete=models.CASCADE, related_name="translations")

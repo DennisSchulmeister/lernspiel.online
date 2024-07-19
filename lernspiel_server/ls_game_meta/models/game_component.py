@@ -26,10 +26,6 @@ class GameComponentMeta(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
     category   = models.ForeignKey(Category, verbose_name=_("Category"), on_delete=models.SET_NULL, null=True, blank=True)
     thumbnail  = models.FileField(verbose_name=_("Thumbnail"), upload_to=_calc_file_path, null=True, blank=True)
 
-    # Translated texts
-    def get_translations(self, language: str = "") -> Optional[models.Model]:
-        return db_utils.get_translations(self, language)
-
     # Source files
     media_files  = GenericRelation(MediaFile)
     source_files = GenericRelation(SourceFile)
@@ -43,6 +39,10 @@ class GameComponentMeta(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
     
     def __str__(self):
         return self.name
+
+    # Translated texts
+    def get_translations(self, language: str = "") -> Optional[models.Model]:
+        return db_utils.get_translations(self, language)
 
 class GameComponentMeta_T(db_utils.UUIDMixin, db_utils.TranslatableMixin):
     parent      = models.ForeignKey(GameComponentMeta, on_delete=models.CASCADE, related_name="translations")

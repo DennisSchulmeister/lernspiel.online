@@ -34,10 +34,7 @@ class PageType(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
     background = models.ForeignKey(Background, verbose_name=_("Background"), on_delete=models.SET_NULL, null=True, blank=True)
     menus      = GenericRelation(MenuAssignment, help_text=_("Use this to override the menu assignments from the page type."))
     custom_css = GenericRelation(CustomCSS)
-
-    def get_translations(self, language: str = "") -> Optional[models.Model]:
-        return db_utils.get_translations(self, language)
-    
+   
     class Meta:
         verbose_name        = _("Page  Type")
         verbose_name_plural = _("Page Types")
@@ -49,6 +46,9 @@ class PageType(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
 
     def __str__(self):
         return self.name
+
+    def get_translations(self, language: str = "") -> Optional[models.Model]:
+        return db_utils.get_translations(self, language)
 
 class PageType_T(db_utils.UUIDMixin, db_utils.TranslatableMixin):
     parent = models.ForeignKey(PageType, on_delete=models.CASCADE, related_name="translations")

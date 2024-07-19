@@ -6,6 +6,7 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
+from typing                   import Optional
 from django.db                import models
 from django.utils.translation import gettext_lazy as _
 from lernspiel_server.utils   import models as db_utils
@@ -29,6 +30,9 @@ class ParticipantRole(db_utils.UUIDMixin):
     
     def __str__(self):
         return self.name
+
+    def get_translations(self, language: str = "") -> Optional[models.Model]:
+        return db_utils.get_translations(self, language)
 
 class ParticipantRole_T(db_utils.UUIDMixin, db_utils.TranslatableMixin):
     parent = models.ForeignKey(ParticipantRole, on_delete=models.CASCADE, related_name="translations")
