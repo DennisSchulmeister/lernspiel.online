@@ -30,11 +30,10 @@ Core Architecture
 - [X] Fixtures for dummy data during development
 - [X] Include model primary key in the upload path of media files(!)
 - [X] Fix crash during startup in Docker
-- [ ] Automatically fill created_by / modified_by fields in the Admin (and forms in general)
-- [ ] Create admin mixin class for CreatedModifiedByMixin model
-- [ ] Create admin mixin class for EditKeyMixin model
+- [X] Automatically fill created_by / modified_by fields in the Admin (and forms in general)
 - [X] Create model mixin for translation models
-- [ ] Textpages Admin / MenuEntry: Hide link parameters not relevant for selected link type
+- [X] Text Pages Admin / MenuEntry: Hide link parameters not relevant for selected link type
+- [ ] Use natural keys for all models and fixtures
 
 ### Website
 
@@ -42,6 +41,8 @@ Core Architecture
     - [X] Models
     - [X] Admin
     - [ ] Views + Templates
+    - [ ] WYSIWYG editor in the admin
+    - [ ] Implement start-page design
 
 ### Game Prototype
 
