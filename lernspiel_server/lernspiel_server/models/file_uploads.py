@@ -38,10 +38,7 @@ class AbstractFileModel(db_utils.UUIDMixin):
     class Meta:
         abstract = True
         ordering = ["content_type", "object_id", "file_name"]
-
-        indexes = [
-            models.Index(fields=["content_type", "object_id", "file_name"])
-        ]
+        indexes  = [models.Index(fields=["content_type", "object_id", "file_name"])]
 
     def __str__(self):
         return self.file_name

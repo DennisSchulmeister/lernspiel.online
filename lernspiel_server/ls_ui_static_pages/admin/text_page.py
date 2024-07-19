@@ -25,8 +25,8 @@ class MenuAssignmentInline(GenericTabularInline):
 
 class TextPageAdmin(admin.ModelAdmin):
     model = models.TextPage
-    search_fields   = ["url", "name"]
-    list_display    = ["url", "name", "page_type", "login_required", "is_published", "published", "publish_start", "publish_end"]
+    search_fields   = ["name", "url"]
+    list_display    = ["name", "url", "page_type", "login_required", "is_published", "published", "publish_start", "publish_end"]
     list_filter     = ["page_type", "login_required", "published", "publish_start", "publish_end", "created_by", "created_at", "modified_by", "modified_at"]
     readonly_fields = ["is_published", "created_modified_by"]
     inlines         = [TextPageTInline, MediaFileInline, CustomCSSInline, MenuAssignmentInline]

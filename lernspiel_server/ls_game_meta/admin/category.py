@@ -22,13 +22,3 @@ class CategoryAdmin(admin.ModelAdmin):
     readonly_fields = ["created_modified_by"]
     fields          = ["name", "parent", "position", "created_modified_by"]
     inlines         = [CategoryTInline]
-    
-    # def get_form(self, request, obj=None, **kwargs):
-    #     """
-    #     Set created by / modified by user
-    #     """
-    #     # TODO: Automatically fill created_by / modified_by -> move to utils/base class
-    #     form = super(CategoryAdmin, self).get_form(request, obj, **kwargs)
-    #     # form.base_fields["created_by"].
-    #     # form.base_fields["modified_by"].
-    #     return form

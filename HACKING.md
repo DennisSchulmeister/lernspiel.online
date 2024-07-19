@@ -185,12 +185,41 @@ the Lernspiel server. Here are a few hints on what to consider:
 
 * **Natural Keys:** When using the `dumpdata` command make sure to enable natural keys. Thus the
   full command becomes: `python manage.py dumpdata --format yaml--natural-foreign --natural-primary myapp`.
-  Not only will the files be much easier to read, but a lot of problems with generated key values
-  (usually the `id` field of a model) will  be avaided.
+  This avoids a problem with generic relations: Each model with a generic relation must have a foreign
+  key on the `ContentType` model that contains a list of all known models. This uses an auto-incremented
+  ID that is not stable. Without natural keys the fixtures would contain the raw ID of the content type,
+  that would most-likely not reference the model we want during import of the fixture.
 
 * **Load Initial Data:** Once your new fixture is working, consider adding it to the `load_initial_data`
   management command. The source code is in the `lernspiel_server` project directory. This allows other
   developers and users to import a complete set of initial data with only one command.
+
+**Natural keys, part II:** Why are we not using natural keys for our models? After writing the lines
+above the initial plan was to add natural keys to all own models, so that the fixtures would be free
+from UUIDs and generally much easier to read. But the attached trade-offs quickly outgrew the benefit:
+
+* Adding natural keys to each model increases the size considerably: `natural_key()` method, custom
+  manager, unique constraint for each model. But that alone would have been okay, as we didn't want
+  to introduce a dependency to [Django Natural Keys](https://pypi.org/project/natural-keys/) to keep
+  the dependencies minimal.
+
+* Many models have a name, that would be a perfect fit for the natural key. But it might be problematic
+  to make them unique.
+
+* Generic relations are still problematic due to the `object_id` property. That was the real killer.
+  Why all the effort, if each generic relation still references the UUID of the related object?
+  For this to work the UUID of the related object must be enforced during import, neglecting the reason
+  to add natural keys in the first place.
+
+  There is a work-around using [custom serializers and deserializers](https://stackoverflow.com/a/70700302).
+  But that is quite a lot of code that needs deep understanding of Django's inner workings. 🤯
+  Clearly something to avoid, if at all possible.
+
+Thankfuly using UUIDs the problem is not as large as if we were using the traditional auto-incremented
+IDs. With auto-incremented IDs natural keys are needed to ensure stable keys. Otherwise entries will
+not be imported if the ID is already used by another entry and imported foreign keys will reference
+the wrong object. UUIDs are supposed to be globally unique by default, avoiding most of the problems
+in the first place.
 
 SQLite Shell
 ------------

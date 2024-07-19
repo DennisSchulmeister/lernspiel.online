@@ -19,13 +19,3 @@ class BackgroundAdmin(admin.ModelAdmin):
     readonly_fields = ["created_modified_by"]
     fields          = ["name", "created_modified_by"]
     inlines         = [MediaFileInline]
-
-    # def get_form(self, request, obj=None, **kwargs):
-    #     """
-    #     Set created by / modified by user
-    #     """
-    #     # TODO: Automatically fill created_by / modified_by -> move to utils/base class
-    #     form = super(models.Background, self).get_form(request, obj, **kwargs)
-    #     # form.base_fields["created_by"].
-    #     # form.base_fields["modified_by"].
-    #     return form

@@ -32,10 +32,7 @@ class Snippet(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
         verbose_name        = _("Snippet")
         verbose_name_plural = _("Snippets")
         ordering            = ["name"]
-
-        indexes = [
-            models.Index(fields=["name"])
-        ]
+        indexes             = [models.Index(fields=["name"])]
 
     def __str__(self):
         return self.name

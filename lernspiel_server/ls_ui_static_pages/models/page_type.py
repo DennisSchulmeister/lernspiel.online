@@ -39,10 +39,7 @@ class PageType(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
         verbose_name        = _("Page  Type")
         verbose_name_plural = _("Page Types")
         ordering            = ["name",]
-
-        indexes = [
-            models.Index(fields=["name"])
-        ]
+        indexes             = [models.Index(fields=["name"])]
 
     def __str__(self):
         return self.name

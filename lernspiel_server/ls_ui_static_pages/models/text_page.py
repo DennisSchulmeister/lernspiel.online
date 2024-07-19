@@ -37,8 +37,8 @@ class TextPage(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
       * Custom CSS
     """
     # General information
-    url         = models.CharField(verbose_name=_("URL"), max_length=255)
     name        = models.CharField(verbose_name=_("Name"), max_length=255)
+    url         = models.CharField(verbose_name=_("URL"), max_length=255)
     page_type   = models.ForeignKey(PageType, verbose_name=_("Page Type"), on_delete=models.SET_NULL, null=True)
 
     # Page Content
@@ -62,10 +62,7 @@ class TextPage(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
         verbose_name        = _("Text Page")
         verbose_name_plural = _("Text Pages")
         ordering            = ["url",]
-
-        indexes = [
-            models.Index(fields=["url"])
-        ]
+        indexes             = [models.Index(fields=["url"])]
 
     def __str__(self):
         return "%s: %s" % (self.url, self.name)

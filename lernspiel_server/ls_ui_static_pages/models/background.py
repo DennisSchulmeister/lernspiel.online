@@ -23,10 +23,8 @@ class Background(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
         verbose_name        = _("Background")
         verbose_name_plural = _("Backgrounds")
         ordering            = ["name"]
-
-        indexes = [
-            models.Index(fields=["name"])
-        ]
+        indexes             = [models.Index(fields=["name"])]
 
     def __str__(self):
         return self.name
+    

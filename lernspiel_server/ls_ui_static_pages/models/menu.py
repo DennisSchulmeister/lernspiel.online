@@ -23,10 +23,7 @@ class Menu(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
         verbose_name        = _("Menu")
         verbose_name_plural = _("Menus")
         ordering            = ["name"]
-
-        indexes = [
-            models.Index(fields=["name"])
-        ]
+        indexes             = [models.Index(fields=["name"])]
 
     def __str__(self):
         return self.name
