@@ -10,3 +10,12 @@
     show_title: true
     login_required: false
     published: true
+  
+  - model: ls_ui_static_pages.textpage_t
+  pk: 72a79e68-04b0-4fce-95c4-63ae07f0f8ec
+  fields:
+    parent: 293219ce-5d33-4284-a9fa-90e50ca5a1b6
+    language: en
+    format: html
+    title: Welcome
+    content: Welcome to Lernspiel Online
