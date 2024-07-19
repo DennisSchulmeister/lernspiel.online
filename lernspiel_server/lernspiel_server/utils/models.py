@@ -8,13 +8,14 @@
 
 import uuid
 
-from typing                   import Optional
-from django.conf              import settings
-from django.contrib           import admin
-from django.db                import models
-from django.db.models         import Q
-from django.utils.translation import gettext_lazy as _, get_language
-from .                        import hash
+from typing                    import Optional
+from django.conf               import settings
+from django.contrib            import admin
+from django.db                 import models
+from django.db.models          import Q
+from django.utils.translation  import gettext_lazy as _, get_language
+from ..middleware.current_user import get_current_user
+from .                         import hash
 
 class UUIDMixin(models.Model):
     """
@@ -41,6 +42,22 @@ class CreatedModifiedByMixin(models.Model):
     class Meta:
         abstract = True
     
+    def save(self, *args, **kwargs):
+        """
+        Automatically populate the `created_by` and `modified_by` fields. Care must be taken
+        to this method from the mixin class, if the `save()` method is overwritten by another
+        mixin class or the model itself.
+        """
+        user = get_current_user()
+
+        if user and user.is_authenticated:
+            if not self.pk:
+                self.created_by = user
+
+            self.modified_by = user
+
+        super().save(*args, **kwargs)
+
     @property
     @admin.display(description=_("Last Changed"))
     def created_modified_by(self):

@@ -58,6 +58,9 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "django.contrib.sites.middleware.CurrentSiteMiddleware",
+
+    # Lernspiel Server
+    "lernspiel_server.middleware.CurrentUserMiddleware",
 ]
 
 ROOT_URLCONF = "lernspiel_server.urls"
