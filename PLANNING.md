@@ -33,7 +33,6 @@ Core Architecture
 - [X] Automatically fill created_by / modified_by fields in the Admin (and forms in general)
 - [X] Create model mixin for translation models
 - [X] Text Pages Admin / MenuEntry: Hide link parameters not relevant for selected link type
-- [ ] Use natural keys for all models and fixtures
 
 ### Website
 
