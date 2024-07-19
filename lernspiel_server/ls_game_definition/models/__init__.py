@@ -6,5 +6,6 @@
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
 
-from .game_definition  import *
-from .participant_role import *
+from .game_definition      import *
+from .participant_property import *
+from .participant_role     import *

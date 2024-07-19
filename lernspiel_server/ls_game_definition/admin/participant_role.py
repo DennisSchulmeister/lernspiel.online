@@ -8,6 +8,7 @@
 
 from django.contrib           import admin
 from django.utils.translation import gettext_lazy as _
+from .participant_property    import ParticipantPropertyInline
 from ..                       import models
 
 class ParticipantRoleTInline(admin.TabularInline):
@@ -16,7 +17,7 @@ class ParticipantRoleTInline(admin.TabularInline):
 
 class ParticipantRoleAdmin(admin.ModelAdmin):
     model        = models.ParticipantRole
-    inlines      = [ParticipantRoleTInline]
+    inlines      = [ParticipantRoleTInline, ParticipantPropertyInline]
     list_display = ["parent", "name", "limit"]
 
 class ParticipantRoleInline(admin.TabularInline):

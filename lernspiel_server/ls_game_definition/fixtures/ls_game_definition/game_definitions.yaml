@@ -63,3 +63,27 @@
     language: de
     parent: cfe05bb1-6f2a-41c1-9793-6bace073025e
     label: Dozent
+
+# Participan Properties for Students
+- model: ls_game_definition.ParticipantProperty
+  pk: 67796d76-f519-403d-9a5a-8615ce5d9ae4
+  fields:
+    name: score
+    data_type: num
+    length: null
+    is_array: false
+    parent: 6f3b6b82-6571-425c-b114-37690eefbdea
+
+- model: ls_game_definition.ParticipantProperty_t
+  pk: 48ea6f85-6942-4719-84d4-b1650f0f5068
+  fields:
+    language: de
+    parent: 67796d76-f519-403d-9a5a-8615ce5d9ae4
+    label: Punkte
+
+- model: ls_game_definition.ParticipantProperty_t
+  pk: f07d1d65-d266-42fa-8641-5d1c1567136b
+  fields:
+    language: en
+    parent: 67796d76-f519-403d-9a5a-8615ce5d9ae4
+    label: Score

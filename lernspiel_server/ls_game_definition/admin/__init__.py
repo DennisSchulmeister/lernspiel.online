@@ -8,8 +8,10 @@
 
 from .game_definition       import *
 from .participant_role      import *
+from .participant_property  import *
 from lernspiel_server.admin import admin_site
 from ..                     import models
 
 admin_site.register(models.GameDefinition, GameDefinitionAdmin)
 admin_site.register(models.ParticipantRole, ParticipantRoleAdmin)
+admin_site.register(models.ParticipantProperty, ParticipantPropertyAdmin)
