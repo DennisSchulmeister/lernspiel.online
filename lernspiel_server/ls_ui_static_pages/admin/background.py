@@ -9,13 +9,22 @@
 from django.contrib           import admin
 from django.utils.translation import gettext_lazy as _
 from lernspiel_server.admin   import MediaFileInline
-from ..                       import models
+from ..                       import models, forms
 
 class BackgroundAdmin(admin.ModelAdmin):
     model           = models.Background
+    form            = forms.BackgroundForm
     search_fields   = ["name"]
     list_display    = ["name", "created_modified_by"]
     list_filter     = ["name", "created_by", "created_at", "modified_by", "modified_at"]
     readonly_fields = ["created_modified_by"]
-    fields          = ["name", "created_modified_by"]
     inlines         = [MediaFileInline]
+
+    fieldsets = (
+        (None, {
+            "fields": ["name", "created_modified_by"],
+        }),
+        (_("Effects"), {
+            "fields": ["overlay_color", "overlay_alpha", "blur"],
+        }),
+    )
