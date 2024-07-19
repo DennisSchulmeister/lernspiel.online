@@ -196,10 +196,11 @@ def calc_file_path(object, pk, filename):
     if it is a `models.ForeignKey` from a generic relation, can make sense to use the app
     name and label of the foreign model, instead.
     """
-    model = object.model if type(object) is str else object.model.__name__
+    model = object.model if type(object.model) is str else object.model.__name__
 
     return "%(app_label)s/%(model)s/%(pk)s/%(filename)s" % {
         "app_label": object.app_label,
         "model":     model,
+        "pk":        pk,
         "filename":  filename,
     }
