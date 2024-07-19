@@ -8,10 +8,9 @@
 
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
-from django.db import models
-from django.utils.translation import gettext_lazy as _
-
-from ..utils import models as db_utils
+from django.db                          import models
+from django.utils.translation           import gettext_lazy as _
+from ..utils                            import models as db_utils
 
 class AbstractFileModel(db_utils.UUIDMixin):
     """

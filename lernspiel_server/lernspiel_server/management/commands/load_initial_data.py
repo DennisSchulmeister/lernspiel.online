@@ -19,6 +19,7 @@ class Command(BaseCommand):
         "ls_game_runtime/game_instances",
         "ls_ui_static_pages/header_main_menu",
         "ls_ui_static_pages/page_type_start_page",
+        "ls_ui_static_pages/page_start_page",
     ]
 
     def handle(self, *args, **options):

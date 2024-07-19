@@ -81,15 +81,15 @@ class TextPage(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
         return reverse("textpage", kwargs={"url": str(self.url)})
 
     @property
-    @admin.display(description=_("Page is published"))
+    @admin.display(description=_("Page is published"), boolean=True)
     def is_published(self):
         today = date.today()
 
         if not self.published:
             return False
-        elif self.publish_on and self.publish_on > today:
+        elif self.publish_start and self.publish_start > today:
             return False
-        elif self.publish_to and self.publish_to < today:
+        elif self.publish_end and self.publish_end < today:
             return False
         else:
             return True
