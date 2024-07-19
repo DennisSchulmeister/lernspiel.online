@@ -1,0 +1,17 @@
+{% extends "admin/change_form.html" %}
+{% load static %}
+
+{% block extrahead %}
+{{ block.super }}
+<script type="text/javascript" src="{% static 'ls_ui_static_pages/admin/menu/toggle_link_fields.js' %}"></script>
+
+<style>
+    .form-row.field-link_view_par1 .flex-container {
+        gap: 1em;
+    }
+
+    .form-row.field-link_view_par1 input:first-of-type {
+        margin-left: -1em;
+    }
+</style>
+{% endblock %}

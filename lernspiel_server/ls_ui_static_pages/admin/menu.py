@@ -15,6 +15,8 @@ class MenuTInline(admin.TabularInline):
     extra = 1
 
 class MenuAdmin(admin.ModelAdmin):
+    change_form_template = "ls_ui_text_pages/admin/menu/change_form.html"
+    
     model           = models.Menu
     search_fields   = ["name"]
     list_display    = ["name", "created_modified_by"]

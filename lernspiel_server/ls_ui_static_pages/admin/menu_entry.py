@@ -15,7 +15,7 @@ class MenuEntryTInline(admin.TabularInline):
     extra = 1
 
 class MenuEntryAdmin(admin.ModelAdmin):
-    change_form_template = "ls_ui_text_pages/admin/menu_entry/change_form.html"
+    change_form_template = "ls_ui_text_pages/admin/menu/change_form.html"
 
     model           = models.MenuEntry
     search_fields   = ["name"]
@@ -45,12 +45,18 @@ class MenuEntryAdmin(admin.ModelAdmin):
         to dynamically hide the fields that are not relevant for the selected link type.
         """
         form = super().get_form(request, obj, **kwargs)
+
+        form.base_fields["link_type"].widget.attrs["class"] = "link_type"
+        form.base_fields["link_url"].widget.attrs["class"]  = "link_url"
+        form.base_fields["link_page"].widget.attrs["class"] = "link_page"
         form.base_fields["link_view_name"].widget.attrs["class"] = "link_view"
         form.base_fields["link_view_par1"].widget.attrs["class"] = "link_view"
         form.base_fields["link_view_par2"].widget.attrs["class"] = "link_view"
         form.base_fields["link_view_par3"].widget.attrs["class"] = "link_view"
         form.base_fields["link_view_par4"].widget.attrs["class"] = "link_view"
         form.base_fields["link_view_par5"].widget.attrs["class"] = "link_view"
+        form.base_fields["new_window"].widget.attrs["class"] = "new_window"
+
         return form
 
 class MenuEntryInline(admin.StackedInline):
@@ -58,17 +64,32 @@ class MenuEntryInline(admin.StackedInline):
     extra            = 0
     show_change_link = True
 
-    fieldsets = (
-        (None, {
-            "fields":["menu", "position", "name", "link_type", "new_window"],
-        }),
-        (_("Parameters"), {
-            "fields": [
-                "link_url",
-                "link_page",
-                "link_view_name", "link_view_par1", "link_view_par2", "link_view_par3", "link_view_par4", "link_view_par5"
-            ],
-        }),
-    )
+    fields = [
+        "menu", "position", "name", "login_status",
+        "link_type",
+        "link_url",
+        "link_page",
+        "link_view_name", "link_view_par1", "link_view_par2", "link_view_par3", "link_view_par4", "link_view_par5",
+        "new_window",    
+    ]
 
-    # TODO: Hide link parameters not relevant to the current link type (in JavaScript)
+    def get_formset(self, request, obj=None, **kwargs):
+        """
+        Add CSS classes to the link fields to simplify access in JavaScript. This is done
+        to dynamically hide the fields that are not relevant for the selected link type.
+        """
+        formset = super().get_formset(request, obj, **kwargs)
+        form = formset.form
+
+        form.base_fields["link_type"].widget.attrs["class"] = "link_type"
+        form.base_fields["link_url"].widget.attrs["class"]  = "link_url"
+        form.base_fields["link_page"].widget.attrs["class"] = "link_page"
+        form.base_fields["link_view_name"].widget.attrs["class"] = "link_view"
+        form.base_fields["link_view_par1"].widget.attrs["class"] = "link_view"
+        form.base_fields["link_view_par2"].widget.attrs["class"] = "link_view"
+        form.base_fields["link_view_par3"].widget.attrs["class"] = "link_view"
+        form.base_fields["link_view_par4"].widget.attrs["class"] = "link_view"
+        form.base_fields["link_view_par5"].widget.attrs["class"] = "link_view"
+        form.base_fields["new_window"].widget.attrs["class"] = "new_window"
+
+        return formset
