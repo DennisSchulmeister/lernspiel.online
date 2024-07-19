@@ -15,6 +15,8 @@ class MenuEntryTInline(admin.TabularInline):
     extra = 1
 
 class MenuEntryAdmin(admin.ModelAdmin):
+    change_form_template = "ls_ui_text_pages/admin/menu_entry/change_form.html"
+
     model           = models.MenuEntry
     search_fields   = ["name"]
     list_display    = ["menu", "position", "name", "link_type", "new_window", "created_modified_by"]
@@ -24,18 +26,32 @@ class MenuEntryAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            "fields":["menu", "position", "name", "link_type", "new_window", "created_modified_by"],
+            "fields":["menu", "position", "name", "created_modified_by"],
         }),
-        (_("Parameters"), {
+        (_("Link"), {
             "fields": [
+                "link_type",
                 "link_url",
                 "link_page",
-                "link_view_name", "link_view_par1", "link_view_par2", "link_view_par3", "link_view_par4", "link_view_par5"
+                "link_view_name", "link_view_par1", "link_view_par2", "link_view_par3", "link_view_par4", "link_view_par5",
+                "new_window",
             ],
         }),
     )
 
-    # TODO: Hide link parameters not relevant to the current link type (in JavaScript)
+    def get_form(self, request, obj=None, **kwargs):
+        """
+        Add CSS classes to the link fields to simplify access in JavaScript. This is done
+        to dynamically hide the fields that are not relevant for the selected link type.
+        """
+        form = super().get_form(request, obj, **kwargs)
+        form.base_fields["link_view_name"].widget.attrs["class"] = "link_view"
+        form.base_fields["link_view_par1"].widget.attrs["class"] = "link_view"
+        form.base_fields["link_view_par2"].widget.attrs["class"] = "link_view"
+        form.base_fields["link_view_par3"].widget.attrs["class"] = "link_view"
+        form.base_fields["link_view_par4"].widget.attrs["class"] = "link_view"
+        form.base_fields["link_view_par5"].widget.attrs["class"] = "link_view"
+        return form
 
 class MenuEntryInline(admin.StackedInline):
     model            = models.MenuEntry

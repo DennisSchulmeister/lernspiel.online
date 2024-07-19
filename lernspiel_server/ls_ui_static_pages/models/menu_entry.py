@@ -17,28 +17,25 @@ class MenuEntry(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
     """
     An entry inside a menu, defining the link target.
     """
-    NONE    = "none"
-    URL     = "url"
-    PAGE    = "page"
-    BUILTIN = "built-in"
+    NONE = "none"
+    URL  = "url"
+    PAGE = "page"
+    VIEW = "view"
 
-    # See: static/ls_ui_static_pages/admin_menu.js
-    # Function ls_ui_static_pages_menu_hide_fieldsets()
     _LINK_TYPES = {
-        NONE:    _("None / Section Title"),
-        URL:     _("Static URL address"),
-        PAGE:    _("Text Page"),
-        BUILTIN: _("Built-In Page"),
+        NONE: _("None / Section Title"),
+        URL:  _("Static URL address"),
+        PAGE: _("Text Page"),
+        VIEW: _("Built-In View"),
     }
 
     # General information
     menu       = models.ForeignKey(Menu, on_delete=models.CASCADE, verbose_name=_("Menu"), related_name="menu_entries")
     position   = models.PositiveSmallIntegerField(verbose_name=_("Position"))
     name       = models.CharField(verbose_name=_("Name"), max_length=255)
-    new_window = models.BooleanField(verbose_name=_("Open in new window or tab"))
-    link_type  = models.CharField(_("Link type"), max_length=10, choices=_LINK_TYPES)
    
     # Link parameters
+    link_type  = models.CharField(_("Link type"), max_length=10, choices=_LINK_TYPES, default=NONE, blank=False)
     link_url       = models.URLField(verbose_name=_("URL"), blank=True)
     link_page      = models.ForeignKey(TextPage, on_delete=models.SET_NULL, blank=True, null=True)
     link_view_name = models.CharField(_("View Name"), max_length=30, blank=True)
@@ -47,6 +44,7 @@ class MenuEntry(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
     link_view_par3 = models.CharField("", max_length=30, blank=True)
     link_view_par4 = models.CharField("", max_length=30, blank=True)
     link_view_par5 = models.CharField("", max_length=30, blank=True)
+    new_window     = models.BooleanField(verbose_name=_("Open in new window or tab"))
 
     # Django meta information
     class Meta:
