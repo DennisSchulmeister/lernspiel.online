@@ -19,14 +19,14 @@ class MenuEntryAdmin(admin.ModelAdmin):
 
     model           = models.MenuEntry
     search_fields   = ["name"]
-    list_display    = ["menu", "position", "name", "link_type", "new_window", "created_modified_by"]
-    list_filter     = ["menu", "name", "created_by", "created_at", "modified_by", "modified_at"]
+    list_display    = ["menu", "position", "name", "login_status", "link_type", "new_window", "created_modified_by"]
+    list_filter     = ["menu", "name", "login_status", "created_by", "created_at", "modified_by", "modified_at"]
     readonly_fields = ["created_modified_by"]
     inlines         = [MenuEntryTInline]
 
     fieldsets = (
         (None, {
-            "fields":["menu", "position", "name", "created_modified_by"],
+            "fields":["menu", "position", "name", "login_status", "created_modified_by"],
         }),
         (_("Link"), {
             "fields": [

@@ -17,6 +17,8 @@ class Command(BaseCommand):
         "lernspiel_server/languages",
         "ls_game_definition/game_definitions",
         "ls_game_runtime/game_instances",
+        "ls_ui_static_pages/header_main_menu",
+        "ls_ui_static_pages/page_type_start_page",
     ]
 
     def handle(self, *args, **options):

@@ -14,8 +14,9 @@ from .custom_css                       import CustomCSSInline
 from ..                                import models
 
 class TextPageTInline(admin.StackedInline):
-    model = models.TextPage_T
-    extra = 1
+    model  = models.TextPage_T
+    extra  = 1
+    fields = ["language", "format", "title", "content"]
     
 class MenuAssignmentInline(GenericTabularInline):
     model   = models.MenuAssignment

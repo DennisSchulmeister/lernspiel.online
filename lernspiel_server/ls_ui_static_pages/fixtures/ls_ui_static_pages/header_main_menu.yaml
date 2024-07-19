@@ -1,0 +1,105 @@
+# Menu with translations
+- model: ls_ui_static_pages.Menu
+  pk: 46dfb527-f323-4520-85b9-af860e0ba907
+  fields:
+    created_at: 2024-07-19 12:20:54.181518+00:00
+    modified_at: 2024-07-19 12:20:54.181560+00:00
+    name: Sign up / in / out
+
+- model: ls_ui_static_pages.Menu_T
+  pk: 0f03f3a6-4bb4-43fc-97d8-fd2aa61fc1fb
+  fields:
+    language: en
+    parent: 46dfb527-f323-4520-85b9-af860e0ba907
+    title: Sign up / in / out
+
+- model: ls_ui_static_pages.Menu_T
+  pk: 6c828aaf-cb10-4b27-8c95-454cb91992c6
+  fields:
+    language: de
+    parent: 46dfb527-f323-4520-85b9-af860e0ba907
+    title: Registrieren / An- / Abmelden
+
+# Menu entry: Sign up
+- model: ls_ui_static_pages.MenuEntry
+  pk: d1971065-de8e-4af8-9903-ef2a25744c13
+  fields:
+    created_at: 2024-07-19 12:23:38.294541+00:00
+    modified_at: 2024-07-19 12:23:38.294575+00:00
+    menu: 46dfb527-f323-4520-85b9-af860e0ba907
+    position: 1
+    name: Sign up
+    login_status: logged-out
+    link_type: view
+    link_view_name: sign-up
+    new_window: false
+
+- model: ls_ui_static_pages.MenuEntry_T
+  pk: d1e74886-7132-4e87-9f8e-d67b507fafcd
+  fields:
+    language: en
+    parent: d1971065-de8e-4af8-9903-ef2a25744c13
+    title: Registrieren
+
+- model: ls_ui_static_pages.MenuEntry_T
+  pk: 4e09c856-1da9-4ded-88f5-be6591f74f8c
+  fields:
+    language: de
+    parent: d1971065-de8e-4af8-9903-ef2a25744c13
+    title: Sign up
+
+# Menu entry: Sign in
+- model: ls_ui_static_pages.MenuEntry
+  pk: f3012ca6-1230-4915-8e96-e471069b8c58
+  fields:
+    created_at: 2024-07-19 12:24:00.305050+00:00
+    modified_at: 2024-07-19 12:24:00.305087+00:00
+    menu: 46dfb527-f323-4520-85b9-af860e0ba907
+    position: 2
+    name: Sign in
+    login_status: logged-out
+    link_type: view
+    link_view_name: sign-in
+    new_window: false
+
+- model: ls_ui_static_pages.MenuEntry_T
+  pk: caf13177-87dc-427e-b781-f0449fc3fb9a
+  fields:
+    language: en
+    parent: f3012ca6-1230-4915-8e96-e471069b8c58
+    title: Sign in
+
+- model: ls_ui_static_pages.MenuEntry_T
+  pk: 89c56db6-4717-4d32-a16d-8e4b92fffd1b
+  fields:
+    language: de
+    parent: f3012ca6-1230-4915-8e96-e471069b8c58
+    title: Anmelden
+
+# Menu Entry: Sign out
+- model: ls_ui_static_pages.MenuEntry
+  pk: 6b72832f-8e1c-4a8c-83f6-fee07e1d0b73
+  fields:
+    created_at: 2024-07-19 12:24:21.476508+00:00
+    modified_at: 2024-07-19 12:24:21.476545+00:00
+    menu: 46dfb527-f323-4520-85b9-af860e0ba907
+    position: 3
+    name: Sign out
+    login_status: logged-in
+    link_type: view
+    link_view_name: sign-out
+    new_window: false
+
+- model: ls_ui_static_pages.MenuEntry_T
+  pk: 2ee1e7c2-054a-4a67-b572-9c82a3cbb962
+  fields:
+    language: en
+    parent: 6b72832f-8e1c-4a8c-83f6-fee07e1d0b73
+    title: Sign out
+
+- model: ls_ui_static_pages.MenuEntry_T
+  pk: c415d60b-f7d2-440c-9eb2-df297a90b0b7
+  fields:
+    language: de
+    parent: 6b72832f-8e1c-4a8c-83f6-fee07e1d0b73
+    title: Abmelden

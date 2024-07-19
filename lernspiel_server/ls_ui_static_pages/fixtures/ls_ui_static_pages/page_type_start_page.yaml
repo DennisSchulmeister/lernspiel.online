@@ -1,0 +1,35 @@
+# Page with translations
+- model: ls_ui_static_pages.PageType
+  pk: 169b4310-2c8a-444d-acb5-a6afb52de86f
+  fields:
+    created_at: 2024-07-19 12:20:28.905166+00:00
+    modified_at: 2024-07-19 12:25:16.435728+00:00
+    name: Start Page
+    template: ls_ui_text_pages/PageType/centered.html
+    background: null
+
+- model: ls_ui_static_pages.PageType_t
+  pk: 9fa538fd-23c7-47cc-a461-fbac94b51b89
+  fields:
+    language: de
+    parent: 169b4310-2c8a-444d-acb5-a6afb52de86f
+    title: Startseite
+
+- model: ls_ui_static_pages.PageType_t
+  pk: bc0af1e4-e82e-42a1-a882-e58e0c0899ee
+  fields:
+    language: en
+    parent: 169b4310-2c8a-444d-acb5-a6afb52de86f
+    title: Start Page
+
+# Header Menu
+- model: ls_ui_static_pages.menuassignment
+  pk: 76de37a4-f758-41c9-b02f-99db4ec80d42
+  fields:
+    content_type:
+    - ls_ui_static_pages
+    - pagetype
+    object_id: 169b4310-2c8a-444d-acb5-a6afb52de86f
+    area: header
+    position: 1
+    menu: 46dfb527-f323-4520-85b9-af860e0ba907

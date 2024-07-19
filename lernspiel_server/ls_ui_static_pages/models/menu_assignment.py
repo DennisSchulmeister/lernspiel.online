@@ -24,12 +24,10 @@ class MenuAssignment(db_utils.UUIDMixin):
 
     # Menu assignment
     HEADER = "header"
-    SIDE   = "side"
     FOOTER = "footer"
 
     _MENU_AREAS = {
         HEADER: _("Header"),
-        SIDE:   _("Side"),
         FOOTER: _("Footer"),
     }
 

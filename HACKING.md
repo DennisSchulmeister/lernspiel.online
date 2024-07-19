@@ -12,6 +12,7 @@ tries to summarize the most important things.
 1. [Poetry Package Management](#poetry-package-management)
 1. [Django Web Framework](#django-web-framework)
 1. [Django Project vs. App](#django-project-vs-app)
+1. [Creating Fixtures](#creating-fixtures)
 1. [SQLite Shell](#sqlite-shell)
 1. [NPM and esbuild](#npm-and-esbuild)
 1. [The Game Server Data Model](#the-game-server-data-model)
@@ -170,6 +171,26 @@ applications will be created:
     └── ls_app_3                        Django Application
         └── ...
 ```
+
+Creating Fixtures
+-----------------
+
+Fixtures are a good way to provide initial data for developers and end-users to get started with
+the Lernspiel server. Here are a few hints on what to consider:
+
+* **Hand-edited YAML Format:** Use `python manage.py dumpdata --format yaml myapp` to create a data
+  dump on the console. Copy the relevant parts into a new `fixtures/myapp/xyz.yaml` file. Note that
+  the file extension must be exactly `.yaml` for Django to recognize the fixture. Clean up the file,
+  bring all entries in logical order, remove unneeded `null` properties and add comments.
+
+* **Natural Keys:** When using the `dumpdata` command make sure to enable natural keys. Thus the
+  full command becomes: `python manage.py dumpdata --format yaml--natural-foreign --natural-primary myapp`.
+  Not only will the files be much easier to read, but a lot of problems with generated key values
+  (usually the `id` field of a model) will  be avaided.
+
+* **Load Initial Data:** Once your new fixture is working, consider adding it to the `load_initial_data`
+  management command. The source code is in the `lernspiel_server` project directory. This allows other
+  developers and users to import a complete set of initial data with only one command.
 
 SQLite Shell
 ------------

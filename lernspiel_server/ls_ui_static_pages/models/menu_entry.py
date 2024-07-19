@@ -29,6 +29,16 @@ class MenuEntry(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
         VIEW: _("Built-In View"),
     }
 
+    LOGIN_ANY  = "any"
+    LOGGED_IN  = "logged-in"
+    LOGGED_OUT = "logged-out"
+
+    _LOGIN_STATUS = {
+        LOGIN_ANY:  _("Show always"),
+        LOGGED_IN:  _("Show only for logged in users"),
+        LOGGED_OUT: _("Show only for logged out users"),
+    }
+
     # General information
     menu       = models.ForeignKey(Menu, on_delete=models.CASCADE, verbose_name=_("Menu"), related_name="menu_entries")
     position   = models.PositiveSmallIntegerField(verbose_name=_("Position"))
@@ -44,7 +54,9 @@ class MenuEntry(db_utils.UUIDMixin, db_utils.CreatedModifiedByMixin):
     link_view_par3 = models.CharField("", max_length=30, blank=True)
     link_view_par4 = models.CharField("", max_length=30, blank=True)
     link_view_par5 = models.CharField("", max_length=30, blank=True)
+
     new_window     = models.BooleanField(verbose_name=_("Open in new window or tab"))
+    login_status   = models.CharField(_("Login Status"), max_length=10, choices=_LOGIN_STATUS, default=LOGIN_ANY, blank=False)
 
     # Django meta information
     class Meta:
