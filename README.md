@@ -6,10 +6,10 @@ Lernspiel Online: Lecture Game Platform
 1. [Copyright](#copyright)
 
 <p align="center">
-<!-- https://pixabay.com/photos/screwdriver-background-screw-wooden-1008974/ -->
-<img src="_img/under-construction.jpg" alt="Under Construction" width="300">
-
-**Under Construction:** Development has just started in July 2024. Many features are not built yet!
+   <!-- https://pixabay.com/photos/screwdriver-background-screw-wooden-1008974/ -->
+   <img src="_img/under-construction.jpg" alt="Under Construction" width="300">
+   <br>
+   <b>Under Construction:</b> Development has just started in July 2024. Many features are not built yet!
 </p>
 
 Description
