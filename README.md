@@ -5,6 +5,12 @@ Lernspiel Online: Lecture Game Platform
 1. [Further Documentation](#further-documentation)
 1. [Copyright](#copyright)
 
+<div style="text-align: center">
+<img src="_img/under-construction.jpg" alt="Under Construction" width="300">
+
+**Under Construction:** Development has just started in July 2024. Many features are not built yet!
+</div>
+
 Description
 -----------
 
