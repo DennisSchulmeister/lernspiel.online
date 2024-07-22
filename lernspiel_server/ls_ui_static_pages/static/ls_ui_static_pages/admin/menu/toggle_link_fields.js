@@ -1,3 +1,13 @@
+/*
+ * Lernspiel Online: Lecture Game Platform - Core App
+ * © 2024 Dennis Schulmeister-Zimolong <dennis@wpvs.de>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ */
+
 document.addEventListener("DOMContentLoaded", function() {
     /**
      * Toggle visibility of the link fields depending on the currently chosen link type.
@@ -5,11 +15,11 @@ document.addEventListener("DOMContentLoaded", function() {
      * types only the relevant fields will be shown.
      */
     function toggleFields(container) {
-        const linkTypeField  = container.querySelector(".link_type");
-        const linkUrlField   = container.querySelector(".link_url").closest(".form-row");
-        const linkPageField  = container.querySelector(".link_page").closest(".form-row");
-        const linkViewFields = container.querySelectorAll(".link_view");
-        const newWindow      = container.querySelector(".new_window").closest(".form-row");
+        const linkTypeField  = container.querySelector(".__link_type");
+        const linkUrlField   = container.querySelector(".__link_url").closest(".form-row");
+        const linkPageField  = container.querySelector(".__link_page").closest(".form-row");
+        const linkViewFields = container.querySelectorAll(".__link_view");
+        const newWindow      = container.querySelector(".__new_window").closest(".form-row");
     
         function toggle() {
             const linkType = linkTypeField.value;

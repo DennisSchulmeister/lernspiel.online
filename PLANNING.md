@@ -40,7 +40,8 @@ Core Architecture
     - [X] Models
     - [X] Admin
     - [ ] Views + Templates
-    - [ ] WYSIWYG editor in the admin
+    - [X] WYSIWYG editor in the admin
+    - [ ] Custom Elements / HTML Component Support
     - [ ] Implement start-page design
 
 ### Game Prototype

@@ -24,7 +24,7 @@
     "build:web": "node ../_scripts/esbuild-bundle.js   web/src/index.ts   web/dist/lernspiel_game_sdk_web.js",
     "build": "npm run clean && npm run build:cli && npm run build:web && npm run tsc:web",
     "watch:cli": "tsc -p cli/ -w --preserveWatchOutput",
-    "watch:web": "NODE_ENV=development npm run build:web",
+    "watch:web": "conc -c auto -n esbuild,tsc \"NODE_ENV=development npm run build:web\" \"npm run tsc:web -- -w --preserveWatchOutput\"",
     "watch": "conc -c auto -n web,cli \"npm run watch:web\" \"npm run watch:cli\"",
     "lint": "eslint --ext .ts,.tsx ./",
     "lintfix": "eslint --fix --ext .ts,.tsx ./",

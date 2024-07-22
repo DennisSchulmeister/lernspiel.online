@@ -17,6 +17,19 @@ class TextPageTInline(admin.StackedInline):
     model  = models.TextPage_T
     extra  = 1
     fields = ["language", "format", "title", "content"]
+
+    def get_formset(self, request, obj=None, **kwargs):
+        """
+        Add CSS classes to the some fields to simplify access in JavaScript. This is done
+        to dynamically create a rich-text content editor for the chosen format.
+        """
+        formset = super().get_formset(request, obj, **kwargs)
+        form = formset.form
+
+        form.base_fields["format"].widget.attrs["class"] = "__format"
+        form.base_fields["content"].widget.attrs["class"]  = "__content"
+        
+        return formset
     
 class MenuAssignmentInline(GenericTabularInline):
     model   = models.MenuAssignment
@@ -24,6 +37,8 @@ class MenuAssignmentInline(GenericTabularInline):
     classes = ["collapse"]
 
 class TextPageAdmin(admin.ModelAdmin):
+    change_form_template = "ls_ui_text_pages/admin/textpage/change_form.html"
+
     model = models.TextPage
     search_fields   = ["name", "url"]
     list_display    = ["name", "url", "page_type", "login_required", "is_published", "published", "publish_start", "publish_end"]

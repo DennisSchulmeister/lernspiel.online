@@ -3,14 +3,27 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "clean": "rimraf ../lernspiel_server/static/lernspiel_server/_bundle.*",
-    "build": "node ../../_scripts/esbuild-bundle.js   src/index.ts   ../lernspiel_server/static/lernspiel_server/_bundle.js",
-    "watch": "conc -c auto -n esbuild,tsc \"NODE_ENV=development npm run build\" \"npm run tsc -- -w --preserveWatchOutput\"",
+    "clean:admin": "rimraf ../lernspiel_server/static/lernspiel_server/admin.bundle.*",
+    "clean:website": "rimraf ../lernspiel_server/static/lernspiel_server/website.bundle.*",
+    "clean": "npm run clean:admin && npm run clean:website",
+    "build:admin": "node ../../_scripts/esbuild-bundle.js   admin/src/index.ts   ../lernspiel_server/static/lernspiel_server/admin.bundle.js",
+    "build:website": "node ../../_scripts/esbuild-bundle.js   website/src/index.ts   ../lernspiel_server/static/lernspiel_server/website.bundle.js",
+    "build": "npm run build:admin && npm run tsc:admin && npm run build:website && npm run tsc:website",
+    "watch:admin": "conc -c auto -n esbuild,tsc \"NODE_ENV=development npm run build:admin\" \"npm run tsc:admin -- -w --preserveWatchOutput\"",
+    "watch:website": "conc -c auto -n esbuild,tsc \"NODE_ENV=development npm run build:website\" \"npm run tsc:website -- -w --preserveWatchOutput\"",
+    "watch": "conc -c auto -n admin,website \"npm run watch:admin\" \"npm run watch:website\"",
     "lint": "eslint --ext .ts,.tsx ./",
     "lintfix": "eslint --fix --ext .ts,.tsx ./",
     "prettier": "prettier --ignore-path ../../.gitignore \"**/*.+(ts|tsx)\"",
     "format": "npm run prettier -- --write",
-    "tsc": "tsc",
+    "tsc:admin": "tsc -p admin/",
+    "tsc:website": "tsc -p website/",
+    "tsc": "npm run tsc:admin && npm run tsc:website",
     "check": "npm run lint && npm run tsc"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "ckeditor5": "^42.0.1",
+    "tiny-markdown-editor": "^0.1.23"
   }
 }

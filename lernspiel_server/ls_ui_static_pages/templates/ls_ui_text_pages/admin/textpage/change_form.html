@@ -1,0 +1,40 @@
+{# Lernspiel Online: Lecture Game Platform - Core App                   #}
+{# © 2024 Dennis Schulmeister-Zimolong <dennis@wpvs.de>                 #}
+{#                                                                      #}
+{# This program is free software: you can redistribute it and/or modify #}
+{# it under the terms of the GNU Affero General Public License as       #}
+{# published by the Free Software Foundation, either version 3 of the   #}
+{# License, or (at your option) any later version.                      #}
+{% extends "admin/change_form.html" %}
+{% load static %}
+
+{% block extrahead %}
+{{ block.super }}
+<link href="{% static 'lernspiel_server/admin.bundle.css' %}" rel="stylesheet">
+<script type="text/javascript" src="{% static 'lernspiel_server/admin.bundle.js' %}"></script>
+<script type="text/javascript" src="{% static 'ls_ui_static_pages/admin/textpage/wysiwyg_editor.js' %}"></script>
+
+<style>
+    /* Use maximal width */
+    .wysiwyg_container,
+    .ck-editor {
+        flex: 1;
+    }
+
+    /* Avoid clipped popover menu in CKEditor caused by Django Admin */
+    .form-row {
+        overflow: unset !important;
+    }
+
+    /* Unapply some of Django Admin's styling in the rich text editors */
+    .ck-content ul,
+    .ck-content ol {
+        margin: 0 !important;
+        padding: 1rem !important;
+    }
+
+    .ck-content ul li {
+        list-style: disc !important;
+    }
+</style>
+{% endblock %}

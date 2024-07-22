@@ -46,16 +46,16 @@ class MenuEntryAdmin(admin.ModelAdmin):
         """
         form = super().get_form(request, obj, **kwargs)
 
-        form.base_fields["link_type"].widget.attrs["class"] = "link_type"
-        form.base_fields["link_url"].widget.attrs["class"]  = "link_url"
-        form.base_fields["link_page"].widget.attrs["class"] = "link_page"
-        form.base_fields["link_view_name"].widget.attrs["class"] = "link_view"
-        form.base_fields["link_view_par1"].widget.attrs["class"] = "link_view"
-        form.base_fields["link_view_par2"].widget.attrs["class"] = "link_view"
-        form.base_fields["link_view_par3"].widget.attrs["class"] = "link_view"
-        form.base_fields["link_view_par4"].widget.attrs["class"] = "link_view"
-        form.base_fields["link_view_par5"].widget.attrs["class"] = "link_view"
-        form.base_fields["new_window"].widget.attrs["class"] = "new_window"
+        form.base_fields["link_type"].widget.attrs["class"] = "__link_type"
+        form.base_fields["link_url"].widget.attrs["class"]  = "__link_url"
+        form.base_fields["link_page"].widget.attrs["class"] = "__link_page"
+        form.base_fields["link_view_name"].widget.attrs["class"] = "__link_view"
+        form.base_fields["link_view_par1"].widget.attrs["class"] = "__link_view"
+        form.base_fields["link_view_par2"].widget.attrs["class"] = "__link_view"
+        form.base_fields["link_view_par3"].widget.attrs["class"] = "__link_view"
+        form.base_fields["link_view_par4"].widget.attrs["class"] = "__link_view"
+        form.base_fields["link_view_par5"].widget.attrs["class"] = "__link_view"
+        form.base_fields["new_window"].widget.attrs["class"] = "__new_window"
 
         return form
 
@@ -81,15 +81,15 @@ class MenuEntryInline(admin.StackedInline):
         formset = super().get_formset(request, obj, **kwargs)
         form = formset.form
 
-        form.base_fields["link_type"].widget.attrs["class"] = "link_type"
-        form.base_fields["link_url"].widget.attrs["class"]  = "link_url"
-        form.base_fields["link_page"].widget.attrs["class"] = "link_page"
-        form.base_fields["link_view_name"].widget.attrs["class"] = "link_view"
-        form.base_fields["link_view_par1"].widget.attrs["class"] = "link_view"
-        form.base_fields["link_view_par2"].widget.attrs["class"] = "link_view"
-        form.base_fields["link_view_par3"].widget.attrs["class"] = "link_view"
-        form.base_fields["link_view_par4"].widget.attrs["class"] = "link_view"
-        form.base_fields["link_view_par5"].widget.attrs["class"] = "link_view"
-        form.base_fields["new_window"].widget.attrs["class"] = "new_window"
+        form.base_fields["link_type"].widget.attrs["class"] = "__link_type"
+        form.base_fields["link_url"].widget.attrs["class"]  = "__link_url"
+        form.base_fields["link_page"].widget.attrs["class"] = "__link_page"
+        form.base_fields["link_view_name"].widget.attrs["class"] = "__link_view"
+        form.base_fields["link_view_par1"].widget.attrs["class"] = "__link_view"
+        form.base_fields["link_view_par2"].widget.attrs["class"] = "__link_view"
+        form.base_fields["link_view_par3"].widget.attrs["class"] = "__link_view"
+        form.base_fields["link_view_par4"].widget.attrs["class"] = "__link_view"
+        form.base_fields["link_view_par5"].widget.attrs["class"] = "__link_view"
+        form.base_fields["new_window"].widget.attrs["class"] = "__new_window"
 
         return formset
