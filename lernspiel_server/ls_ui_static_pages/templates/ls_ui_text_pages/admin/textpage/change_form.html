@@ -27,6 +27,38 @@
     }
 
     /* Unapply some of Django Admin's styling in the rich text editors */
+    .ck-content {
+        font-size: 15px;
+    }
+
+    .ck-content h1,
+    .ck-content h2,
+    .ck-content h3,
+    .ck-content h4,
+    .ck-content h5,
+    .ck-content h6 {
+        background: unset !important;
+        color: unset !important;
+        text-transform: unset !important;
+        letter-spacing: unset !important;
+        font-size: unset !important;
+        border: unset !important;
+        margin: unset !important;
+        padding: unset !important;
+
+        margin-top: 0.5em !important;
+        margin-bottom: 0.5em !important;
+        font-weight: bold !important;
+    }
+
+    .ck-content h1 { font-size: 250% !important; }
+    .ck-content h2 { font-size: 200% !important; }
+    .ck-content h3 { font-size: 175% !important; }
+    .ck-content h4 { font-size: 150% !important; }
+    .ck-content h5 { font-size: 125% !important; }
+    .ck-content h6 { font-size: 100% !important; }
+    .ck-content p  { font-size: 100%  !important; }
+
     .ck-content ul,
     .ck-content ol {
         margin: 0 !important;
