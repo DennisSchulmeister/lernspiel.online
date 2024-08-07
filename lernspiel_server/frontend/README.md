@@ -1,5 +1,5 @@
-Lernspiel Online Core Frontend
-====================
+Lernspiel Online Frontend
+=========================
 
 This is the JavaScript / TypeScript code for the Lernspiel Online Core Frontend. It is mainly used
 to pull external libraries from the NPM package index and build a distribution bundle.

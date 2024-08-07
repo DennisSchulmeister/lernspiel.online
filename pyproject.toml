@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "lernspiel"
+name = "lernspiel.online"
 version = "0.1.0"
 description = "Lernspiel Online: Lecture Game Platform"
 authors = ["Dennis Schulmeister-Zimolong <dennis@wpvs.de>"]

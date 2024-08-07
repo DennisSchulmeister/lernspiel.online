@@ -24,7 +24,7 @@ for all details. Below is a quick summary including a few notable considerations
    * Serving of uploaded media files
    * Reverse proxy to the application
 
-  The last part is kind-of optional, if you have multiple domains like https://example.com,
+  The last point is kind-of optional if you have multiple domains like https://example.com,
   https://static.example.com and https://media.example.com pointing to different machines.
   A more basic setup hosts everything on one machine and uses the front webserver to host
   static and media files and forward all other requests to the Django application.
@@ -130,7 +130,6 @@ game runner processes can be started like this:
 cd lernspiel_server
 python manage.py runworker game-runner
 ```
-
 
 Docker Compose
 --------------

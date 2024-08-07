@@ -1,5 +1,5 @@
 Developer Notes for Lernspiel Online
-==========================
+====================================
 
 This document serves as a cheat sheet for developers to get started quickly. There are no
 fancy things -- if you already know Python, Poetry, Django, NPM, … But finding the right

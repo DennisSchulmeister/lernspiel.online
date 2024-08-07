@@ -1,5 +1,5 @@
 {
-  "name": "lernspiel_server",
+  "name": "@lernspiel.online/frontend",
   "private": true,
   "type": "module",
   "scripts": {
