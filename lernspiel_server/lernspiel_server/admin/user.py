@@ -43,7 +43,7 @@ class CustomUserAdmin(UserAdmin):
         return form
 
 CustomUserAdmin.fieldsets[0][1]["fields"] += ("user_type",)
-CustomUserAdmin.fieldsets[1][1]["fields"] += ("description", "picture",) 
+CustomUserAdmin.fieldsets[1][1]["fields"] += ("description", "picture",)
 CustomUserAdmin.fieldsets[3][1]["fields"] += ("date_expires",)
 
 CustomUserAdmin.add_fieldsets[0][1]["fields"] = ("username", "user_type", "email",)

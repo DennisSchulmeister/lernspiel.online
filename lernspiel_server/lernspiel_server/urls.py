@@ -41,15 +41,9 @@ if settings.DEBUG:
     urlpatterns += staticfiles_urlpatterns()
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-handler400 = views.Error400.as_view()
-handler403 = views.Error403.as_view()
-handler404 = views.Error404.as_view()
-handler500 = views.Error500.as_view()
-
-if settings.DEBUG:
     urlpatterns += [
-        path("error/400", handler400),
-        path("error/403", handler403),
-        path("error/404", handler404),
-        path("error/500", handler500),
+        path("error/400", views.Error400.as_view()),
+        path("error/403", views.Error403.as_view()),
+        path("error/404", views.Error404.as_view()),
+        path("error/500", views.Error500.as_view()),
     ]

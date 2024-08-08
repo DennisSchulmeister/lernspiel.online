@@ -18,7 +18,7 @@ from ..utils.models import calc_file_path
 class User(AbstractUser):
     """
     Extension to Django's core User model to allow non-human application users
-    that connect via API to the server. Application users use a username with 
+    that connect via API to the server. Application users use a username with
     pre-defined password (the API Key). Developers use this to connect their
     local machine to the server via the Game SDK. Bots and other applications
     join games to participate. Besides that there are regular users logging in
@@ -56,7 +56,7 @@ class User(AbstractUser):
     # Profile picture
     def _calc_file_path(self, filename):
         return calc_file_path(self._meta, self.id, filename)
-    
+
     picture = models.FileField(verbose_name=_("Profile Picture"), upload_to=_calc_file_path, null=True, blank=True)
 
     # Form validation
@@ -74,7 +74,7 @@ class User(AbstractUser):
         """
         if self.can_have_api_key() and not self.email:
             raise ValidationError(_("E-Mail address is required."))
-    
+
     # Utility methods
     def reset_api_key(self, save_and_send_email: bool) -> str:
         """
@@ -86,7 +86,7 @@ class User(AbstractUser):
         # Sanity checks
         if not self.can_have_api_key():
             raise ValidationError(_("The user %s cannot have an API key.") % self.username)
-    
+
         if not self.email:
             raise ValidationError(_("Cannot reset the API key of user %s without an e-mail address.") % self.username)
 
@@ -125,8 +125,8 @@ class User(AbstractUser):
 
 class UserGroup(Group):
     """
-    Dummy class to move the Group model from `django.contrib.auth` into our own app.
-    The users and groups stand together in the Admin.
+    Dummy class to move the Group model from `django.contrib.auth` into our own app,
+    so that users and groups stand together in the Admin.
     """
     class Meta():
         verbose_name        = _("User Group")
